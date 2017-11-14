@@ -11,6 +11,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="231dp" />
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="218dp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text|textFilter"
+        tools:layout_editor_absoluteX="73dp"
+        tools:layout_editor_absoluteY="72dp" />
+
+    <ListView
+        android:layout_width="368dp"
+        android:layout_height="84dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="126dp" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPostalAddress"
+        tools:layout_editor_absoluteX="73dp"
+        tools:layout_editor_absoluteY="26dp" />
 </android.support.constraint.ConstraintLayout>
