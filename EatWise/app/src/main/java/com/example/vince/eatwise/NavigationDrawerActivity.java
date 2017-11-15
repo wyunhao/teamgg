@@ -86,13 +86,14 @@ public class NavigationDrawerActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        FragmentManager fragmentManager = getFragmentManager();
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_recommendation) {
-            // Handle the camera action
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new RecommendationList()).commit();
         } else if (id == R.id.nav_search) {
-
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new SearchInterface()).commit();
         } else if (id == R.id.nav_account) {
 
         }

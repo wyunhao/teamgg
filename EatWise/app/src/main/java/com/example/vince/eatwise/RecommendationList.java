@@ -22,7 +22,7 @@ public class RecommendationList extends Fragment {
         myView = inflater.inflate(R.layout.activity_main, container, false);
 
         getActivity().setTitle(R.string.title_recommendation_fragment);
-        
+
 
         return myView;
     }
