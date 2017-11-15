@@ -22,15 +22,7 @@ public class RecommendationList extends Fragment {
         myView = inflater.inflate(R.layout.activity_main, container, false);
 
         getActivity().setTitle(R.string.title_recommendation_fragment);
-
-
-        final Button button = (Button)myView.findViewById(R.id.button_id);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SearchActivity.class);
-                startActivity(intent);
-            }
-        });
+        
 
         return myView;
     }
