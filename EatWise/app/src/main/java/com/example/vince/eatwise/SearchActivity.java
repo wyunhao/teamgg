@@ -18,7 +18,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        final Button submitFilter = findViewById(R.id.button_id);
+        final Button submitFilter = findViewById(R.id.buttonSubmit);
         final EditText location = findViewById(R.id.editTextLocation);
         final EditText distance = findViewById(R.id.editTextDistance);
         final Spinner category = findViewById(R.id.spinnerCategory);
