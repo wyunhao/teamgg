@@ -12,11 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.vince.eatwise.QueryData.CruisineType;
+import com.example.vince.eatwise.QueryData.CuisineType;
 import com.example.vince.eatwise.QueryData.QueryFilter;
-/**
- * Created by HaojieChen on 11/15/17.
- */
 
 public class SearchInterface extends Fragment {
     View myView;
@@ -32,23 +29,23 @@ public class SearchInterface extends Fragment {
         final EditText location = myView.findViewById(R.id.editTextLocation);
         final EditText distance = myView.findViewById(R.id.editTextDistance);
         final Spinner category = myView.findViewById(R.id.spinnerCategory);
-        category.setAdapter(new ArrayAdapter<CruisineType>(getActivity(), android.R.layout.simple_spinner_item, CruisineType.values()));
+        category.setAdapter(new ArrayAdapter<CuisineType>(getActivity(), android.R.layout.simple_spinner_item, CuisineType.values()));
         final EditText price = myView.findViewById(R.id.editTextPrice);
         final EditText keyword = myView.findViewById(R.id.editTextKeyword);
-/*
-        final QueryFilter filter = QueryFilter.builder().location(location.getText().toString())
-                .category(category.getDropDownHorizontalOffset())
-                .distance(distance.getText())
-                .price(price.getText())
-                .keyword(keyword.getText())
-                .build();
-*/
+
         submitFilter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                final QueryFilter filter = QueryFilter.builder().location(location.getText().toString())
+                        .category((CuisineType)category.getSelectedItem())
+                        .distance(Integer.parseInt(distance.getText().toString()))
+                        .price(Double.parseDouble(price.getText().toString()))
+                        .keyword(keyword.getText().toString().split(" "))
+                        .build();
+
                 Intent intent = new Intent(getActivity(), SearchResultActivity.class);
-                //Bundle b = new Bundle();
-                //b.putSerializable("filter", filter);
-                //intent.putExtras(b);
+                Bundle b = new Bundle();
+                b.putSerializable("filter", filter);
+                intent.putExtras(b);
                 startActivity(intent);
             }
         });
