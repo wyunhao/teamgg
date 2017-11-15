@@ -21,6 +21,8 @@ public class RecommendationList extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.activity_main, container, false);
 
+        getActivity().setTitle(R.string.title_recommendation_fragment);
+
 
         final Button button = (Button)myView.findViewById(R.id.button_id);
         button.setOnClickListener(new View.OnClickListener() {
