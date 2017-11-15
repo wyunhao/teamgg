@@ -1,10 +1,10 @@
 package com.example.vince.eatwise.QueryData;
 
 
-public enum CruisineType {
+public enum CuisineType {
     AMERICAN("American"),
     BREAKFAST("Breakfast & Brunch"),
-    BURGERS("Bugers"),
+    BURGERS("Burgers"),
     CHINESE("Chinese"),
     INDIAN("Indian"),
     ITALIAN("Italian"),
@@ -21,7 +21,7 @@ public enum CruisineType {
 
     private String context;
 
-    CruisineType(String context) {
+    CuisineType(String context) {
         this.context = context;
     }
 

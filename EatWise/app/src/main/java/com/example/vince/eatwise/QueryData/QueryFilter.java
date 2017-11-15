@@ -7,10 +7,10 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class QueryFilter implements Serializable{
+public class QueryFilter implements Serializable {
     private String location;
-    private CruisineType category;
-    private Long distance;
+    private CuisineType category;
+    private Integer distance;
     private Double price;
     private String[] keyword;
 }
