@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by wangjingtao on 11/14/17.
  */
 
-public class Query {
+public class Query extends Preference_Data{
     public String restaurant_name;
     public Date query_time;
     public API_Input sanitizeInput(){
