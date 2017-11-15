@@ -15,7 +15,7 @@ import android.widget.Spinner;
 import com.example.vince.eatwise.QueryData.CuisineType;
 import com.example.vince.eatwise.QueryData.QueryFilter;
 
-public class SearchInterface extends Fragment {
+public class SearchFragment extends Fragment {
     View myView;
 
     @Nullable
