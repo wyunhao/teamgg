@@ -1,4 +1,4 @@
-package com.example.vince.eatwise;
+package com.example.vince.eatwise.Utility;
 
 /**
  * Created by wangjingtao on 11/14/17.

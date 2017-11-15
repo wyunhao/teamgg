@@ -1,8 +1,4 @@
-package com.example.vince.eatwise;
-
-/**
- * Created by wangjingtao on 11/14/17.
- */
+package com.example.vince.eatwise.Utility;
 
 public class History {
     public Query[] past_query;

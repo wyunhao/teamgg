@@ -1,10 +1,6 @@
-package com.example.vince.eatwise;
+package com.example.vince.eatwise.Utility;
 
 import java.util.Date;
-
-/**
- * Created by wangjingtao on 11/14/17.
- */
 
 public class Query extends Preference_Data{
     public String restaurant_name;

@@ -1,10 +1,6 @@
-package com.example.vince.eatwise;
+package com.example.vince.eatwise.Utility;
 
 import java.util.Date;
-
-/**
- * Created on 11/14/17.
- */
 
 public class Viewed {
     public Date date;

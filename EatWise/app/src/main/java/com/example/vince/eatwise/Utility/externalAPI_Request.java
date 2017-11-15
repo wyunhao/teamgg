@@ -1,8 +1,4 @@
-package com.example.vince.eatwise;
-
-/**
- * Created by wangjingtao on 11/14/17.
- */
+package com.example.vince.eatwise.Utility;
 
 public class externalAPI_Request implements API_Request {
     public void formattingFunction()
