@@ -93,7 +93,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         if (id == R.id.nav_recommendation) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, new RecommendationList()).commit();
         } else if (id == R.id.nav_search) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new SearchInterface()).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new SearchFragment()).commit();
         } else if (id == R.id.nav_account) {
 
         }

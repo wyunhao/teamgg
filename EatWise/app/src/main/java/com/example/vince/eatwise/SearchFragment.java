@@ -39,7 +39,7 @@ public class SearchFragment extends Fragment {
                         .category((CuisineType)category.getSelectedItem())
                         .distance(Integer.parseInt(distance.getText().toString()))
                         .price(Double.parseDouble(price.getText().toString()))
-                        .keyword(keyword.getText().toString().split(" "))
+                        .keyword(keyword.getText().toString())
                         .build();
 
                 Intent intent = new Intent(getActivity(), SearchResultActivity.class);

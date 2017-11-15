@@ -12,5 +12,5 @@ public class QueryFilter implements Serializable {
     private CuisineType category;
     private Integer distance;
     private Double price;
-    private String[] keyword;
+    private String keyword;
 }
