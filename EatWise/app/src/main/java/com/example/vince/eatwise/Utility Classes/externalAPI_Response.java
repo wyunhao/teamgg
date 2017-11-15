@@ -7,7 +7,7 @@ package com.example.vince.eatwise;
 public class externalAPI_Response implements API_Response {
     public void formattingFunction()
     {
-
+        //TODO
     }
     public RestaurantArray ResultToOutput()
     {

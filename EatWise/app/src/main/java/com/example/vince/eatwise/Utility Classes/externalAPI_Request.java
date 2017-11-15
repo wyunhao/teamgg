@@ -6,7 +6,9 @@ package com.example.vince.eatwise;
 
 public class externalAPI_Request implements API_Request {
     public void formattingFunction()
-    {}
+    {
+        //TODO
+    }
     public API_Input QueryToInput()
     {
         //TODO
