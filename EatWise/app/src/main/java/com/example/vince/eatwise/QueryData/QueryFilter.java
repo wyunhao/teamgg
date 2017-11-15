@@ -12,5 +12,20 @@ public class QueryFilter implements Serializable{
     private CruisineType category;
     private Long distance;
     private Double price;
-    private String[] keyword;
+    private String keyword;
+    public String getLocation(){
+        return this.location;
+    }
+    public CruisineType getCuisineType(){
+        return this.category;
+    }
+    public Long getDistance(){
+        return this.distance;
+    }
+    public Double getPrice(){
+        return this.price;
+    }
+    public String getKeyword(){
+        return this.keyword;
+    }
 }
