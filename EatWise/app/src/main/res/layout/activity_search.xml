@@ -45,8 +45,8 @@
         android:layout_alignParentRight = "true"
         android:layout_alignParentEnd = "true" />
 
-    <EditText
-        android:id="@+id/editTextCategory"
+    <Spinner
+        android:id="@+id/spinnerCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextDistance"
@@ -67,17 +67,31 @@
         android:focusable = "true"
         android:textColorHighlight = "#8157c4"
         android:textColorHint = "#255fff"
-        android:layout_below="@id/editTextCategory"
+        android:layout_below="@id/spinnerCategory"
         android:layout_alignParentLeft = "true"
         android:layout_alignParentStart = "true"
         android:layout_alignParentRight = "true"
         android:layout_alignParentEnd = "true" />
+
+    <EditText
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:id = "@+id/editTextKeyword"
+        android:hint = "Enter restaurant keyword (optional)"
+        android:focusable = "true"
+        android:textColorHighlight = "#8157c4"
+        android:textColorHint = "#255fff"
+        android:layout_below="@id/editTextPrice"
+        android:layout_alignParentLeft = "true"
+        android:layout_alignParentStart = "true"
+        android:layout_alignParentRight = "true"
+        android:layout_alignParentEnd = "true" />
+
     <Button
-        android:id="@+id/button_id"
+        android:id="@+id/buttonSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="210dp"
         android:text="Search"
-        android:layout_centerVertical="true"
+        android:layout_below="@id/editTextKeyword"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
