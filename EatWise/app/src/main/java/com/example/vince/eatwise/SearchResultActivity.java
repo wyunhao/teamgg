@@ -68,6 +68,7 @@ public class SearchResultActivity extends AppCompatActivity implements AsyncResp
             e.printStackTrace();
         }
 
+        // JsonStr value assigned
         //parsing JSON str
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(this.JsonStr, JsonObject.class);
