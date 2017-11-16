@@ -13,7 +13,8 @@
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:src="@drawable/pin_icon"
         android:tint="#837e7e"
-        android:layout_toLeftOf="@id/editTextLocation"/>
+        android:layout_toLeftOf="@id/editTextLocation"
+        android:layout_marginVertical="@dimen/text_margin"/>
 
     <EditText
         android:layout_width = "wrap_content"
@@ -24,17 +25,8 @@
         android:textColorHighlight = "#72757c"
         android:textColorHint = "#72757c"
         android:background="@drawable/search_field_gradient"
-        android:layout_centerHorizontal="true"/>
-
-
-    <ImageView
-        android:id="@+id/foodbar1"
-        android:layout_width="120dp"
-        android:layout_height="30dp"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/foodbar1"
-        android:layout_below="@id/editTextLocation"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="@dimen/text_margin"/>
 
 
     <EditText
@@ -47,8 +39,9 @@
         android:textColorHighlight = "#72757c"
         android:textColorHint = "#72757c"
         android:background="@drawable/search_field_gradient"
-        android:layout_below="@id/foodbar1"
-        android:layout_centerHorizontal="true"/>
+        android:layout_below="@id/editTextLocation"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="@dimen/text_margin"/>
 
     <ImageView
         android:id="@+id/mapicon"
@@ -56,29 +49,23 @@
         android:layout_height="35dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:src="@drawable/map_icon"
-        android:layout_below="@id/foodbar1"
+        android:layout_below="@id/editTextLocation"
         android:tint="#837e7e"
-        android:layout_toLeftOf="@id/editTextDistance"/>
+        android:layout_toLeftOf="@id/editTextDistance"
+        android:layout_marginVertical="@dimen/text_margin"/>
 
-    <ImageView
-        android:id="@+id/foodbar2"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/foodbar2"
-        android:layout_below="@id/editTextDistance"
-        android:layout_centerHorizontal="true"/>
 
     <Spinner
         android:id="@+id/spinnerCategory"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_below="@id/foodbar2"
+        android:layout_below="@id/editTextDistance"
         android:focusable="true"
-        android:prompt="  Select food category  "
+        android:hint="  Select food category  "
         android:textColorHighlight="#95b5fd"
         android:textColorHint="#72757c"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="@dimen/text_margin"/>
 
     <ImageView
         android:id="@+id/forkicon"
@@ -86,18 +73,11 @@
         android:layout_height="40dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:src="@drawable/fork_icon"
-        android:layout_below="@id/foodbar2"
+        android:layout_below="@id/editTextDistance"
         android:tint="#5b5959"
-        android:layout_toLeftOf="@id/spinnerCategory"/>
+        android:layout_toLeftOf="@id/spinnerCategory"
+        android:layout_marginVertical="@dimen/text_margin"/>
 
-    <ImageView
-        android:id="@+id/foodbar3"
-        android:layout_width="120dp"
-        android:layout_height="30dp"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/foodbar3"
-        android:layout_below="@id/spinnerCategory"
-        android:layout_centerHorizontal="true"/>
 
     <EditText
         android:layout_width = "wrap_content"
@@ -109,8 +89,9 @@
         android:textColorHighlight = "#72757c"
         android:textColorHint = "#72757c"
         android:background="@drawable/search_field_gradient"
-        android:layout_below="@id/foodbar3"
-        android:layout_centerHorizontal="true"/>
+        android:layout_below="@id/spinnerCategory"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="@dimen/text_margin"/>
 
     <ImageView
         android:id="@+id/priceicon"
@@ -118,17 +99,10 @@
         android:layout_height="40dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:src="@drawable/price_icon"
-        android:layout_below="@id/foodbar3"
-        android:layout_toLeftOf="@id/editTextPrice"/>
+        android:layout_below="@id/spinnerCategory"
+        android:layout_toLeftOf="@id/editTextPrice"
+        android:layout_marginVertical="@dimen/text_margin"/>
 
-    <ImageView
-        android:id="@+id/foodbar4"
-        android:layout_width="120dp"
-        android:layout_height="30dp"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/foodbar4"
-        android:layout_below="@id/editTextPrice"
-        android:layout_centerHorizontal="true"/>
 
     <EditText
         android:layout_width = "wrap_content"
@@ -139,8 +113,9 @@
         android:textColorHighlight = "#72757c"
         android:textColorHint = "#72757c"
         android:background="@drawable/search_field_gradient"
-        android:layout_below="@id/foodbar4"
-        android:layout_centerHorizontal="true"/>
+        android:layout_below="@id/editTextPrice"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="@dimen/text_margin"/>
 
     <ImageView
         android:id="@+id/houseicon"
@@ -148,9 +123,10 @@
         android:layout_height="35dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:src="@drawable/house_icon"
-        android:layout_below="@id/foodbar4"
+        android:layout_below="@id/editTextPrice"
         android:tint="#837e7e"
-        android:layout_toLeftOf="@id/editTextKeyword"/>
+        android:layout_toLeftOf="@id/editTextKeyword"
+        android:layout_marginVertical="@dimen/text_margin"/>
 
     <Button
         android:id="@+id/buttonSubmit"

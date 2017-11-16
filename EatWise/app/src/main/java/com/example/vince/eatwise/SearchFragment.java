@@ -4,18 +4,18 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.Spinner;
 
 import com.example.vince.eatwise.QueryData.CuisineType;
 import com.example.vince.eatwise.QueryData.QueryFilter;
+
 
 public class SearchFragment extends Fragment {
     View myView;
@@ -29,21 +29,58 @@ public class SearchFragment extends Fragment {
 
         final Button submitFilter = myView.findViewById(R.id.buttonSubmit);
         final EditText location = myView.findViewById(R.id.editTextLocation);
+        location.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (location.getText().length() == 0) {
+                    location.setError("Please specify the search address.");
+                }
+            }
+        });
         final EditText distance = myView.findViewById(R.id.editTextDistance);
+        distance.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                try {
+                    Integer dist = Integer.parseInt(distance.getText().toString());
+                } catch (NumberFormatException e) {
+                    distance.setError("Please enter a valid range of distance.");
+                }
+            }
+        });
         final Spinner category = myView.findViewById(R.id.spinnerCategory);
-        //String[] spinnerText = CuisineType.values()
-        category.setAdapter(new ArrayAdapter<CuisineType>(getActivity(), android.R.layout.simple_spinner_item, CuisineType.values()));
+        category.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, CuisineType.values()));
         final EditText price = myView.findViewById(R.id.editTextPrice);
+        price.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                try {
+                    Double p = Double.parseDouble(price.getText().toString());
+                } catch (NumberFormatException e) {
+                    price.setError("Please enter a valid price level.");
+                }
+            }
+        });
         final EditText keyword = myView.findViewById(R.id.editTextKeyword);
 
         submitFilter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (true) {
+                String kw = "";
+                try {
+                    kw = keyword.getText().toString();
+                } catch (Exception e) {
+
+                }
+
+                if (location.getError() != null || distance.getError() != null || price.getError() != null) {
+                    Toast.makeText(getActivity(), "Please complete the search filter", Toast.LENGTH_SHORT).show();
+                }
+                else {
                     final QueryFilter filter = QueryFilter.builder().location(location.getText().toString())
                             .category((CuisineType) category.getSelectedItem())
                             .distance(Integer.parseInt(distance.getText().toString()))
                             .price(Double.parseDouble(price.getText().toString()))
-                            .keyword(keyword.getText().toString())
+                            .keyword(kw)
                             .build();
 
                     Intent intent = new Intent(getActivity(), SearchResultActivity.class);
@@ -56,38 +93,5 @@ public class SearchFragment extends Fragment {
         });
 
         return myView;
-    }
-/*
-    private boolean checkValidInput(final EditText location, final EditText distance, final EditText price) {
-        final String loc = location.getText().toString();
-        if (loc == "") {
-            location.setError("Must enter valid location.");
-            //setErrorMessageForInvalidInput(R.id.location, "You need to enter a valid location.");
-            return false;
-        } else {
-            setErrorMessageForInvalidInput(R.id.location, null);
-        }
-
-        try {
-            Integer dist = Integer.parseInt(distance.getText().toString());
-        } catch (NumberFormatException e) {
-            Log.d("int", "Cannot parse int");
-            setErrorMessageForInvalidInput(R.id.location, "You need to enter a valid distance range.");
-            return false;
-        }
-
-        try {
-            Double p = Double.parseDouble(price.getText().toString());
-        } catch (NumberFormatException e) {
-            setErrorMessageForInvalidInput(R.id.price, "You need to enter a valid price level with two number after decimal.");
-            return false;
-        }
-
-        return true;
-    }
-*/
-    private void setErrorMessageForInvalidInput(int viewID, String errorMsg) {
-        final TextInputLayout e = myView.findViewById(viewID);
-        e.setError(errorMsg);
     }
 }
