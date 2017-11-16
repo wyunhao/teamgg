@@ -75,7 +75,12 @@ public class SearchResultActivity extends AppCompatActivity implements AsyncResp
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(this.JsonStr, JsonObject.class);
         // businesses_arr contains all the restaurants' metadata as elements
-        businesses_arr =  jsonObject.getAsJsonArray("businesses");
+        if(!JsonStr.isEmpty()){
+            businesses_arr =  jsonObject.getAsJsonArray("businesses");
+        }
+        else{
+            businesses_arr = null;
+        }
 //        String name = businesses_arr.get(0).getAsJsonObject().get("name").getAsString();
 //        textView.setText(name);
 
