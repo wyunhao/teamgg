@@ -4,6 +4,8 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.MotionEvent;
+import android.view.inputmethod.InputMethodManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,16 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.activity_search, container, false);
+
+        myView.findViewById(R.id.relataivesearchlayout).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                final InputMethodManager inputMethodManager = (InputMethodManager) getActivity()
+                        .getSystemService(getActivity().INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                return true;
+            }
+        });
 
         getActivity().setTitle(R.string.title_search_fragment);
 
@@ -48,8 +60,10 @@ public class SearchFragment extends Fragment {
                 }
             }
         });
+
         final Spinner category = myView.findViewById(R.id.spinnerCategory);
-        category.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, CuisineType.values()));
+        category.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, CuisineType.values()));
+
         final EditText price = myView.findViewById(R.id.editTextPrice);
         price.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
