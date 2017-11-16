@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.vince.eatwise.QueryData.QueryFilter;
+import com.example.vince.eatwise.Utility.AsyncResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -28,15 +29,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class SearchResultActivity extends AppCompatActivity {
+public class SearchResultActivity extends AppCompatActivity implements AsyncResponse{
     private final String client_id = "2S9ar0NXnZr9RFPo25zgBA";
     private final String client_secret = "Llc2Gjdua4U4llGf532aspiuQs841gmbGhvGQBOhCJhhoxKscYkV79H7UFKvMElB";
     private final String token = "Bearer";
     private final String token_secret = "KVIzqS5JwpvzDhTOELrii4Yl563Yg2FTxaaJBmNKIi0Igkhd3dCDhWfslEq3jLkG1ZQ7_aX6MZUgp2oWtU32GkdLsVGvpGmRJstpQFcAQpvnME8Kqx-ZufrRuZoLWnYx";
+
+    YelpAPIcall yelpAPIcall = new YelpAPIcall(this);
+    private String JsonStr = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +59,26 @@ public class SearchResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         QueryFilter filter = (QueryFilter) intent.getExtras().getSerializable("filter"); //gets the query filter
         String url = generateURL(filter);
-        new APIcall().execute(url);
+
+        try {
+            String result = yelpAPIcall.execute(url).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        //parsing JSON str
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.fromJson(this.JsonStr, JsonObject.class);
+        JsonArray businesses_arr =  jsonObject.getAsJsonArray("businesses");
+        String name = businesses_arr.get(0).getAsJsonObject().get("name").getAsString();
+        textView.setText(name);
     }
+
+    /*
+    HELPER FUNCTION TO GENERATE SEARCH URL
+     */
 
     private String generateURL(QueryFilter filter){
         String keyword = "food";
@@ -70,38 +93,50 @@ public class SearchResultActivity extends AppCompatActivity {
         return queryURL;
     }
 
-    private class APIcall extends AsyncTask<String, Void, String>{
-
-        protected String doInBackground(String... params) {
-            try {
-                String queryURL = params[0];
-                URL url = new URL (queryURL);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-                connection.setRequestProperty  ("Authorization", "Bearer " + "KVIzqS5JwpvzDhTOELrii4Yl563Yg2FTxaaJBmNKIi0Igkhd3dCDhWfslEq3jLkG1ZQ7_aX6MZUgp2oWtU32GkdLsVGvpGmRJstpQFcAQpvnME8Kqx-ZufrRuZoLWnYx");
-                InputStream content = (InputStream)connection.getInputStream();
-                BufferedReader in   =
-                        new BufferedReader (new InputStreamReader(content));
-                String line;
-                String JsonStr = "";
-                while ((line = in.readLine()) != null) {
-                    JsonStr += line;
-                }
-                Gson gson = new Gson();
-                JsonObject jsonObject = gson.fromJson(JsonStr, JsonObject.class);
-                JsonArray businesses_arr =  jsonObject.getAsJsonArray("businesses");
-                String name = businesses_arr.get(0).getAsJsonObject().get("name").getAsString();
-                return name;
-
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
-            return "";
-        }
-
-        protected void onPostExecute(String result) {
-            TextView txt = (TextView) findViewById(R.id.textView_id);
-            txt.setText(result);
-        }
+    @Override
+    public void processFinish(String output){
+        this.JsonStr = output;
     }
 }
+
+ /*
+    CLASS THAT DEALS WITH THE API CALL. EXTENDS ASYNCTASK SO THAT IT CAN ACCESS INTERNET
+ */
+
+class YelpAPIcall extends AsyncTask<String, Void, String>{
+    public AsyncResponse delegate = null;
+
+    public YelpAPIcall(AsyncResponse delegate){
+        this.delegate = delegate;
+    }
+
+    protected String doInBackground(String... params) {
+        try {
+            String queryURL = params[0];
+            URL url = new URL (queryURL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty  ("Authorization", "Bearer " + "KVIzqS5JwpvzDhTOELrii4Yl563Yg2FTxaaJBmNKIi0Igkhd3dCDhWfslEq3jLkG1ZQ7_aX6MZUgp2oWtU32GkdLsVGvpGmRJstpQFcAQpvnME8Kqx-ZufrRuZoLWnYx");
+            InputStream content = (InputStream)connection.getInputStream();
+            BufferedReader in   =
+                    new BufferedReader (new InputStreamReader(content));
+            String line;
+            String JsonStr = "";
+            while ((line = in.readLine()) != null) {
+                JsonStr += line;
+            }
+            delegate.processFinish(JsonStr);
+            return JsonStr;
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    protected void onPostExecute(String result) {
+        return;
+    }
+}
+
+
