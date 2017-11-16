@@ -31,13 +31,14 @@ public class SearchFragment extends Fragment {
         final EditText location = myView.findViewById(R.id.editTextLocation);
         final EditText distance = myView.findViewById(R.id.editTextDistance);
         final Spinner category = myView.findViewById(R.id.spinnerCategory);
+        //String[] spinnerText = CuisineType.values()
         category.setAdapter(new ArrayAdapter<CuisineType>(getActivity(), android.R.layout.simple_spinner_item, CuisineType.values()));
         final EditText price = myView.findViewById(R.id.editTextPrice);
         final EditText keyword = myView.findViewById(R.id.editTextKeyword);
 
         submitFilter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (checkValidInput(location, distance, price)) {
+                if (true) {
                     final QueryFilter filter = QueryFilter.builder().location(location.getText().toString())
                             .category((CuisineType) category.getSelectedItem())
                             .distance(Integer.parseInt(distance.getText().toString()))
@@ -56,7 +57,7 @@ public class SearchFragment extends Fragment {
 
         return myView;
     }
-
+/*
     private boolean checkValidInput(final EditText location, final EditText distance, final EditText price) {
         final String loc = location.getText().toString();
         if (loc == "") {
@@ -84,7 +85,7 @@ public class SearchFragment extends Fragment {
 
         return true;
     }
-
+*/
     private void setErrorMessageForInvalidInput(int viewID, String errorMsg) {
         final TextInputLayout e = myView.findViewById(viewID);
         e.setError(errorMsg);

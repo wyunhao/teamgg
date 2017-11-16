@@ -7,122 +7,156 @@
     tools:context="com.example.vince.eatwise.SearchFragment">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/pinicon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@FoodBar/3" />
+        android:src="@drawable/pin_icon"
+        android:tint="#837e7e"
+        android:layout_toLeftOf="@id/editTextLocation"/>
+
+    <EditText
+        android:layout_width = "wrap_content"
+        android:layout_height = "40dp"
+        android:id = "@+id/editTextLocation"
+        android:hint = "  Enter search location  "
+        android:focusable = "true"
+        android:textColorHighlight = "#72757c"
+        android:textColorHint = "#72757c"
+        android:background="@drawable/search_field_gradient"
+        android:layout_centerHorizontal="true"/>
 
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textView"
-        android:layout_alignParentLeft = "true"
-        android:layout_alignParentStart = "true"
-        android:layout_alignParentRight = "true"
-        android:layout_alignParentEnd = "true"
-        app:errorEnabled="true">
+    <ImageView
+        android:id="@+id/foodbar1"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:src="@drawable/foodbar1"
+        android:layout_below="@id/editTextLocation"
+        android:layout_centerHorizontal="true"/>
 
-        <EditText
-            android:layout_width = "wrap_content"
-            android:layout_height = "wrap_content"
-            android:id = "@+id/editTextLocation"
-            android:hint = "Enter search location"
-            android:focusable = "true"
-            android:textColorHighlight = "#8157c4"
-            android:textColorHint = "#72757c"
-            android:layout_alignParentLeft = "true"
-            android:layout_alignParentStart = "true"
-            android:layout_alignParentRight = "true"
-            android:layout_alignParentEnd = "true" />
-    </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/distance"
+    <EditText
+        android:layout_width = "wrap_content"
+        android:layout_height = "40dp"
+        android:id = "@+id/editTextDistance"
+        android:hint = "  Enter range distance  "
+        android:inputType="number"
+        android:focusable = "true"
+        android:textColorHighlight = "#72757c"
+        android:textColorHint = "#72757c"
+        android:background="@drawable/search_field_gradient"
+        android:layout_below="@id/foodbar1"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageView
+        android:id="@+id/mapicon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:src="@drawable/map_icon"
+        android:layout_below="@id/foodbar1"
+        android:tint="#837e7e"
+        android:layout_toLeftOf="@id/editTextDistance"/>
+
+    <ImageView
+        android:id="@+id/foodbar2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/location"
-        app:errorEnabled="true">
+        android:layout_height="35dp"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:src="@drawable/foodbar2"
+        android:layout_below="@id/editTextDistance"
+        android:layout_centerHorizontal="true"/>
 
-        <EditText
-            android:layout_width = "wrap_content"
-            android:layout_height = "wrap_content"
-            android:id = "@+id/editTextDistance"
-            android:hint = "Enter range distance"
-            android:inputType="number"
-            android:focusable = "true"
-            android:textColorHighlight = "#72757c"
-            android:textColorHint = "#72757c"
-            android:layout_alignParentLeft = "true"
-            android:layout_alignParentStart = "true"
-            android:layout_alignParentRight = "true"
-            android:layout_alignParentEnd = "true" />
-    </android.support.design.widget.TextInputLayout>
-
-        <Spinner
-            android:id="@+id/spinnerCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/distance"
-            android:focusable="true"
-            android:hint="Enter food category"
-            android:textColorHighlight="#72757c"
-            android:textColorHint="#72757c"
-            android:layout_alignParentLeft = "true"
-            android:layout_alignParentStart = "true"
-            android:layout_alignParentRight = "true"
-            android:layout_alignParentEnd = "true"/>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/price"
+    <Spinner
+        android:id="@+id/spinnerCategory"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/foodbar2"
+        android:focusable="true"
+        android:prompt="  Select food category  "
+        android:textColorHighlight="#95b5fd"
+        android:textColorHint="#72757c"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageView
+        android:id="@+id/forkicon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:src="@drawable/fork_icon"
+        android:layout_below="@id/foodbar2"
+        android:tint="#5b5959"
+        android:layout_toLeftOf="@id/spinnerCategory"/>
+
+    <ImageView
+        android:id="@+id/foodbar3"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:src="@drawable/foodbar3"
         android:layout_below="@id/spinnerCategory"
-        app:errorEnabled="true">
+        android:layout_centerHorizontal="true"/>
 
-        <EditText
-            android:layout_width = "wrap_content"
-            android:layout_height = "wrap_content"
-            android:id = "@+id/editTextPrice"
-            android:inputType="numberDecimal"
-            android:hint = "Enter price level"
-            android:focusable = "true"
-            android:textColorHighlight = "#72757c"
-            android:textColorHint = "#72757c"
-            android:layout_alignParentLeft = "true"
-            android:layout_alignParentStart = "true"
-            android:layout_alignParentRight = "true"
-            android:layout_alignParentEnd = "true" />
-    </android.support.design.widget.TextInputLayout>
+    <EditText
+        android:layout_width = "wrap_content"
+        android:layout_height = "40dp"
+        android:id = "@+id/editTextPrice"
+        android:inputType="numberDecimal"
+        android:hint = "  Enter price level  "
+        android:focusable = "true"
+        android:textColorHighlight = "#72757c"
+        android:textColorHint = "#72757c"
+        android:background="@drawable/search_field_gradient"
+        android:layout_below="@id/foodbar3"
+        android:layout_centerHorizontal="true"/>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/keyword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/price"
-        app:errorEnabled="true">
+    <ImageView
+        android:id="@+id/priceicon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:src="@drawable/price_icon"
+        android:layout_below="@id/foodbar3"
+        android:layout_toLeftOf="@id/editTextPrice"/>
 
-        <EditText
-            android:layout_width = "wrap_content"
-            android:layout_height = "wrap_content"
-            android:id = "@+id/editTextKeyword"
-            android:hint = "Enter restaurant keyword (optional)"
-            android:focusable = "true"
-            android:textColorHighlight = "#72757c"
-            android:textColorHint = "#72757c"
-            android:layout_alignParentLeft = "true"
-            android:layout_alignParentStart = "true"
-            android:layout_alignParentRight = "true"
-            android:layout_alignParentEnd = "true" />
-    </android.support.design.widget.TextInputLayout>
+    <ImageView
+        android:id="@+id/foodbar4"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:src="@drawable/foodbar4"
+        android:layout_below="@id/editTextPrice"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:layout_width = "wrap_content"
+        android:layout_height = "50dp"
+        android:id = "@+id/editTextKeyword"
+        android:hint = "  Enter restaurant keyword (optional)  "
+        android:focusable = "true"
+        android:textColorHighlight = "#72757c"
+        android:textColorHint = "#72757c"
+        android:background="@drawable/search_field_gradient"
+        android:layout_below="@id/foodbar4"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageView
+        android:id="@+id/houseicon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:src="@drawable/house_icon"
+        android:layout_below="@id/foodbar4"
+        android:tint="#837e7e"
+        android:layout_toLeftOf="@id/editTextKeyword"/>
 
     <Button
         android:id="@+id/buttonSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search"
-        android:layout_below="@id/keyword"
+        android:layout_below="@id/editTextKeyword"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
