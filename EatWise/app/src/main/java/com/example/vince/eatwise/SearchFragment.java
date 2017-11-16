@@ -16,7 +16,7 @@ import com.example.vince.eatwise.QueryData.CuisineType;
 import com.example.vince.eatwise.QueryData.QueryFilter;
 
 public class SearchFragment extends Fragment {
-    View myView;
+    private View myView;
 
     @Nullable
     @Override

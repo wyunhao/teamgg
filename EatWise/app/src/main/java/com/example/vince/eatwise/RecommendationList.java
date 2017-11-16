@@ -14,7 +14,7 @@ import android.widget.Button;
  */
 
 public class RecommendationList extends Fragment {
-    View myView;
+    private View myView;
 
     @Nullable
     @Override

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">EatWise</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_result_list">Results</string>
     <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
