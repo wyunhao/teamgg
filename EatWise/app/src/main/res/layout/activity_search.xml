@@ -4,96 +4,125 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.vince.eatwise.SearchInterface">
+    tools:context="com.example.vince.eatwise.SearchFragment">
 
-    <TextView
-        android:id="@+id/textView"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search for your favourite!"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        app:srcCompat="@FoodBar/3" />
 
-    <EditText
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:id = "@+id/editTextLocation"
-        android:hint = "Enter search location"
-        android:focusable = "true"
-        android:textColorHighlight = "#8157c4"
-        android:textColorHint = "#72757c"
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/textView"
         android:layout_alignParentLeft = "true"
         android:layout_alignParentStart = "true"
         android:layout_alignParentRight = "true"
-        android:layout_alignParentEnd = "true" />
+        android:layout_alignParentEnd = "true"
+        app:errorEnabled="true">
 
-    <EditText
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:id = "@+id/editTextDistance"
-        android:hint = "Enter range distance"
-        android:inputType="number"
-        android:focusable = "true"
-        android:textColorHighlight = "#72757c"
-        android:textColorHint = "#72757c"
-        android:layout_below="@id/editTextLocation"
-        android:layout_alignParentLeft = "true"
-        android:layout_alignParentStart = "true"
-        android:layout_alignParentRight = "true"
-        android:layout_alignParentEnd = "true" />
+        <EditText
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:id = "@+id/editTextLocation"
+            android:hint = "Enter search location"
+            android:focusable = "true"
+            android:textColorHighlight = "#8157c4"
+            android:textColorHint = "#72757c"
+            android:layout_alignParentLeft = "true"
+            android:layout_alignParentStart = "true"
+            android:layout_alignParentRight = "true"
+            android:layout_alignParentEnd = "true" />
+    </android.support.design.widget.TextInputLayout>
 
-    <Spinner
-        android:id="@+id/spinnerCategory"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextDistance"
-        android:focusable="true"
-        android:hint="Enter food category"
-        android:textColorHighlight="#72757c"
-        android:textColorHint="#72757c"
-        android:layout_alignParentLeft = "true"
-        android:layout_alignParentStart = "true"
-        android:layout_alignParentRight = "true"
-        android:layout_alignParentEnd = "true"/>
+        android:layout_below="@id/location"
+        app:errorEnabled="true">
 
-    <EditText
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:id = "@+id/editTextPrice"
-        android:inputType="numberDecimal"
-        android:hint = "Enter price level"
-        android:focusable = "true"
-        android:textColorHighlight = "#72757c"
-        android:textColorHint = "#72757c"
+        <EditText
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:id = "@+id/editTextDistance"
+            android:hint = "Enter range distance"
+            android:inputType="number"
+            android:focusable = "true"
+            android:textColorHighlight = "#72757c"
+            android:textColorHint = "#72757c"
+            android:layout_alignParentLeft = "true"
+            android:layout_alignParentStart = "true"
+            android:layout_alignParentRight = "true"
+            android:layout_alignParentEnd = "true" />
+    </android.support.design.widget.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/spinnerCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/distance"
+            android:focusable="true"
+            android:hint="Enter food category"
+            android:textColorHighlight="#72757c"
+            android:textColorHint="#72757c"
+            android:layout_alignParentLeft = "true"
+            android:layout_alignParentStart = "true"
+            android:layout_alignParentRight = "true"
+            android:layout_alignParentEnd = "true"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/spinnerCategory"
-        android:layout_alignParentLeft = "true"
-        android:layout_alignParentStart = "true"
-        android:layout_alignParentRight = "true"
-        android:layout_alignParentEnd = "true" />
+        app:errorEnabled="true">
 
-    <EditText
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:id = "@+id/editTextKeyword"
-        android:hint = "Enter restaurant keyword (optional)"
-        android:focusable = "true"
-        android:textColorHighlight = "#72757c"
-        android:textColorHint = "#72757c"
-        android:layout_below="@id/editTextPrice"
-        android:layout_alignParentLeft = "true"
-        android:layout_alignParentStart = "true"
-        android:layout_alignParentRight = "true"
-        android:layout_alignParentEnd = "true" />
+        <EditText
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:id = "@+id/editTextPrice"
+            android:inputType="numberDecimal"
+            android:hint = "Enter price level"
+            android:focusable = "true"
+            android:textColorHighlight = "#72757c"
+            android:textColorHint = "#72757c"
+            android:layout_alignParentLeft = "true"
+            android:layout_alignParentStart = "true"
+            android:layout_alignParentRight = "true"
+            android:layout_alignParentEnd = "true" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/keyword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/price"
+        app:errorEnabled="true">
+
+        <EditText
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:id = "@+id/editTextKeyword"
+            android:hint = "Enter restaurant keyword (optional)"
+            android:focusable = "true"
+            android:textColorHighlight = "#72757c"
+            android:textColorHint = "#72757c"
+            android:layout_alignParentLeft = "true"
+            android:layout_alignParentStart = "true"
+            android:layout_alignParentRight = "true"
+            android:layout_alignParentEnd = "true" />
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/buttonSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search"
-        android:layout_below="@id/editTextKeyword"
+        android:layout_below="@id/keyword"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
