@@ -119,7 +119,6 @@ public class SearchFragment extends Fragment {
                 } catch (Exception e) {
 
                 }
-
                 if (location.getError() != null || distance.getError() != null || price.getError() != null
                         || ((TextView) category.getSelectedView()).getError() != null) {
                     Toast.makeText(getActivity(), "Please complete the search filter", Toast.LENGTH_SHORT).show();

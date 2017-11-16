@@ -26,11 +26,15 @@
         android:id = "@+id/editTextLocation"
         android:hint = "  Enter search location  "
         android:focusable = "true"
-        android:textColorHighlight = "#72757c"
+        android:textColorHighlight = "#224db3"
         android:textColorHint = "#8b8d93"
         android:background="@drawable/search_field_gradient"
         android:layout_centerHorizontal="true"
-        android:layout_marginVertical="@dimen/text_margin"/>
+        android:layout_marginVertical="@dimen/text_margin"
+        android:nextFocusDown="@id/editTextDistance"
+        android:textAlignment="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"/>
 
 
     <EditText
@@ -40,12 +44,16 @@
         android:hint = "  Enter range distance  "
         android:inputType="number"
         android:focusable = "true"
-        android:textColorHighlight = "#72757c"
+        android:textColorHighlight = "#224db3"
         android:textColorHint = "#8b8d93"
         android:background="@drawable/search_field_gradient"
         android:layout_below="@id/editTextLocation"
         android:layout_centerHorizontal="true"
-        android:layout_marginVertical="@dimen/text_margin"/>
+        android:layout_marginVertical="@dimen/text_margin"
+        android:nextFocusDown="@id/spinnerCategory"
+        android:textAlignment="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"/>
 
     <ImageView
         android:id="@+id/mapicon"
@@ -69,7 +77,10 @@
         android:background="@drawable/search_field_gradient"
         android:textColor="#8b8d93"
         android:layout_centerHorizontal="true"
-        android:layout_marginVertical="@dimen/text_margin"/>
+        android:layout_marginVertical="@dimen/text_margin"
+        android:textAlignment="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"/>
 
     <ImageView
         android:id="@+id/forkicon"
@@ -90,12 +101,17 @@
         android:inputType="numberDecimal"
         android:hint = "  Enter price level  "
         android:focusable = "true"
-        android:textColorHighlight = "#72757c"
+        android:textColorHighlight = "#224db3"
         android:textColorHint = "#8b8d93"
         android:background="@drawable/search_field_gradient"
         android:layout_below="@id/spinnerCategory"
         android:layout_centerHorizontal="true"
-        android:layout_marginVertical="@dimen/text_margin"/>
+        android:layout_marginVertical="@dimen/text_margin"
+        android:nextFocusDown="@id/editTextKeyword"
+        android:textAlignment="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:singleLine="true"/>
 
     <ImageView
         android:id="@+id/priceicon"
@@ -114,12 +130,16 @@
         android:id = "@+id/editTextKeyword"
         android:hint = "  Enter restaurant keyword (optional)  "
         android:focusable = "true"
-        android:textColorHighlight = "#72757c"
+        android:textColorHighlight = "#224db3"
         android:textColorHint = "#8b8d93"
         android:background="@drawable/search_field_gradient"
         android:layout_below="@id/editTextPrice"
         android:layout_centerHorizontal="true"
-        android:layout_marginVertical="@dimen/text_margin"/>
+        android:layout_marginVertical="@dimen/text_margin"
+        android:textAlignment="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:singleLine="true"/>
 
     <ImageView
         android:id="@+id/houseicon"
