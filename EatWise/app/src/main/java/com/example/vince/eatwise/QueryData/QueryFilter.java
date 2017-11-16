@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 public class QueryFilter implements Serializable {
     private String location;
-    private CuisineType category;
+    private String category;
     private Integer distance;
     private Double price;
     private String keyword;
