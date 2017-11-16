@@ -9,8 +9,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        javaCompileOptions{
-            annotationProcessorOptions{
+        javaCompileOptions {
+            annotationProcessorOptions {
                 includeCompileClasspath = true
             }
         }
@@ -30,11 +30,14 @@ repositories {
 
 
 dependencies {
+    implementation 'com.google.firebase:firebase-auth:11.0.4'
     compile 'com.yelp.clientlib:yelp-android:3.0.0'
+    compile 'com.google.code.gson:gson:2.8.1'
+    compile 'org.json:json:20160212'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.google.android.gms:play-services-maps:11.6.0'
+    implementation 'com.google.android.gms:play-services-maps:11.0.4'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support:support-v4:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
@@ -45,3 +48,6 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok:1.16.10"
     provided 'org.glassfish:javax.annotation:10.0-b28'
 }
+
+
+apply plugin: 'com.google.gms.google-services'

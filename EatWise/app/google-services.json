@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "995271070752",
+    "firebase_url": "https://eatwise-30b72.firebaseio.com",
+    "project_id": "eatwise-30b72",
+    "storage_bucket": "eatwise-30b72.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:995271070752:android:4109904ddaa88ffd",
+        "android_client_info": {
+          "package_name": "com.example.vince.eatwise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "995271070752-mc8gdqvav9o8vh0327la7oc59reb8lvd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vince.eatwise",
+            "certificate_hash": "a30d9caf859fc90da5ac558cf99d7a81cd499bfb"
+          }
+        },
+        {
+          "client_id": "995271070752-kmjo91teiqeqfgibfs2eq7v3ifj1nup8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbDuD8zOUyqvzCNZ-716LAuced5ZfFOXQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "995271070752-kmjo91teiqeqfgibfs2eq7v3ifj1nup8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
