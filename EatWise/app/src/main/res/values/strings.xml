@@ -25,4 +25,5 @@
         completions."
     </string>
     <string name="error_sign_in">Sign in error</string>
+    <string name="title_activity_detailed">DetailedActivity</string>
 </resources>

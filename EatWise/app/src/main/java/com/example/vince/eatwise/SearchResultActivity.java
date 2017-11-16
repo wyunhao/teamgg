@@ -13,6 +13,7 @@ import com.example.vince.eatwise.QueryData.QueryFilter;
 import com.example.vince.eatwise.Utility.AsyncResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.yelp.clientlib.connection.YelpAPI;
 import com.yelp.clientlib.connection.YelpAPIFactory;
@@ -49,15 +50,7 @@ public class SearchResultActivity extends AppCompatActivity implements AsyncResp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
-//        TextView textView = (TextView) findViewById(R.id.textView_id);
 
-//        final Button button = findViewById(R.id.button_id);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                Intent intent = new Intent(SearchResultActivity.this, MapsActivity.class);
-//                startActivity(intent);
-//            }
-//        });
         Intent intent = getIntent();
         QueryFilter filter = (QueryFilter) intent.getExtras().getSerializable("filter"); //gets the query filter
         String url = generateURL(filter);
@@ -75,7 +68,12 @@ public class SearchResultActivity extends AppCompatActivity implements AsyncResp
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(this.JsonStr, JsonObject.class);
         // businesses_arr contains all the restaurants' metadata as elements
-        businesses_arr =  jsonObject.getAsJsonArray("businesses");
+        if(!JsonStr.isEmpty()){
+            businesses_arr =  jsonObject.getAsJsonArray("businesses");
+        }
+        else{
+            businesses_arr = null;
+        }
 //        String name = businesses_arr.get(0).getAsJsonObject().get("name").getAsString();
 //        textView.setText(name);
 
