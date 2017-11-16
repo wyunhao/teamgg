@@ -1,5 +1,6 @@
 package com.example.vince.eatwise;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -42,20 +43,21 @@ public class SearchResultActivity extends AppCompatActivity implements AsyncResp
 
     YelpAPIcall yelpAPIcall = new YelpAPIcall(this);
     private String JsonStr = "";
+    private JsonArray businesses_arr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
-        TextView textView = (TextView) findViewById(R.id.textView_id);
+//        TextView textView = (TextView) findViewById(R.id.textView_id);
 
-        final Button button = findViewById(R.id.button_id);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(SearchResultActivity.this, MapsActivity.class);
-                startActivity(intent);
-            }
-        });
+//        final Button button = findViewById(R.id.button_id);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Intent intent = new Intent(SearchResultActivity.this, MapsActivity.class);
+//                startActivity(intent);
+//            }
+//        });
         Intent intent = getIntent();
         QueryFilter filter = (QueryFilter) intent.getExtras().getSerializable("filter"); //gets the query filter
         String url = generateURL(filter);
@@ -72,14 +74,27 @@ public class SearchResultActivity extends AppCompatActivity implements AsyncResp
         //parsing JSON str
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(this.JsonStr, JsonObject.class);
-        JsonArray businesses_arr =  jsonObject.getAsJsonArray("businesses");
-        String name = businesses_arr.get(0).getAsJsonObject().get("name").getAsString();
-        textView.setText(name);
+        // businesses_arr contains all the restaurants' metadata as elements
+        businesses_arr =  jsonObject.getAsJsonArray("businesses");
+//        String name = businesses_arr.get(0).getAsJsonObject().get("name").getAsString();
+//        textView.setText(name);
+
+        gotoResultListFragment();
     }
 
     /*
     HELPER FUNCTION TO GENERATE SEARCH URL
      */
+
+    public JsonArray getResults() {
+        return businesses_arr;
+    }
+
+    private void gotoResultListFragment(){
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, new ResultListFragment()).commit();
+    }
+
 
     private String generateURL(QueryFilter filter){
         String keyword = "food";
