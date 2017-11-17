@@ -13,6 +13,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.vince.eatwise.Utility.LoginInfo;
+import com.example.vince.eatwise.Utility.Registration;
+import com.example.vince.eatwise.Utility.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -74,7 +77,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // pass user information to the next Activity: NavigationDrawerActivity
         if (user != null) {
             mStatus.setText("log in successfully");
+            // Create user object and pass it to NavigationDrawerActivity
+            LoginInfo info = LoginInfo.builder().name("Mike Chung").email(mEmail.getText().toString()).build();
             Intent intent = new Intent(LoginActivity.this, NavigationDrawerActivity.class);
+            Bundle b = new Bundle();
+            b.putSerializable("email", mEmail.getText().toString());
+            intent.putExtras(b);
             startActivity(intent);
             // TODO: send credentials specific to User Object to NavigationDrawerActivity
         } else {
