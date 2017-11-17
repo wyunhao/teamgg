@@ -78,13 +78,4 @@ public class Query extends Preference_Data{//passed by user into search
         this.restaurant_name = "";
         this.query_time = new Date();
     }
-
-    /**
-     * Convert user input to valid inputs for Yelp API
-     * @return valid input for Yelp API
-     */
-    public API_Input sanitizeInput(){
-        //TODO: format user input for Yelp API
-        return new API_Input();
-    }
 }
