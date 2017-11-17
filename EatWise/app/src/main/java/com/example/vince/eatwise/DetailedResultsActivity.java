@@ -1,14 +1,23 @@
 package com.example.vince.eatwise;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.Manifest;
 
 import com.example.vince.eatwise.Utility.AsyncResponse;
 import com.example.vince.eatwise.Utility.RestaurantInfo;
@@ -108,9 +117,9 @@ class getImage extends AsyncTask<String, Void, Drawable> {
         this.delegate = delegate;
     }
     /**
-     * Extending the AsyncTask class to make the actual API call.
-     * @param params contains the query URL
-     * @return the JSON string returned by the API call
+     * Extending the AsyncTask class to find image according to the url.
+     * @param params contains the image's URL
+     * @return Drawable object (which is the image that the url refers to)
      */
     protected Drawable doInBackground(String... params) {
         try {
