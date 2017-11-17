@@ -16,6 +16,15 @@ public class RestaurantArray {
         this.size = 0;
     }
 
+    /**
+     * Add a new restaurant initialized with features to the restaurant list
+     * @param name
+     * @param location
+     * @param type
+     * @param cost
+     * @param rating
+     * @param distance
+     */
     public void add_restaurant(String name, String location, String type, Double cost,
                                Preference_Data.Rating rating, Double distance){//notice that rating here should naturally be double, not quantized; here it is only for convenience
         this.data_member.add(new Restaurant(name, location, type, cost, rating));
@@ -31,6 +40,9 @@ public class RestaurantArray {
     }
     */
 
+    /**
+     * Clear the restaurant list
+     */
     public void reset(){
         for(Integer i = this.size-1; i >= 0; i--){
             this.data_member.remove(i);

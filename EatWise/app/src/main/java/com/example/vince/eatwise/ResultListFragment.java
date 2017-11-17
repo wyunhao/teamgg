@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +43,15 @@ public class ResultListFragment extends Fragment {
         getActivity().setTitle(R.string.title_result_list);
         results = ((SearchResultActivity)getActivity()).getResults();
 
+        FloatingActionButton fab = (FloatingActionButton) myView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Switch to Map view", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
         TextView textView = myView.findViewById(R.id.error_msg);
         ListView listView = myView.findViewById(R.id.list);
 
@@ -69,7 +80,7 @@ public class ResultListFragment extends Fragment {
                 String rating = results.get(position).getAsJsonObject().get("rating").getAsString();
 
                 RestaurantInfo restaurantInfo = RestaurantInfo.builder().name(name).addr(addr).phone(phone).picture(picture).rating(rating).build();
-                Intent intent = new Intent(getActivity(), DetailedActivity.class);
+                Intent intent = new Intent(getActivity(), DetailedResultsActivity.class);
                 Bundle b = new Bundle();
                 b.putSerializable("restaurantInfo", restaurantInfo);
                 intent.putExtras(b);
@@ -143,5 +154,5 @@ class CustomListAdapter extends ArrayAdapter<String> {
 
         return rowView;
 
-    };
+    }
 }

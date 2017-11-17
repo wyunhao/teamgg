@@ -16,6 +16,13 @@ public class Preference_Data {//kept by user for recommendation
     public Double distance;
     public Double freqByType, freqByCost, freqByRating, freqByDistance; //added attr. for calculating recommendation; rather awkward
 
+    /**
+     * Constructor that takes four parameters
+     * @param type
+     * @param cost
+     * @param rating
+     * @param distance
+     */
     public Preference_Data(String type, Double cost, Rating rating, Double distance){
         this.type = type;
         this.cost = cost;
@@ -23,18 +30,52 @@ public class Preference_Data {//kept by user for recommendation
         this.distance = distance;
         this.freqByType = this.freqByCost = this.freqByRating = this.freqByDistance = 0.0;
     }
+
+    /**
+     * Constructor that takes three parameters
+     * @param type
+     * @param cost
+     * @param rating
+     */
     public Preference_Data(String type, Double cost, Rating rating){
         this(type, cost, rating, 0.0);
     }
+
+    /**
+     * Constructor that takes two parameters
+     * @param type
+     * @param cost
+     */
     public Preference_Data(String type, Double cost){
         this(type, cost, Rating.ZERO, 0.0);
     }
+
+    /**
+     * Constructor that takes one parameter
+     * @param type
+     */
     public Preference_Data(String type){
         this(type, 0.0, Rating.ZERO, 0.0);
     }
+
+    /**
+     * Default constructor
+     */
     public Preference_Data(){
         this("", 0.0, Rating.ZERO, 0.0); //the default restaurant type can either be null or empty
     }
+
+    /**
+     * Setter function to set the preference
+     * @param type
+     * @param cost
+     * @param rating
+     * @param distance
+     * @param freqByType
+     * @param freqByCost
+     * @param freqByRating
+     * @param freqByDistance
+     */
 
     //update preference when required and new history is generated
     public void update_preference(String type, Double cost, Rating rating, Double distance,

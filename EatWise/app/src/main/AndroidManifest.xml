@@ -45,22 +45,16 @@
             android:name=".NavigationDrawerActivity"
             android:label="@string/title_activity_navigation_drawer"
             android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"></activity>
-        <activity
-            android:name=".DetailedActivity"
-            android:label="@string/title_activity_detailed"
-            android:parentActivityName=".SearchResultActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.vince.eatwise.SearchResultActivity" />
-        </activity>
+        <activity android:name=".DetailedResultsActivity"></activity>
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.vince.eatwise.API.YelpAPIcall;
 import com.example.vince.eatwise.QueryData.QueryFilter;
 import com.example.vince.eatwise.Utility.AsyncResponse;
 import com.google.gson.Gson;
@@ -93,7 +94,11 @@ public class SearchResultActivity extends AppCompatActivity implements AsyncResp
         fragmentManager.beginTransaction().replace(R.id.content_frame, new ResultListFragment()).commit();
     }
 
-
+    /**
+     * Use filter information to create valid URL to search for restaurant information
+     * @param filter object that contains all the filter information
+     * @return a valid URL that integrates the filter information
+     */
     private String generateURL(QueryFilter filter){
         String keyword = "food";
         Integer distance = filter.getDistance();
@@ -112,45 +117,3 @@ public class SearchResultActivity extends AppCompatActivity implements AsyncResp
         this.JsonStr = output;
     }
 }
-
- /*
-    CLASS THAT DEALS WITH THE API CALL. EXTENDS ASYNCTASK SO THAT IT CAN ACCESS INTERNET
- */
-
-class YelpAPIcall extends AsyncTask<String, Void, String>{
-    public AsyncResponse delegate = null;
-
-    public YelpAPIcall(AsyncResponse delegate){
-        this.delegate = delegate;
-    }
-
-    protected String doInBackground(String... params) {
-        try {
-            String queryURL = params[0];
-            URL url = new URL (queryURL);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty  ("Authorization", "Bearer " + "KVIzqS5JwpvzDhTOELrii4Yl563Yg2FTxaaJBmNKIi0Igkhd3dCDhWfslEq3jLkG1ZQ7_aX6MZUgp2oWtU32GkdLsVGvpGmRJstpQFcAQpvnME8Kqx-ZufrRuZoLWnYx");
-            InputStream content = (InputStream)connection.getInputStream();
-            BufferedReader in   =
-                    new BufferedReader (new InputStreamReader(content));
-            String line;
-            String JsonStr = "";
-            while ((line = in.readLine()) != null) {
-                JsonStr += line;
-            }
-            delegate.processFinish(JsonStr);
-            return JsonStr;
-
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
-    protected void onPostExecute(String result) {
-        return;
-    }
-}
-
-

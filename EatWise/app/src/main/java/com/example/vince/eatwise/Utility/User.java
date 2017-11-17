@@ -62,12 +62,20 @@ public class User {
 
     //major calling methods
     //relate to search activity
+
+    /**
+     * Search for restaurants from the restaurant list that match the preferences
+     * @return restaurants that match the preferences
+     */
     public RestaurantArray search_restaurants()
     {
         //TODO:may not be compatiable/necessary with current implementation for search
         return new RestaurantArray();
     }
 
+    /**
+     * Update preferences and recommendations
+     */
     //relate to recommendation activity
     public void show_recommendation(){
         //this.update_preference(); //skipped for generating temp. recommendation page
