@@ -32,9 +32,16 @@ public class History {
      * Adding a new query to the history
      * @param newQuery The query to be added
      */
+
     public void addQuery(Query newQuery){
-        pastQuery.set(queryLength%historyLength, new Query(newQuery.getType(), newQuery.getCost(), newQuery.getRating(),
-                newQuery.getDistance(), newQuery.getRestaurantName())); //TODO: find a way to acconnt for direct search by name
+        if(queryLength < historyLength){
+            pastQuery.add(new Query(newQuery.getType(), newQuery.getCost(), newQuery.getRating(),
+                    newQuery.getDistance(), newQuery.getRestaurantName()));
+        }
+        else {
+            pastQuery.set(queryLength % historyLength, new Query(newQuery.getType(), newQuery.getCost(),
+                    newQuery.getRating(), newQuery.getDistance(), newQuery.getRestaurantName())); //TODO: find a way to acconnt for direct search by name
+        }
         queryLength++;
     }
 
@@ -43,7 +50,12 @@ public class History {
      * @param newViewed The viewed restaurant tio be added
      */
     public void addViewed(Viewed newViewed){
-        pastViewing.set(viewLength%historyLength, new Viewed(newViewed.getRestaurant()));
+        if (viewLength < historyLength){
+            pastViewing.add(new Viewed(newViewed.restaurant));
+        }
+        else {
+            pastViewing.set(viewLength % historyLength, new Viewed(newViewed.restaurant));
+        }
         viewLength++;
     };
 
@@ -55,13 +67,13 @@ public class History {
      */
     //calculate preference
     public void updatePreference(PreferenceData currentPreference){
-
         Integer qLen = (queryLength > historyLength) ? historyLength : queryLength;
         Integer vLen = (viewLength > historyLength) ? historyLength : viewLength;
 
         //for query, get key frequency
         Double num_type, num_cost, num_rating, num_distance; num_type = num_cost = num_rating = num_distance = 0.0;
         Double fre_type, fre_cost, fre_rating, fre_distance;
+
         for(Integer i = 0; i <qLen; i++){
             final Query query = pastQuery.get(i);
             if(!query.getType().equals("")) num_type++;
@@ -107,6 +119,7 @@ public class History {
                 score += weight * currentPreference.getFreqByRating();
             }
             if(preferenceData.getDistance().equals(currentPreference.getDistance())){
+
                 score += weight * currentPreference.getFreqByDistance();
             }
 

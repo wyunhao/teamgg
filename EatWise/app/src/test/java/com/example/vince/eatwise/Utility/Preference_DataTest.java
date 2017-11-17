@@ -32,7 +32,7 @@ public class Preference_DataTest {
     @Test
     public void updatePreferenceSucceed() {
         final Double testDouble = new Double(1.1);
-        pd.update_preference("new", testDouble, Rating.TWO,
+        pd.updatePreference("new", testDouble, Rating.TWO,
                 testDouble, testDouble, testDouble, testDouble, testDouble);
 
         assertEquals("new", pd.getType());

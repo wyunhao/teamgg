@@ -1,10 +1,9 @@
 package com.example.vince.eatwise.Utility;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
+
 public class Restaurant {
     private String name;
     private String location;
@@ -22,8 +21,6 @@ public class Restaurant {
      * given location of the restaurant, get the current location of the user and calculate distance, for navigation mode
      * @param location location of restaurant
      */
-
-
     public void setDistance(String location){
         //TODO:given location of the restaurant, get the current location of the user and calculate distance, for navigation mode
     }
