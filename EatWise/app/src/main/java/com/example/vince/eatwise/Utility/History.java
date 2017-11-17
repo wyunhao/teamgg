@@ -33,7 +33,7 @@ public class History {
      */
     public void add_query(Query newQuery){
         past_query.set(queryLength%historyLength,
-                    new Query(newQuery.type, newQuery.cost, newQuery.rating, newQuery.distance, newQuery.restaurant_name)); //TODO: find a way to acconnt for direct search by name
+                    new Query(newQuery.getType(), newQuery.getCost(), newQuery.getRating(), newQuery.getDistance(), newQuery.restaurant_name)); //TODO: find a way to acconnt for direct search by name
         queryLength++;
     }
 
@@ -62,10 +62,10 @@ public class History {
         Double num_type, num_cost, num_rating, num_distance; num_type = num_cost = num_rating = num_distance = 0.0;
         Double fre_type, fre_cost, fre_rating, fre_distance;
         for(Integer i = 0; i <q_length; i++){
-            if(!past_query.get(i).type.equals("")) num_type++;
-            if(past_query.get(i).cost != 0.0) num_cost++;
-            if(past_query.get(i).rating != Query.Rating.ZERO) num_rating++;
-            if(past_query.get(i).distance != 0.0) num_distance++;
+            if(!past_query.get(i).getType().equals("")) num_type++;
+            if(past_query.get(i).getCost() != 0.0) num_cost++;
+            if(past_query.get(i).getRating() != Query.Rating.ZERO) num_rating++;
+            if(past_query.get(i).getDistance() != 0.0) num_distance++;
         }
         fre_type = num_type / q_length; fre_cost = num_cost / q_length; fre_rating = num_rating / q_length; fre_distance = num_distance / q_length;
 
@@ -94,17 +94,17 @@ public class History {
             Double score = 0.0;
             Double weight = this.past_viewing.get(i).visit ? weightVisit : weightView;//TODO:consider how/when to use set_visit()
 
-            if(this.past_viewing.get(i).restaurant.feature.type.equals(currentPreference.type)){
-                score += weight * currentPreference.freqByType;
+            if(this.past_viewing.get(i).restaurant.feature.getType().equals(currentPreference.getType())){
+                score += weight * currentPreference.getFreqByType();
             }
-            if(this.past_viewing.get(i).restaurant.feature.cost.equals(currentPreference.cost)){
-                score += weight * currentPreference.freqByCost;
+            if(this.past_viewing.get(i).restaurant.feature.getCost().equals(currentPreference.getCost())){
+                score += weight * currentPreference.getFreqByCost();
             }
-            if(this.past_viewing.get(i).restaurant.feature.rating.equals(currentPreference.rating)){
-                score += weight * currentPreference.freqByRating;
+            if(this.past_viewing.get(i).restaurant.feature.getRating().equals(currentPreference.getRating())){
+                score += weight * currentPreference.getFreqByRating();
             }
-            if(this.past_viewing.get(i).restaurant.feature.distance.equals(currentPreference.distance)){
-                score += weight * currentPreference.freqByDistance;
+            if(this.past_viewing.get(i).restaurant.feature.getDistance().equals(currentPreference.getDistance())){
+                score += weight * currentPreference.getFreqByDistance();
             }
 
             recScore.set(i, score);

@@ -2,19 +2,23 @@ package com.example.vince.eatwise.Utility;
 
 import java.util.Date;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /*
  * Last update on 2017-11-15
  */
 
 
-
+@Getter
+@Setter
 public class Preference_Data {//kept by user for recommendation
     public enum Rating{ZERO, ONE, TWO, THREE, FOUR, FIVE}//the user input should be converted to this enum type
-    public String type; //see enum CuisineType in QueryData
-    public Double cost; //if ranged, consider enum, array, etc; else introduce two variables; current treat as +- $2 range
-    public Rating rating; //name change; type changed: quantized to 0,1,2,3,4,5; no less than input by default
-    public Double distance;
-    public Double freqByType, freqByCost, freqByRating, freqByDistance; //added attr. for calculating recommendation; rather awkward
+    private String type; //see enum CuisineType in QueryData
+    private Double cost; //if ranged, consider enum, array, etc; else introduce two variables; current treat as +- $2 range
+    private Rating rating; //name change; type changed: quantized to 0,1,2,3,4,5; no less than input by default
+    private Double distance;
+    private Double freqByType, freqByCost, freqByRating, freqByDistance; //added attr. for calculating recommendation; rather awkward
 
     /**
      * Constructor that takes four parameters

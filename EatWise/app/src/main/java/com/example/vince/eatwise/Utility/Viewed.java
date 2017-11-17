@@ -14,8 +14,8 @@ public class Viewed {
     public Viewed(Restaurant restaurant){
         this.date = new Date(); //current date, can be formatted per need
         this.restaurant = new Restaurant(restaurant.name, restaurant.location,
-                                        restaurant.feature.type, restaurant.feature.cost,restaurant.feature.rating);
-        this.restaurant.set_distance(restaurant.feature.distance);
+                                        restaurant.feature.getType(), restaurant.feature.getCost(),restaurant.feature.getRating());
+        this.restaurant.set_distance(restaurant.feature.getDistance());
         this.visit = false;
     }
 

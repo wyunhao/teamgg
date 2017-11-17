@@ -25,6 +25,6 @@ public class Restaurant {
         //TODO:given location of the restaurant, get the current location of the user and calculate distance, for navigation mode
     }
     public void set_distance(Double distance){//for recording view based on search info
-        this.feature.distance = distance;
+        this.feature.setDistance(distance);
     }
 }

@@ -3,13 +3,16 @@ package com.example.vince.eatwise.Utility;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+
 /*
 * Last update on 2017-11-15
 * */
 
+@Getter
 public class RestaurantArray {
-    public Integer size;
-    public List<Restaurant> data_member;
+    private Integer size;
+    private List<Restaurant> data_member;
 
     public RestaurantArray(){
         this.data_member = new ArrayList<Restaurant>();

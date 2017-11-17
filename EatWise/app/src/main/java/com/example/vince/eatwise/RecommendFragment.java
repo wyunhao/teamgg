@@ -81,23 +81,23 @@ public class RecommendFragment extends Fragment implements AsyncResponse {
         User user = new User("username", "12345", "xxxx@gmail.com", "Larry", "David", new Date());
         user.show_recommendation();
         String[] rec_name_list = new String[]{
-                user.getRecList().data_member.get(0).name,
-                user.getRecList().data_member.get(1).name,
-                user.getRecList().data_member.get(2).name,
-                user.getRecList().data_member.get(3).name,
-                user.getRecList().data_member.get(4).name,
-                user.getRecList().data_member.get(4).name,
-                user.getRecList().data_member.get(4).name,
-                user.getRecList().data_member.get(4).name,
-                user.getRecList().data_member.get(4).name,
-                user.getRecList().data_member.get(4).name,
-                user.getRecList().data_member.get(4).name,
-                user.getRecList().data_member.get(4).name,
-                user.getRecList().data_member.get(4).name,
-                user.getRecList().data_member.get(4).name,
-                user.getRecList().data_member.get(4).name,
-                user.getRecList().data_member.get(4).name,
-                user.getRecList().data_member.get(4).name
+                user.getRecList().getData_member().get(0).name,
+                user.getRecList().getData_member().get(1).name,
+                user.getRecList().getData_member().get(2).name,
+                user.getRecList().getData_member().get(3).name,
+                user.getRecList().getData_member().get(4).name,
+                user.getRecList().getData_member().get(4).name,
+                user.getRecList().getData_member().get(4).name,
+                user.getRecList().getData_member().get(4).name,
+                user.getRecList().getData_member().get(4).name,
+                user.getRecList().getData_member().get(4).name,
+                user.getRecList().getData_member().get(4).name,
+                user.getRecList().getData_member().get(4).name,
+                user.getRecList().getData_member().get(4).name,
+                user.getRecList().getData_member().get(4).name,
+                user.getRecList().getData_member().get(4).name,
+                user.getRecList().getData_member().get(4).name,
+                user.getRecList().getData_member().get(4).name
         };
 
         //adaptor
