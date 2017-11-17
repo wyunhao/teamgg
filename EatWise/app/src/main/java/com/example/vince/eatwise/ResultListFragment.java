@@ -69,7 +69,7 @@ public class ResultListFragment extends Fragment {
                 String rating = results.get(position).getAsJsonObject().get("rating").getAsString();
 
                 RestaurantInfo restaurantInfo = RestaurantInfo.builder().name(name).addr(addr).phone(phone).picture(picture).rating(rating).build();
-                Intent intent = new Intent(getActivity(), DetailedActivity.class);
+                Intent intent = new Intent(getActivity(), DetailedResultsActivity.class);
                 Bundle b = new Bundle();
                 b.putSerializable("restaurantInfo", restaurantInfo);
                 intent.putExtras(b);
