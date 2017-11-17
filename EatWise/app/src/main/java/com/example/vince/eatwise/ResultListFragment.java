@@ -1,6 +1,7 @@
 package com.example.vince.eatwise;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,6 +18,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import com.example.vince.eatwise.Utility.RestaurantInfo;
 
 import com.google.gson.JsonArray;
 
@@ -38,17 +41,42 @@ public class ResultListFragment extends Fragment {
         getActivity().setTitle(R.string.title_result_list);
         results = ((SearchResultActivity)getActivity()).getResults();
 
+        TextView textView = myView.findViewById(R.id.error_msg);
+        ListView listView = myView.findViewById(R.id.list);
+
         if (results.size() != 0) {
-            TextView textView = myView.findViewById(R.id.error_msg);
             textView.setVisibility(View.GONE);
             populateResults();
         } else {
-            ListView listView = myView.findViewById(R.id.list);
             listView.setVisibility(View.GONE);
         }
 
-
         // TODO: send to DetailedActivity: RestaurantInfo
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+               // TODO: build RestaurantInfo Object
+                String name = results.get(position).getAsJsonObject().get("name").getAsString();
+                String addr = "";
+                JsonArray addr_array = results.get(position).getAsJsonObject().get("location").getAsJsonObject().getAsJsonArray("display_address");
+                for (int i = 0; i < addr_array.size(); i++) {
+                    if (i != 0) addr+=",";
+                    addr += addr_array.get(i).getAsString();
+                }
+                String phone = results.get(position).getAsJsonObject().get("phone").getAsString();
+                String picture = results.get(position).getAsJsonObject().get("image_url").getAsString();
+                String rating = results.get(position).getAsJsonObject().get("rating").getAsString();
+
+                RestaurantInfo restaurantInfo = RestaurantInfo.builder().name(name).addr(addr).phone(phone).picture(picture).rating(rating).build();
+                Intent intent = new Intent(getActivity(), DetailedActivity.class);
+                Bundle b = new Bundle();
+                b.putSerializable("restaurantInfo", restaurantInfo);
+                intent.putExtras(b);
+                startActivity(intent);
+            }
+        });
+
         return myView;
     }
 
