@@ -1,10 +1,8 @@
 package com.example.vince.eatwise;
 
-import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.MotionEvent;
@@ -30,23 +28,13 @@ import java.util.List;
 public class SearchFragment extends Fragment {
     private View myView;
 
-    @TargetApi(Build.VERSION_CODES.N)
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, final Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.activity_search, container, false);
-
-        myView.findViewById(R.id.relataivesearchlayout).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                final InputMethodManager inputMethodManager = (InputMethodManager) getActivity()
-                        .getSystemService(getActivity().INPUT_METHOD_SERVICE);
-                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                return true;
-            }
-        });
-
         getActivity().setTitle(R.string.title_search_fragment);
+
+        setSoftKeyboardHiddenListener(myView);
 
         final Button submitFilter = myView.findViewById(R.id.buttonSubmit);
         final EditText location = myView.findViewById(R.id.editTextLocation);
@@ -57,7 +45,7 @@ public class SearchFragment extends Fragment {
                     location.setError("Please specify the search address.");
                 }
             }
-        });
+        });//set error for location if user does not specify one, real-time validation
         final EditText distance = myView.findViewById(R.id.editTextDistance);
         distance.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -68,7 +56,7 @@ public class SearchFragment extends Fragment {
                     distance.setError("Please enter a valid range of distance.");
                 }
             }
-        });
+        });//set error for distance if user does not specify one, real-time validation
 
         List<String> categorySpinner = new ArrayList();
         for (CuisineType type : CuisineType.values()) {
@@ -88,7 +76,7 @@ public class SearchFragment extends Fragment {
                     selected.setTextColor(Color.GRAY);
                     selected.setError("Please select a food category");
                 }
-            }
+            }//set error for category spinner if the selected item is default string msg
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -108,7 +96,7 @@ public class SearchFragment extends Fragment {
                     price.setError("Please enter a valid price level.");
                 }
             }
-        });
+        });//set error for price level if user does not specify one, real-time validation
         final EditText keyword = myView.findViewById(R.id.editTextKeyword);
 
         submitFilter.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +110,7 @@ public class SearchFragment extends Fragment {
                 if (location.getError() != null || distance.getError() != null || price.getError() != null
                         || ((TextView) category.getSelectedView()).getError() != null) {
                     Toast.makeText(getActivity(), "Please complete the search filter", Toast.LENGTH_SHORT).show();
-                }
+                }//if there is still error in any edittext boxes, show the Toast to let user complete the search filter
                 else {
                     final QueryFilter filter = QueryFilter.builder().location(location.getText().toString())
                             .category((String) category.getSelectedItem())
@@ -141,5 +129,18 @@ public class SearchFragment extends Fragment {
         });
 
         return myView;
+    }
+
+
+    private void setSoftKeyboardHiddenListener(View myView) {
+        myView.findViewById(R.id.relataivesearchlayout).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                final InputMethodManager inputMethodManager = (InputMethodManager) getActivity()
+                        .getSystemService(getActivity().INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                return true;
+            }
+        });
     }
 }
