@@ -17,10 +17,11 @@ import com.example.vince.eatwise.Utility.User;
 import java.util.Date;
 
 /*
- * Alternative to RecommendationList.java
+ * Entry fragment of NavigationDrawerActivity
+ * Display recommendations based on past user activity
  */
 
-public class RecommendFrag extends Fragment {
+public class RecommendFragment extends Fragment {
     private View myView;
 
     @Nullable

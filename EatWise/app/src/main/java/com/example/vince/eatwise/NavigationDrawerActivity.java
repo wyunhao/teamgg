@@ -1,7 +1,6 @@
 package com.example.vince.eatwise;
 
 import android.app.FragmentManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -22,12 +20,11 @@ public class NavigationDrawerActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_navigation_drawer);
 
+        // When activity is initiated, switch to RecommendFragment as default entry fragment.
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, new RecommendationList()).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, new RecommendFragment()).commit();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -91,7 +88,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_recommendation) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new RecommendationList()).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new RecommendFragment()).commit();
         } else if (id == R.id.nav_search) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, new SearchFragment()).commit();
         } else if (id == R.id.nav_account) {
