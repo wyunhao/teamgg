@@ -2,15 +2,29 @@ package com.example.vince.eatwise;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.vince.eatwise.Utility.AsyncResponse;
 import com.example.vince.eatwise.Utility.RestaurantInfo;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
-public class DetailedResultsActivity extends AppCompatActivity {
+public class DetailedResultsActivity extends AppCompatActivity implements AsyncResponse{
+
+    private getImage ImageGetter = new getImage(this);
+    private ImageView restaurant_image = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +43,21 @@ public class DetailedResultsActivity extends AppCompatActivity {
         // TODO: ACTUALLY GET THESE RATING FROM API CALLS
         String foursquare_rating = rand.nextInt(5) + 1 + "";
         String tripadvisor_rating = rand.nextInt(5) + 1 + "";
-        Double avg_rating_d = (Double.parseDouble(yelp_rating) + Double.parseDouble(foursquare_rating) + Double.parseDouble(tripadvisor_rating))/3;
+        Double avg_rating_d = (Double.parseDouble(yelp_rating) + Double.parseDouble(foursquare_rating) + Double.parseDouble(tripadvisor_rating)) / 3;
         String avg_rating = avg_rating_d + "";
+
+        //getting image
+        restaurant_image = findViewById(R.id.restaurant_image);
+        Drawable d = null;
+        try {
+            d = this.ImageGetter.execute(pic_url).get();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        restaurant_image.setImageDrawable(d);
 
         // set general information
         TextView textView_name = findViewById(R.id.textView_m_name);
@@ -55,7 +82,7 @@ public class DetailedResultsActivity extends AppCompatActivity {
         setFontColor(Double.parseDouble(avg_rating), textView);
     }
 
-    private void setFontColor(Double rating_d, TextView rating){
+    private void setFontColor(Double rating_d, TextView rating) {
         if (rating_d >= 4 && rating_d <= 5) {
             rating.setTextColor(Color.parseColor("#ff067c"));
         } else if (rating_d >= 3 && rating_d < 4) {
@@ -68,4 +95,35 @@ public class DetailedResultsActivity extends AppCompatActivity {
             rating.setTextColor(Color.parseColor("#d8d8d0"));
         }
     }
+
+    public void processFinish(String output){
+        return;
+    }
 }
+
+class getImage extends AsyncTask<String, Void, Drawable> {
+    public AsyncResponse delegate = null;
+
+    public getImage(AsyncResponse delegate){
+        this.delegate = delegate;
+    }
+    /**
+     * Extending the AsyncTask class to make the actual API call.
+     * @param params contains the query URL
+     * @return the JSON string returned by the API call
+     */
+    protected Drawable doInBackground(String... params) {
+        try {
+            String url = params[0];
+            InputStream is = (InputStream) new URL(url).getContent();
+            return Drawable.createFromStream(is, "src name");
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    protected void onPostExecute(Drawable result) {
+        return;
+    }
+}
+
