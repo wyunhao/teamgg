@@ -147,13 +147,11 @@ public class RecommendFragment extends Fragment implements AsyncResponse {
         }
         // TODO: this is temporary, future: support images
         Integer imageID[] = new Integer[20];
-        CustomListAdapter adapter = new CustomListAdapter(getActivity(), itemName, itemRating, imageID);
+        CustomListAdapter2 adapter = new CustomListAdapter2(getActivity(), itemName, itemRating, imageID);
         ListView list = (ListView) myView.findViewById(R.id.rec_list);
         list.setAdapter(adapter);
 
         return;
-
-
     }
 
     @Override
@@ -179,13 +177,11 @@ class CustomListAdapter2 extends ArrayAdapter<String> {
     }
 
     public View getView(int position, View view, ViewGroup parent) {
-        // TODO: support restaurant icons, and addresses
         LayoutInflater inflater = contextActivity.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.list_row, null, true);
 
         TextView title = (TextView) rowView.findViewById(R.id.item);
         TextView rating = (TextView) rowView.findViewById(R.id.item_rating);
-//        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 
         title.setText(this.itemName[position]);
         rating.setText(this.itemRating[position] + "/5.0");

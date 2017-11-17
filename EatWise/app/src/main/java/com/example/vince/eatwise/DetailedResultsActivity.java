@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vince.eatwise.Utility.AsyncResponse;
+import com.example.vince.eatwise.Utility.GetImage;
 import com.example.vince.eatwise.Utility.RestaurantInfo;
 
 import java.io.BufferedReader;
@@ -23,7 +24,7 @@ import java.util.concurrent.ExecutionException;
 
 public class DetailedResultsActivity extends AppCompatActivity implements AsyncResponse{
 
-    private getImage ImageGetter = new getImage(this);
+    private GetImage ImageGetter = new GetImage(this);
     private ImageView restaurant_image = null;
 
     @Override
@@ -100,30 +101,3 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
         return;
     }
 }
-
-class getImage extends AsyncTask<String, Void, Drawable> {
-    public AsyncResponse delegate = null;
-
-    public getImage(AsyncResponse delegate){
-        this.delegate = delegate;
-    }
-    /**
-     * Extending the AsyncTask class to make the actual API call.
-     * @param params contains the query URL
-     * @return the JSON string returned by the API call
-     */
-    protected Drawable doInBackground(String... params) {
-        try {
-            String url = params[0];
-            InputStream is = (InputStream) new URL(url).getContent();
-            return Drawable.createFromStream(is, "src name");
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    protected void onPostExecute(Drawable result) {
-        return;
-    }
-}
-

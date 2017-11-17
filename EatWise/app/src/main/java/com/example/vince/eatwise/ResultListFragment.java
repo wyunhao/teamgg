@@ -3,6 +3,7 @@ package com.example.vince.eatwise;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
@@ -20,11 +21,15 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.example.vince.eatwise.Utility.AsyncResponse;
+import com.example.vince.eatwise.Utility.GetImage;
 import com.example.vince.eatwise.Utility.RestaurantInfo;
 
 import com.google.gson.JsonArray;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import static android.view.Gravity.CENTER;
 
@@ -94,46 +99,56 @@ public class ResultListFragment extends Fragment {
     private void populateResults() {
         String[] itemName = new String[results.size()];
         String[] itemRating = new String[results.size()];
+        String[] imageURL = new String[results.size()];
         for (int i = 0; i < results.size(); i++) {
             itemName[i] = results.get(i).getAsJsonObject().get("name").getAsString();
             itemRating[i] = results.get(i).getAsJsonObject().get("rating").getAsString();
+            imageURL[i] = results.get(i).getAsJsonObject().get("image_url").getAsString();
         }
-            // TODO: this is temporary, future: support images
-        Integer imageID[] = new Integer[20];
-        CustomListAdapter adapter = new CustomListAdapter(getActivity(), itemName, itemRating, imageID);
+        CustomListAdapter adapter = new CustomListAdapter(getActivity(), itemName, itemRating, imageURL);
         ListView list = (ListView) myView.findViewById(R.id.list);
         list.setAdapter(adapter);
 
         return;
-
-
     }
 }
 
-class CustomListAdapter extends ArrayAdapter<String> {
+class CustomListAdapter extends ArrayAdapter<String>  implements AsyncResponse {
 
     private final Activity contextActivity;
     private final String[] itemName;
     private final String[] itemRating;
+    private final String[] imageURL;
 
-
-    public CustomListAdapter(Activity contextActivity, String[] itemName, String[] itemRating, Integer[] imageID) {
+    public CustomListAdapter(Activity contextActivity, String[] itemName, String[] itemRating, String[] imageURL) {
         super(contextActivity, R.layout.list_row, itemName);
         // TODO Auto-generated constructor stub
 
         this.contextActivity=contextActivity;
         this.itemName = itemName;
         this.itemRating = itemRating;
+        this.imageURL = imageURL;
     }
 
     public View getView(int position,View view,ViewGroup parent) {
-        // TODO: support restaurant icons, and addresses
         LayoutInflater inflater=contextActivity.getLayoutInflater();
         View rowView=inflater.inflate(R.layout.list_row, null,true);
 
         TextView title = (TextView) rowView.findViewById(R.id.item);
         TextView rating = (TextView) rowView.findViewById(R.id.item_rating);
-//        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+//        ImageView restaurant_image = rowView.findViewById(R.id.icon);
+
+//        GetImage imageGetter = new GetImage(this);
+//        Drawable d = null;
+//        try {
+//            d = imageGetter.execute(this.imageURL[position]).get();
+//
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        }
+//        restaurant_image.setImageDrawable(d);
 
         title.setText(this.itemName[position]);
         rating.setText(this.itemRating[position] + "/5.0");
@@ -152,7 +167,14 @@ class CustomListAdapter extends ArrayAdapter<String> {
             rating.setTextColor(Color.parseColor("#d8d8d0"));
         }
 
+
+
         return rowView;
 
     }
+
+    public void processFinish(String output){
+        return;
+    }
+
 }
