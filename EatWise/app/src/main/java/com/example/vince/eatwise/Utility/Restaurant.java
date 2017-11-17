@@ -10,7 +10,7 @@ public class Restaurant {
     public Review[] reviews;
     public Preference_Data feature;
 
-    public Restaurant(String name, String location, String type, Double cost, Preference_Data.Rating rating){
+    public Restaurant(String name, String location, String type, Double cost, Rating rating){
         this.name = name;
         this.location = location;
         this.feature = new Preference_Data(type, cost,rating);

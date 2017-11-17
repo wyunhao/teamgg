@@ -42,7 +42,7 @@ public class History {
      * @param newViewed The viewed restaurant tio be added
      */
     public void add_viewed(Viewed newViewed){
-        past_viewing.set(viewLength%historyLength, new Viewed(newViewed.restaurant));
+        past_viewing.set(viewLength%historyLength, new Viewed(newViewed.getRestaurant()));
         viewLength++;
     };
 
@@ -64,7 +64,7 @@ public class History {
         for(Integer i = 0; i <q_length; i++){
             if(!past_query.get(i).getType().equals("")) num_type++;
             if(past_query.get(i).getCost() != 0.0) num_cost++;
-            if(past_query.get(i).getRating() != Query.Rating.ZERO) num_rating++;
+            if(past_query.get(i).getRating() != Rating.ZERO) num_rating++;
             if(past_query.get(i).getDistance() != 0.0) num_distance++;
         }
         fre_type = num_type / q_length; fre_cost = num_cost / q_length; fre_rating = num_rating / q_length; fre_distance = num_distance / q_length;
@@ -72,7 +72,7 @@ public class History {
         //for viewed, get most viewed type, cost, rating, distance
         //TODO:quantize each feature and count their appearance by range
 
-        current_preference.update_preference("Mexican", 5.0, Preference_Data.Rating.FOUR, 1.0, fre_type, fre_cost, fre_rating, fre_distance);
+        current_preference.update_preference("Mexican", 5.0, Rating.FOUR, 1.0, fre_type, fre_cost, fre_rating, fre_distance);
     }
 
     /**
@@ -92,18 +92,18 @@ public class History {
 
         for(Integer i = 0; i < ((viewLength < historyLength) ? viewLength : historyLength); i++){
             Double score = 0.0;
-            Double weight = this.past_viewing.get(i).visit ? weightVisit : weightView;//TODO:consider how/when to use set_visit()
+            Double weight = this.past_viewing.get(i).getVisit() ? weightVisit : weightView;//TODO:consider how/when to use set_visit()
 
-            if(this.past_viewing.get(i).restaurant.feature.getType().equals(currentPreference.getType())){
+            if(this.past_viewing.get(i).getRestaurant().feature.getType().equals(currentPreference.getType())){
                 score += weight * currentPreference.getFreqByType();
             }
-            if(this.past_viewing.get(i).restaurant.feature.getCost().equals(currentPreference.getCost())){
+            if(this.past_viewing.get(i).getRestaurant().feature.getCost().equals(currentPreference.getCost())){
                 score += weight * currentPreference.getFreqByCost();
             }
-            if(this.past_viewing.get(i).restaurant.feature.getRating().equals(currentPreference.getRating())){
+            if(this.past_viewing.get(i).getRestaurant().feature.getRating().equals(currentPreference.getRating())){
                 score += weight * currentPreference.getFreqByRating();
             }
-            if(this.past_viewing.get(i).restaurant.feature.getDistance().equals(currentPreference.getDistance())){
+            if(this.past_viewing.get(i).getRestaurant().feature.getDistance().equals(currentPreference.getDistance())){
                 score += weight * currentPreference.getFreqByDistance();
             }
 
@@ -113,11 +113,11 @@ public class History {
         //TODO:pick num_recommend highest score from recScore and add corresponding past_viewing index to topTenId; add restaurants from viewed to userRecList by topTenId
 
         /*general mock data to display*/
-        userRecList.add_restaurant("R1", "pos(1,1)", "type1", 5.0, Preference_Data.Rating.ONE, 1.0);
-        userRecList.add_restaurant("R2", "pos(2,2)", "type2", 6.0, Preference_Data.Rating.TWO, 2.0);
-        userRecList.add_restaurant("R3", "pos(3,3)", "type3", 7.0, Preference_Data.Rating.THREE, 3.0);
-        userRecList.add_restaurant("R4", "pos(4,4)", "type4", 8.0, Preference_Data.Rating.FOUR, 4.0);
-        userRecList.add_restaurant("R5", "pos(4,4)", "type5", 9.0, Preference_Data.Rating.FIVE, 5.0);
+        userRecList.add_restaurant("R1", "pos(1,1)", "type1", 5.0, Rating.ONE, 1.0);
+        userRecList.add_restaurant("R2", "pos(2,2)", "type2", 6.0, Rating.TWO, 2.0);
+        userRecList.add_restaurant("R3", "pos(3,3)", "type3", 7.0, Rating.THREE, 3.0);
+        userRecList.add_restaurant("R4", "pos(4,4)", "type4", 8.0, Rating.FOUR, 4.0);
+        userRecList.add_restaurant("R5", "pos(4,4)", "type5", 9.0, Rating.FIVE, 5.0);
     }
 
 }

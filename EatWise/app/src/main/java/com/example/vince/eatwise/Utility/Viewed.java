@@ -2,14 +2,19 @@ package com.example.vince.eatwise.Utility;
 
 import java.util.Date;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /*
 * Last update on 2017-11-15
 * */
 
+@Getter
+@Setter
 public class Viewed {
-    public Date date;
-    public Restaurant restaurant;
-    public Boolean visit;
+    private Date date;
+    private Restaurant restaurant;
+    private Boolean visit;
 
     public Viewed(Restaurant restaurant){
         this.date = new Date(); //current date, can be formatted per need
@@ -18,6 +23,4 @@ public class Viewed {
         this.restaurant.set_distance(restaurant.feature.getDistance());
         this.visit = false;
     }
-
-    public void set_visit(){this.visit = true;}
 }

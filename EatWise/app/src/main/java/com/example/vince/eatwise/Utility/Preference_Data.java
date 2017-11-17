@@ -13,7 +13,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Preference_Data {//kept by user for recommendation
-    public enum Rating{ZERO, ONE, TWO, THREE, FOUR, FIVE}//the user input should be converted to this enum type
     private String type; //see enum CuisineType in QueryData
     private Double cost; //if ranged, consider enum, array, etc; else introduce two variables; current treat as +- $2 range
     private Rating rating; //name change; type changed: quantized to 0,1,2,3,4,5; no less than input by default

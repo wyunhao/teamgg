@@ -60,7 +60,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 try {
-                    Integer dist = Integer.parseInt(distance.getText().toString());
+                    Integer.parseInt(distance.getText().toString());
                 } catch (NumberFormatException e) {
                     distance.setError("Please enter a valid range of distance.");
                 }
@@ -100,7 +100,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 try {
-                    Double p = Double.parseDouble(price.getText().toString());
+                    Double.parseDouble(price.getText().toString());
                 } catch (NumberFormatException e) {
                     price.setError("Please enter a valid price level.");
                 }

@@ -11,7 +11,7 @@ public class RestaurantArrayTest {
     private static final String LOCATION = "location";
     private static final String TYPE = "type";
     private static final Double COST = new Double("0.0");
-    private static final Preference_Data.Rating RATING = Preference_Data.Rating.ONE;
+    private static final Rating RATING = Rating.ONE;
     private static final Double DISTANCE = new Double("0.0");
 
     private RestaurantArray ra;

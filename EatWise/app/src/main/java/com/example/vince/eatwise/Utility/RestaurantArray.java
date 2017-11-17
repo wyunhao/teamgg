@@ -29,7 +29,7 @@ public class RestaurantArray {
      * @param distance
      */
     public void add_restaurant(String name, String location, String type, Double cost,
-                               Preference_Data.Rating rating, Double distance){//notice that rating here should naturally be double, not quantized; here it is only for convenience
+                               Rating rating, Double distance){//notice that rating here should naturally be double, not quantized; here it is only for convenience
         this.data_member.add(new Restaurant(name, location, type, cost, rating));
         this.data_member.get(this.size).set_distance(distance);
         this.size++;
