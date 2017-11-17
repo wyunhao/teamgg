@@ -26,16 +26,32 @@ public class History {
     }
 
     //grow history
+
+    /**
+     * Adding a new query to the history
+     * @param newQuery
+     */
     public void add_query(Query newQuery){
         past_query.set(queryLength%historyLength,
                     new Query(newQuery.type, newQuery.cost, newQuery.rating, newQuery.distance, newQuery.restaurant_name)); //TODO: find a way to acconnt for direct search by name
         queryLength++;
     }
+
+    /**
+     * Adding a restaurant to the viewed list if it is viewed by the user
+     * @param newViewed
+     */
     public void add_viewed(Viewed newViewed){
         past_viewing.set(viewLength%historyLength, new Viewed(newViewed.restaurant));
         viewLength++;
     };
 
+    /**
+     * Modify the calculated preference by frequency of the keys of user's query
+     * Store the preference of the user
+     * Still in progress
+     * @param current_preference User class would pass in its own preference to get an updated preference
+     */
     //calculate preference
     public void update_preference(Preference_Data current_preference){
 
@@ -59,6 +75,12 @@ public class History {
         current_preference.update_preference("Mexican", 5.0, Preference_Data.Rating.FOUR, 1.0, fre_type, fre_cost, fre_rating, fre_distance);
     }
 
+    /**
+     * Assign weight to viewed and visited restaurants from history to calculate recommendation
+     * Still in progress
+     * @param currentPreference  User class would pass in its own preference to get an updated preference
+     * @param userRecList   User class would pass in its stored list of recommended restaurants
+     */
     //get recommended restaurants by preference from historically viewed
     public void calculate_by_preference(Preference_Data currentPreference, RestaurantArray userRecList){//avoid return/copying RestaurantArray
         //!this method may be discarded entirely: by our definition of recommendation(as opposed to favorites), it performs search using preference data

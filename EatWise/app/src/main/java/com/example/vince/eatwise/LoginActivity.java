@@ -33,7 +33,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth mAuth;
     private TextView mStatus;
 
-
+    /**
+     * Find UI elements related to different fields
+     * @param savedInstanceState Saved inputs from the previous login attempts
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    /**
+     * Check if the user is already signed in to display corresponding interface
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -60,6 +66,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuth.signOut();
     }
 
+    /**
+     * Respond to login successes and login failures
+     * @param user the user object authenticated
+     */
     private void updateUI(FirebaseUser user) {
         // pass user information to the next Activity: NavigationDrawerActivity
         if (user != null) {
@@ -73,6 +83,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /**
+     * syntax level validation on user input
+     * @return  if the input is valid
+     */
     private boolean validateForm() {
         boolean valid = true;
 
@@ -95,6 +109,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return valid;
     }
 
+    /**
+     * Create account with new email address and password combination
+     * @param email new email address to be registered
+     * @param password the password corresponds to the email
+     */
 
     private void createAccount(String email, String password) {
         Log.d(TAG, "createAccount:" + email);
@@ -122,6 +141,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 });
 
     }
+
+    /**
+     * Attempt to sign in with email with password online when they are both valid and match each other would login succeed
+     * @param email
+     * @param password
+     */
 
     private void signIn(String email, String password) {
         Log.d(TAG, "signIn" + email);
@@ -158,6 +183,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         updateUI(null);
     }
 
+    /**
+     * Click the button will trigger Sign In attempt
+     * @param v The search view
+     */
     @Override
     public void onClick(View v) {
         int i = v.getId();

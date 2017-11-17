@@ -28,6 +28,15 @@ import java.util.List;
 public class SearchFragment extends Fragment {
     private View myView;
 
+    /**
+     * generate a search user interface for a user to customize their filter objects
+     * which be used to build up the query
+     * extract the user inputs and combine them into a parameter bundle
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, final Bundle savedInstanceState) {
