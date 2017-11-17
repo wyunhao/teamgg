@@ -2,19 +2,22 @@ package com.example.vince.eatwise.Utility;
 
 import java.util.Date;
 
+import lombok.Getter;
+
 /*
  * Created by wangjingtao on 11/14/17.
  * Last update on 11/15/17
  */
 
+@Getter
 public class User {
-    public String username;
-    public Integer id;
+    private String username;
+    private Integer id;
     private String password;
     private History history;
     private Preference_Data preference;
     private Registration registerInfo;
-    public RestaurantArray recList;
+    private RestaurantArray recList;
 
     public User(String username, String password, String email, String first, String last, Date dob){
         this.username = username;
@@ -49,10 +52,10 @@ public class User {
     private Boolean compare_password(String inputPassword){return this.password.equals(inputPassword);}
     private void update_password(String newPassword){this.password = newPassword;}
     //private methods for registration info.
-    private void update_email(String newEmail){this.registerInfo.set_email(newEmail);}
-    private void update_first_name(String newFirst){this.registerInfo.set_first_name(newFirst);}
-    private void update_last_name(String newLast){this.registerInfo.set_last_name(newLast);}
-    private void update_birthdate(Date newDob){this.registerInfo.set_birthdate(newDob);}
+    private void update_email(String newEmail){this.registerInfo.setEmail(newEmail);}
+    private void update_first_name(String newFirst){this.registerInfo.setFirst(newFirst);}
+    private void update_last_name(String newLast){this.registerInfo.setLast(newLast);}
+    private void update_birthdate(Date newDob){this.registerInfo.setDob(newDob);}
     //private method for history
     private void update_history_by_query(Query newQuery){this.history.add_query(newQuery);}
     private void update_history_by_viewed(Viewed newViewed){this.history.add_viewed(newViewed);};

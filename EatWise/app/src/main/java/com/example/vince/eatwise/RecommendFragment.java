@@ -80,6 +80,32 @@ public class RecommendFragment extends Fragment implements AsyncResponse {
         //producing mock recommendation
         User user = new User("username", "12345", "xxxx@gmail.com", "Larry", "David", new Date());
         user.show_recommendation();
+        String[] rec_name_list = new String[]{
+                user.getRecList().data_member.get(0).name,
+                user.getRecList().data_member.get(1).name,
+                user.getRecList().data_member.get(2).name,
+                user.getRecList().data_member.get(3).name,
+                user.getRecList().data_member.get(4).name,
+                user.getRecList().data_member.get(4).name,
+                user.getRecList().data_member.get(4).name,
+                user.getRecList().data_member.get(4).name,
+                user.getRecList().data_member.get(4).name,
+                user.getRecList().data_member.get(4).name,
+                user.getRecList().data_member.get(4).name,
+                user.getRecList().data_member.get(4).name,
+                user.getRecList().data_member.get(4).name,
+                user.getRecList().data_member.get(4).name,
+                user.getRecList().data_member.get(4).name,
+                user.getRecList().data_member.get(4).name,
+                user.getRecList().data_member.get(4).name
+        };
+
+        //adaptor
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                R.layout.recommend_layout, rec_name_list);
+
+        // Assign adapter to ListView
+        list.setAdapter(adapter);
 
         populateResults();
 
@@ -121,13 +147,11 @@ public class RecommendFragment extends Fragment implements AsyncResponse {
         }
         // TODO: this is temporary, future: support images
         Integer imageID[] = new Integer[20];
-        CustomListAdapter adapter = new CustomListAdapter(getActivity(), itemName, itemRating, imageID);
+        CustomListAdapter2 adapter = new CustomListAdapter2(getActivity(), itemName, itemRating, imageID);
         ListView list = (ListView) myView.findViewById(R.id.rec_list);
         list.setAdapter(adapter);
 
         return;
-
-
     }
 
     @Override
@@ -153,13 +177,11 @@ class CustomListAdapter2 extends ArrayAdapter<String> {
     }
 
     public View getView(int position, View view, ViewGroup parent) {
-        // TODO: support restaurant icons, and addresses
         LayoutInflater inflater = contextActivity.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.list_row, null, true);
 
         TextView title = (TextView) rowView.findViewById(R.id.item);
         TextView rating = (TextView) rowView.findViewById(R.id.item_rating);
-//        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 
         title.setText(this.itemName[position]);
         rating.setText(this.itemRating[position] + "/5.0");
