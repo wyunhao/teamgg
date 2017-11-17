@@ -5,10 +5,6 @@ import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
-/*
-* Last update on 2017-11-15
-* */
-
 @Getter
 @Setter
 public class Viewed {
@@ -16,11 +12,10 @@ public class Viewed {
     private Restaurant restaurant;
     private Boolean visit;
 
-    public Viewed(Restaurant restaurant){
+    public Viewed(final Restaurant restaurant){
         this.date = new Date(); //current date, can be formatted per need
-        this.restaurant = new Restaurant(restaurant.name, restaurant.location, restaurant.feature.getType(),
-                restaurant.feature.getCost(),restaurant.feature.getRating());
-        this.restaurant.set_distance(restaurant.feature.getDistance());
+        this.restaurant = restaurant;
+        this.restaurant.setDistance(restaurant.getPreferenceFeature().getDistance());
         this.visit = false;
     }
 }

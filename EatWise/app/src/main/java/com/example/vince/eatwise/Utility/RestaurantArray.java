@@ -36,7 +36,7 @@ public class RestaurantArray {
     }
     /*
     public void add_restaurant(String name, String location, String type, Double cost,
-                               Preference_Data.Rating rating){
+                               PreferenceData.Rating rating){
         this.data_member.add(new Restaurant(name, location, type, cost, rating));
         this.data_member.get(this.size).set_distance(location); //can't really think of any case this one will be used; commented out so that missing distance gives a compile error
         this.size++;

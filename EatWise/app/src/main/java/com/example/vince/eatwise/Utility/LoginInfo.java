@@ -7,11 +7,6 @@ import lombok.Getter;
 
 @Builder
 @Getter
-
-/**
- * Store login information.
- */
-
 public class LoginInfo implements Serializable {
     private String email;
     private String name;

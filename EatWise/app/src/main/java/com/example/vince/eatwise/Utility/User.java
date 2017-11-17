@@ -4,18 +4,13 @@ import java.util.Date;
 
 import lombok.Getter;
 
-/*
- * Created by wangjingtao on 11/14/17.
- * Last update on 11/15/17
- */
-
 @Getter
 public class User {
     private String username;
     private Integer id;
     private String password;
     private History history;
-    private Preference_Data preference;
+    private PreferenceData preference;
     private Registration registerInfo;
     private RestaurantArray recList;
 
@@ -25,7 +20,7 @@ public class User {
         this.id = 1; //hash it or keep a global record, dc
         this.registerInfo = new Registration(email, first, last, dob);
         this.history = new History();
-        this.preference = new Preference_Data(/*consider asking user for initial preference during sign up*/);
+        this.preference = new PreferenceData(/*consider asking user for initial preference during sign up*/);
         this.recList = new RestaurantArray();
     }
 
@@ -51,7 +46,7 @@ public class User {
     public void addHistoryByViewed(Viewed newViewed){updateHistoryByViewed(newViewed);}
 
     //provide access to preference date
-    public Preference_Data showPreference(){return preference;};
+    public PreferenceData showPreference(){return preference;};
     private void updatePreference(){this.history.updatePreference(this.preference);}
 
     //trivial access methods

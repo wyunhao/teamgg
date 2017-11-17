@@ -3,10 +3,11 @@ package com.example.vince.eatwise.Utility;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-* Last update on 2017-11-16
-*/
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class History {
     private static final Integer historyLength = 100;
     private static final Integer numRecommended = 10;
@@ -17,12 +18,12 @@ public class History {
     private Integer queryLength = 0;
     private Integer viewLength = 0;
 
-    public List<Query> past_query;
-    public List<Viewed> past_viewing;
+    private List<Query> pastQuery;
+    private List<Viewed> pastViewing;
 
     public History(){
-        this.past_query = new ArrayList<Query>();
-        this.past_viewing = new ArrayList<Viewed>();
+        this.pastQuery = new ArrayList<>();
+        this.pastViewing = new ArrayList<>();
     }
 
     //grow history
@@ -32,8 +33,8 @@ public class History {
      * @param newQuery The query to be added
      */
     public void addQuery(Query newQuery){
-        past_query.set(queryLength%historyLength,
-                    new Query(newQuery.getType(), newQuery.getCost(), newQuery.getRating(), newQuery.getDistance(), newQuery.restaurant_name)); //TODO: find a way to acconnt for direct search by name
+        pastQuery.set(queryLength%historyLength, new Query(newQuery.getType(), newQuery.getCost(), newQuery.getRating(),
+                newQuery.getDistance(), newQuery.getRestaurantName())); //TODO: find a way to acconnt for direct search by name
         queryLength++;
     }
 
@@ -42,7 +43,7 @@ public class History {
      * @param newViewed The viewed restaurant tio be added
      */
     public void addViewed(Viewed newViewed){
-        past_viewing.set(viewLength%historyLength, new Viewed(newViewed.getRestaurant()));
+        pastViewing.set(viewLength%historyLength, new Viewed(newViewed.getRestaurant()));
         viewLength++;
     };
 
@@ -50,30 +51,30 @@ public class History {
      * Modify the calculated preference by frequency of the keys of user's query
      * Store the preference of the user
      * Still in progress
-     * @param current_preference User class would pass in its own preference to get an updated preference
+     * @param currentPreference User class would pass in its own preference to get an updated preference
      */
     //calculate preference
-    public void updatePreference(Preference_Data current_preference){
+    public void updatePreference(PreferenceData currentPreference){
 
-        Integer q_length = (queryLength > historyLength) ? historyLength : queryLength;
-        Integer v_length = (viewLength > historyLength) ? historyLength : viewLength;
+        Integer qLen = (queryLength > historyLength) ? historyLength : queryLength;
+        Integer vLen = (viewLength > historyLength) ? historyLength : viewLength;
 
         //for query, get key frequency
         Double num_type, num_cost, num_rating, num_distance; num_type = num_cost = num_rating = num_distance = 0.0;
         Double fre_type, fre_cost, fre_rating, fre_distance;
-        for(Integer i = 0; i <q_length; i++){
-            final Query query = past_query.get(i);
+        for(Integer i = 0; i <qLen; i++){
+            final Query query = pastQuery.get(i);
             if(!query.getType().equals("")) num_type++;
             if(query.getCost() != 0.0) num_cost++;
             if(query.getRating() != Rating.ZERO) num_rating++;
             if(query.getDistance() != 0.0) num_distance++;
         }
-        fre_type = num_type / q_length; fre_cost = num_cost / q_length; fre_rating = num_rating / q_length; fre_distance = num_distance / q_length;
+        fre_type = num_type / qLen; fre_cost = num_cost / qLen; fre_rating = num_rating / qLen; fre_distance = num_distance / qLen;
 
         //for viewed, get most viewed type, cost, rating, distance
         //TODO:quantize each feature and count their appearance by range
 
-        current_preference.update_preference("Mexican", 5.0, Rating.FOUR, 1.0, fre_type, fre_cost, fre_rating, fre_distance);
+        currentPreference.updatePreference("Mexican", 5.0, Rating.FOUR, 1.0, fre_type, fre_cost, fre_rating, fre_distance);
     }
 
     /**
@@ -83,7 +84,7 @@ public class History {
      * @param userRecList   User class would pass in its stored list of recommended restaurants
      */
     //get recommended restaurants by preference from historically viewed
-    public void calculateByPreference(Preference_Data currentPreference, RestaurantArray userRecList){//avoid return/copying RestaurantArray
+    public void calculateByPreference(PreferenceData currentPreference, RestaurantArray userRecList){//avoid return/copying RestaurantArray
         //!this method may be discarded entirely: by our definition of recommendation(as opposed to favorites), it performs search using preference data
         userRecList.reset();
 
@@ -93,18 +94,19 @@ public class History {
 
         for(Integer i = 0; i < ((viewLength < historyLength) ? viewLength : historyLength); i++){
             Double score = 0.0;
-            Double weight = this.past_viewing.get(i).getVisit() ? weightVisit : weightView;//TODO:consider how/when to use set_visit()
+            Double weight = this.pastViewing.get(i).getVisit() ? weightVisit : weightView;//TODO:consider how/when to use set_visit()
 
-            if(this.past_viewing.get(i).getRestaurant().feature.getType().equals(currentPreference.getType())){
+            final PreferenceData preferenceData = this.pastViewing.get(i).getRestaurant().getPreferenceFeature();
+            if(preferenceData.getType().equals(currentPreference.getType())){
                 score += weight * currentPreference.getFreqByType();
             }
-            if(this.past_viewing.get(i).getRestaurant().feature.getCost().equals(currentPreference.getCost())){
+            if(preferenceData.getCost().equals(currentPreference.getCost())){
                 score += weight * currentPreference.getFreqByCost();
             }
-            if(this.past_viewing.get(i).getRestaurant().feature.getRating().equals(currentPreference.getRating())){
+            if(preferenceData.getRating().equals(currentPreference.getRating())){
                 score += weight * currentPreference.getFreqByRating();
             }
-            if(this.past_viewing.get(i).getRestaurant().feature.getDistance().equals(currentPreference.getDistance())){
+            if(preferenceData.getDistance().equals(currentPreference.getDistance())){
                 score += weight * currentPreference.getFreqByDistance();
             }
 

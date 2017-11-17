@@ -85,23 +85,23 @@ public class RecommendFragment extends Fragment implements AsyncResponse {
         user.showRecommendation();
         final List<Restaurant> restaurants = user.getRecList().getDataMember();
         String[] rec_name_list = new String[]{
-                restaurants.get(0).name,
-                restaurants.get(1).name,
-                restaurants.get(2).name,
-                restaurants.get(3).name,
-                restaurants.get(4).name,
-                restaurants.get(4).name,
-                restaurants.get(4).name,
-                restaurants.get(4).name,
-                restaurants.get(4).name,
-                restaurants.get(4).name,
-                restaurants.get(4).name,
-                restaurants.get(4).name,
-                restaurants.get(4).name,
-                restaurants.get(4).name,
-                restaurants.get(4).name,
-                restaurants.get(4).name,
-                restaurants.get(4).name
+                restaurants.get(0).getName(),
+                restaurants.get(1).getName(),
+                restaurants.get(2).getName(),
+                restaurants.get(3).getName(),
+                restaurants.get(4).getName(),
+                restaurants.get(4).getName(),
+                restaurants.get(4).getName(),
+                restaurants.get(4).getName(),
+                restaurants.get(4).getName(),
+                restaurants.get(4).getName(),
+                restaurants.get(4).getName(),
+                restaurants.get(4).getName(),
+                restaurants.get(4).getName(),
+                restaurants.get(4).getName(),
+                restaurants.get(4).getName(),
+                restaurants.get(4).getName(),
+                restaurants.get(4).getName()
         };
 
         //adaptor

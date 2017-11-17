@@ -10,11 +10,11 @@ public class Preference_DataTest {
     private static final Rating RATING = Rating.ONE;
     private static final Double DISTANCE = new Double(0.0);
 
-    private Preference_Data pd;
+    private PreferenceData pd;
 
     @Before
     public void setUp() {
-        pd = new Preference_Data(TYPE, COST, RATING, DISTANCE);
+        pd = new PreferenceData(TYPE, COST, RATING, DISTANCE);
     }
 
     @Test
