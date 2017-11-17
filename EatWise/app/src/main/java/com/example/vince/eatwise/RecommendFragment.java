@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.vince.eatwise.API.YelpAPIcall;
 import com.example.vince.eatwise.Utility.AsyncResponse;
+import com.example.vince.eatwise.Utility.CustomListAdapter;
 import com.example.vince.eatwise.Utility.RestaurantInfo;
 import com.example.vince.eatwise.Utility.User;
 import com.google.gson.Gson;
@@ -141,13 +142,12 @@ public class RecommendFragment extends Fragment implements AsyncResponse {
     private void populateResults() {
         String[] itemName = new String[results.size()];
         String[] itemRating = new String[results.size()];
+        String[] imageURL = new String[results.size()];
         for (int i = 0; i < results.size(); i++) {
             itemName[i] = results.get(i).getAsJsonObject().get("name").getAsString();
             itemRating[i] = results.get(i).getAsJsonObject().get("rating").getAsString();
         }
-        // TODO: this is temporary, future: support images
-        Integer imageID[] = new Integer[20];
-        CustomListAdapter2 adapter = new CustomListAdapter2(getActivity(), itemName, itemRating, imageID);
+        CustomListAdapter adapter = new CustomListAdapter(getActivity(), itemName, itemRating, imageURL);
         ListView list = (ListView) myView.findViewById(R.id.rec_list);
         list.setAdapter(adapter);
 
@@ -157,50 +157,5 @@ public class RecommendFragment extends Fragment implements AsyncResponse {
     @Override
     public void processFinish(String output){
         this.JsonStr = output;
-    }
-}
-
-class CustomListAdapter2 extends ArrayAdapter<String> {
-
-    private final Activity contextActivity;
-    private final String[] itemName;
-    private final String[] itemRating;
-
-
-    public CustomListAdapter2(Activity contextActivity, String[] itemName, String[] itemRating, Integer[] imageID) {
-        super(contextActivity, R.layout.list_row, itemName);
-        // TODO Auto-generated constructor stub
-
-        this.contextActivity = contextActivity;
-        this.itemName = itemName;
-        this.itemRating = itemRating;
-    }
-
-    public View getView(int position, View view, ViewGroup parent) {
-        LayoutInflater inflater = contextActivity.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.list_row, null, true);
-
-        TextView title = (TextView) rowView.findViewById(R.id.item);
-        TextView rating = (TextView) rowView.findViewById(R.id.item_rating);
-
-        title.setText(this.itemName[position]);
-        rating.setText(this.itemRating[position] + "/5.0");
-        double rating_d = Double.parseDouble(itemRating[position]);
-
-        // red4-5, orange3-4, lightorange2-3, yellow1-2, grey0-1
-        if (rating_d >= 4 && rating_d <= 5) {
-            rating.setTextColor(Color.parseColor("#ff067c"));
-        } else if (rating_d >= 3 && rating_d < 4) {
-            rating.setTextColor(Color.parseColor("#e9743f"));
-        } else if (rating_d >= 2 && rating_d < 3) {
-            rating.setTextColor(Color.parseColor("#ff9e00"));
-        } else if (rating_d >= 1 && rating_d < 2) {
-            rating.setTextColor(Color.parseColor("#fede86"));
-        } else {
-            rating.setTextColor(Color.parseColor("#d8d8d0"));
-        }
-
-        return rowView;
-
     }
 }
