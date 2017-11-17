@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +42,15 @@ public class ResultListFragment extends Fragment {
         myView = inflater.inflate(R.layout.fragment_result_list, container, false);
         getActivity().setTitle(R.string.title_result_list);
         results = ((SearchResultActivity)getActivity()).getResults();
+
+        FloatingActionButton fab = (FloatingActionButton) myView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Switch to Map view", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
         TextView textView = myView.findViewById(R.id.error_msg);
         ListView listView = myView.findViewById(R.id.list);
