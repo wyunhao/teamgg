@@ -17,6 +17,10 @@ public class Restaurant {
         this.reviews = new Review[10];
     }
 
+    /**
+     * given location of the restaurant, get the current location of the user and calculate distance, for navigation mode
+     * @param location location of restaurant
+     */
     public void set_distance(String location){
         //TODO:given location of the restaurant, get the current location of the user and calculate distance, for navigation mode
     }

@@ -16,7 +16,10 @@ import android.view.MenuItem;
 
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    /**
+     * Find views that buttons correspond to
+     * @param savedInstanceState Instance State to operate upon
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         }
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -81,7 +85,13 @@ public class NavigationDrawerActivity extends AppCompatActivity
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
+
     @Override
+    /**
+     *  Handle navigation view item clicks here.
+     *  @param item The item associated with the clicked button
+     *  @return always return true
+     */
     public boolean onNavigationItemSelected(MenuItem item) {
         FragmentManager fragmentManager = getFragmentManager();
         // Handle navigation view item clicks here.

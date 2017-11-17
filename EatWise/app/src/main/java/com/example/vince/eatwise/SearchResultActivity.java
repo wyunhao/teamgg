@@ -93,7 +93,11 @@ public class SearchResultActivity extends AppCompatActivity implements AsyncResp
         fragmentManager.beginTransaction().replace(R.id.content_frame, new ResultListFragment()).commit();
     }
 
-
+    /**
+     * Use filter information to create valid URL to search for restaurant information
+     * @param filter object that contains all the filter information
+     * @return a valid URL that integrates the filter information
+     */
     private String generateURL(QueryFilter filter){
         String keyword = "food";
         Integer distance = filter.getDistance();
@@ -124,6 +128,11 @@ class YelpAPIcall extends AsyncTask<String, Void, String>{
         this.delegate = delegate;
     }
 
+    /**
+     * Extending the AsyncTask class to make the actual API call.
+     * @param params contains the query URL
+     * @return the JSON string returned by the API call
+     */
     protected String doInBackground(String... params) {
         try {
             String queryURL = params[0];
