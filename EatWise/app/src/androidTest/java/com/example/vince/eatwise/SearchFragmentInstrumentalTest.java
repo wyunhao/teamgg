@@ -12,9 +12,12 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
+import static android.support.test.espresso.matcher.ViewMatchers.hasFocus;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withHint;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 
@@ -50,6 +53,13 @@ public class SearchFragmentInstrumentalTest {
     @Test
     public void assertErrorMessage() {
         locationEdit.perform(typeText(""));
+        locationEdit.check(matches(withHint("  Enter search location  ")));
         locationEdit.check(matches(hasErrorText("Please specify the search address.")));
+    }
+
+    @Test
+    public void assertValidInput() {
+        locationEdit.perform(typeText(LOCATION));
+        locationEdit.check(matches(hasFocus()));
     }
 }
