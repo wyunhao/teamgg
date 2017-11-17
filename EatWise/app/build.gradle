@@ -38,6 +38,10 @@ dependencies {
     compile 'com.yelp.clientlib:yelp-android:3.0.0'
     compile 'com.google.code.gson:gson:2.8.1'
     compile 'org.json:json:20160212'
+
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestCompile 'com.android.support.test:runner:1.0.1'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -51,6 +55,14 @@ dependencies {
     compile "org.projectlombok:lombok:1.16.10"
     annotationProcessor "org.projectlombok:lombok:1.16.10"
     provided 'org.glassfish:javax.annotation:10.0-b28'
+
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    testCompile 'junit:junit:4.12'
+
+    testCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
+    testCompile 'com.android.support.test:runner:1.0.1'
 }
 
 
