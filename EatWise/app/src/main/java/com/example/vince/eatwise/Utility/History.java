@@ -29,7 +29,7 @@ public class History {
 
     /**
      * Adding a new query to the history
-     * @param newQuery
+     * @param newQuery The query to be added
      */
     public void add_query(Query newQuery){
         past_query.set(queryLength%historyLength,
@@ -39,7 +39,7 @@ public class History {
 
     /**
      * Adding a restaurant to the viewed list if it is viewed by the user
-     * @param newViewed
+     * @param newViewed The viewed restaurant tio be added
      */
     public void add_viewed(Viewed newViewed){
         past_viewing.set(viewLength%historyLength, new Viewed(newViewed.restaurant));
