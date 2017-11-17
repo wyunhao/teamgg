@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.vince.eatwise.API.YelpAPIcall;
 import com.example.vince.eatwise.Utility.AsyncResponse;
 import com.example.vince.eatwise.Utility.CustomListAdapter;
+import com.example.vince.eatwise.Utility.Restaurant;
 import com.example.vince.eatwise.Utility.RestaurantInfo;
 import com.example.vince.eatwise.Utility.User;
 import com.google.gson.Gson;
@@ -27,6 +28,7 @@ import com.google.gson.JsonObject;
 import org.json.JSONString;
 
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /*
@@ -80,25 +82,26 @@ public class RecommendFragment extends Fragment implements AsyncResponse {
         //TODO:get user after login
         //producing mock recommendation
         User user = new User("username", "12345", "xxxx@gmail.com", "Larry", "David", new Date());
-        user.show_recommendation();
+        user.showRecommendation();
+        final List<Restaurant> restaurants = user.getRecList().getDataMember();
         String[] rec_name_list = new String[]{
-                user.getRecList().getData_member().get(0).name,
-                user.getRecList().getData_member().get(1).name,
-                user.getRecList().getData_member().get(2).name,
-                user.getRecList().getData_member().get(3).name,
-                user.getRecList().getData_member().get(4).name,
-                user.getRecList().getData_member().get(4).name,
-                user.getRecList().getData_member().get(4).name,
-                user.getRecList().getData_member().get(4).name,
-                user.getRecList().getData_member().get(4).name,
-                user.getRecList().getData_member().get(4).name,
-                user.getRecList().getData_member().get(4).name,
-                user.getRecList().getData_member().get(4).name,
-                user.getRecList().getData_member().get(4).name,
-                user.getRecList().getData_member().get(4).name,
-                user.getRecList().getData_member().get(4).name,
-                user.getRecList().getData_member().get(4).name,
-                user.getRecList().getData_member().get(4).name
+                restaurants.get(0).name,
+                restaurants.get(1).name,
+                restaurants.get(2).name,
+                restaurants.get(3).name,
+                restaurants.get(4).name,
+                restaurants.get(4).name,
+                restaurants.get(4).name,
+                restaurants.get(4).name,
+                restaurants.get(4).name,
+                restaurants.get(4).name,
+                restaurants.get(4).name,
+                restaurants.get(4).name,
+                restaurants.get(4).name,
+                restaurants.get(4).name,
+                restaurants.get(4).name,
+                restaurants.get(4).name,
+                restaurants.get(4).name
         };
 
         //adaptor

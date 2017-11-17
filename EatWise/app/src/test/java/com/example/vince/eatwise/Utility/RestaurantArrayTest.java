@@ -24,17 +24,17 @@ public class RestaurantArrayTest {
     @Test
     public void validateConstructor() {
         assertEquals(new Integer(0), ra.getSize());
-        assertEquals(new ArrayList<Restaurant>(), ra.getData_member());
+        assertEquals(new ArrayList<Restaurant>(), ra.getDataMember());
     }
 
     @Test
-    public void add_restaurant() throws Exception {
-        ra.add_restaurant(NAME, LOCATION, TYPE, COST, RATING, DISTANCE);
+    public void addRestaurantSucceed() throws Exception {
+        ra.addRestaurant(NAME, LOCATION, TYPE, COST, RATING, DISTANCE);
         assertEquals(new Integer(1), ra.getSize());
     }
 
     @Test
-    public void reset() throws Exception {
+    public void resetSucceed() throws Exception {
         ra.reset();
         assertEquals(new Integer(0), ra.getSize());
     }

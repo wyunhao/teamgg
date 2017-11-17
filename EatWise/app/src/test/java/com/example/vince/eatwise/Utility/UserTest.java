@@ -36,20 +36,20 @@ public class UserTest {
 
     @Test
     public void changeUsernameSucceed() {
-        user.change_username("changed");
+        user.changeUsername("changed");
         assertEquals("changed", user.getUsername());
 
     }
 
     @Test
     public void changePasswordSucceed() {
-        user.change_password("pwd", "567");
+        user.changePassword("pwd", "567");
         assertEquals("567", user.getPassword());
     }
 
     @Test
     public void changePasswordFailed() {
-        user.change_password("wrong", "123");
+        user.changePassword("wrong", "123");
         assertEquals("pwd", user.getPassword());
     }
 

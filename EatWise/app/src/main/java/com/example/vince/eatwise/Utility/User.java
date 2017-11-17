@@ -30,35 +30,42 @@ public class User {
     }
 
     //account info. management methods
-    public void change_username(String newUsername){this.username = newUsername;}
-    public void change_password(String oldPassword, String newPassword){
-        if(compare_password(oldPassword)){update_password(newPassword);}
+    public void changeUsername(String newUsername){this.username = newUsername;}
+
+    public void changePassword(String oldPassword, String newPassword){
+        if(comparePassword(oldPassword)){updatePassword(newPassword);}
     }
-    public void change_email(String newEmail){update_email(newEmail);}
-    public void change_first_name(String newFirst){update_first_name(newFirst);}
-    public void change_last_name(String newLast){update_last_name(newLast);}
-    public void change_birthdate(Date newDob){update_birthdate(newDob);}//ideally the string to date conversion should be handled during sanitizing input
+    public void changeEmail(String newEmail) {
+        updateEmail(newEmail);
+    }
+
+    public void changeFirstName(String newFirst){
+        updateFirstName(newFirst);
+    }
+
+    public void changeLastName(String newLast){updateLastName(newLast);}
+    public void changeBirthDate(Date newDob){updateBirthDate(newDob);}//ideally the string to date conversion should be handled during sanitizing input
 
     //grow history
-    public void add_history_by_query(Query newQuery){update_history_by_query(newQuery);}
-    public void add_history_by_viewed(Viewed newViewed){update_history_by_viewed(newViewed);}
+    public void addHistoryByQuery(Query newQuery){updateHistoryByQuery(newQuery);}
+    public void addHistoryByViewed(Viewed newViewed){updateHistoryByViewed(newViewed);}
 
     //provide access to preference date
-    public Preference_Data show_preference(){return preference;};
-    private void update_preference(){this.history.update_preference(this.preference);}
+    public Preference_Data showPreference(){return preference;};
+    private void updatePreference(){this.history.updatePreference(this.preference);}
 
     //trivial access methods
     //private methods for passwords: check and update
-    private Boolean compare_password(String inputPassword){return this.password.equals(inputPassword);}
-    private void update_password(String newPassword){this.password = newPassword;}
+    private Boolean comparePassword(String inputPassword){return this.password.equals(inputPassword);}
+    private void updatePassword(String newPassword){this.password = newPassword;}
     //private methods for registration info.
-    private void update_email(String newEmail){this.registerInfo.setEmail(newEmail);}
-    private void update_first_name(String newFirst){this.registerInfo.setFirst(newFirst);}
-    private void update_last_name(String newLast){this.registerInfo.setLast(newLast);}
-    private void update_birthdate(Date newDob){this.registerInfo.setDob(newDob);}
+    private void updateEmail(String newEmail){this.registerInfo.setEmail(newEmail);}
+    private void updateFirstName(String newFirst){this.registerInfo.setFirst(newFirst);}
+    private void updateLastName(String newLast){this.registerInfo.setLast(newLast);}
+    private void updateBirthDate(Date newDob){this.registerInfo.setDob(newDob);}
     //private method for history
-    private void update_history_by_query(Query newQuery){this.history.add_query(newQuery);}
-    private void update_history_by_viewed(Viewed newViewed){this.history.add_viewed(newViewed);};
+    private void updateHistoryByQuery(Query newQuery){this.history.addQuery(newQuery);}
+    private void updateHistoryByViewed(Viewed newViewed){this.history.addViewed(newViewed);};
 
     //major calling methods
     //relate to search activity
@@ -67,7 +74,7 @@ public class User {
      * Search for restaurants from the restaurant list that match the preferences
      * @return restaurants that match the preferences
      */
-    public RestaurantArray search_restaurants()
+    public RestaurantArray searchRestaurants()
     {
         //TODO:may not be compatiable/necessary with current implementation for search
         return new RestaurantArray();
@@ -77,8 +84,8 @@ public class User {
      * Update preferences and recommendations
      */
     //relate to recommendation activity
-    public void show_recommendation(){
-        //this.update_preference(); //skipped for generating temp. recommendation page
-        this.history.calculate_by_preference(this.preference, this.recList);
+    public void showRecommendation(){
+        //this.updatePreference(); //skipped for generating temp. recommendation page
+        this.history.calculateByPreference(this.preference, this.recList);
     }
 }

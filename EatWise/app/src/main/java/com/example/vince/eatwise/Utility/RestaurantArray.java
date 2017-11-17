@@ -12,10 +12,10 @@ import lombok.Getter;
 @Getter
 public class RestaurantArray {
     private Integer size;
-    private List<Restaurant> data_member;
+    private List<Restaurant> dataMember;
 
     public RestaurantArray(){
-        this.data_member = new ArrayList<Restaurant>();
+        this.dataMember = new ArrayList<Restaurant>();
         this.size = 0;
     }
 
@@ -28,10 +28,10 @@ public class RestaurantArray {
      * @param rating
      * @param distance
      */
-    public void add_restaurant(String name, String location, String type, Double cost,
+    public void addRestaurant(String name, String location, String type, Double cost,
                                Rating rating, Double distance){//notice that rating here should naturally be double, not quantized; here it is only for convenience
-        this.data_member.add(new Restaurant(name, location, type, cost, rating));
-        this.data_member.get(this.size).set_distance(distance);
+        this.dataMember.add(new Restaurant(name, location, type, cost, rating));
+        this.dataMember.get(this.size).setDistance(location);
         this.size++;
     }
     /*
@@ -48,7 +48,7 @@ public class RestaurantArray {
      */
     public void reset(){
         for(Integer i = this.size-1; i >= 0; i--){
-            this.data_member.remove(i);
+            this.dataMember.remove(i);
         }
         this.size = 0;
     }
