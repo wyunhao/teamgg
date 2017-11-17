@@ -2,6 +2,7 @@
 CS130 Project
 
 The structure:
+
   The source code of activities and fragments is located at teamgg/EatWise/app/src/main/java/com/example/vince/eatwise.
   
   The utility class declaration is located at teamgg/EatWise/app/src/main/java/com/example/vince/eatwise/Utility
