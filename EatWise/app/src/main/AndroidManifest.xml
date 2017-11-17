@@ -51,7 +51,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
         <activity
             android:name=".DetailedActivity"
             android:label="@string/title_activity_detailed"
@@ -61,6 +61,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.vince.eatwise.SearchResultActivity" />
         </activity>
+        <activity android:name=".Utility.DetailedResultActivity" />
+        <activity android:name=".DetailedResultActivity" />
+        <activity android:name=".DetailedResultsActivity"></activity>
     </application>
 
 </manifest>
