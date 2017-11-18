@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Spinner;
 
-import com.example.vince.eatwise.QueryData.CuisineType;
+import com.example.vince.eatwise.Constants.CuisineType;
 import com.example.vince.eatwise.QueryData.QueryFilter;
 
 import java.util.ArrayList;

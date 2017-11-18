@@ -1,5 +1,9 @@
 package com.example.vince.eatwise.Utility;
 
+import com.example.vince.eatwise.Constants.Rating;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +23,7 @@ public class PreferenceData {//kept by user for recommendation
      * @param rating
      * @param distance
      */
-    public PreferenceData(String type, Double cost, Rating rating, Double distance){
+    public PreferenceData(final String type, final Double cost, final Rating rating, final Double distance) {
         this.type = type;
         this.cost = cost;
         this.rating = rating;
@@ -33,7 +37,7 @@ public class PreferenceData {//kept by user for recommendation
      * @param cost
      * @param rating
      */
-    public PreferenceData(String type, Double cost, Rating rating){
+    public PreferenceData(final String type, final Double cost, final Rating rating) {
         this(type, cost, rating, 0.0);
     }
 
@@ -42,7 +46,7 @@ public class PreferenceData {//kept by user for recommendation
      * @param type
      * @param cost
      */
-    public PreferenceData(String type, Double cost){
+    public PreferenceData(final String type, final Double cost) {
         this(type, cost, Rating.ZERO, 0.0);
     }
 
@@ -50,14 +54,14 @@ public class PreferenceData {//kept by user for recommendation
      * Constructor that takes one parameter
      * @param type
      */
-    public PreferenceData(String type){
+    public PreferenceData(final String type){
         this(type, 0.0, Rating.ZERO, 0.0);
     }
 
     /**
      * Default constructor
      */
-    public PreferenceData(){
+    public PreferenceData() {
         this("", 0.0, Rating.ZERO, 0.0); //the default restaurant type can either be null or empty
     }
 
@@ -73,9 +77,16 @@ public class PreferenceData {//kept by user for recommendation
      * @param freqByDistance
      */
 
-    //update preference when required and new history is generated
-    public void updatePreference(String type, Double cost, Rating rating, Double distance,
-                                  Double freqByType, Double freqByCost, Double freqByRating, Double freqByDistance){
+    // update preference when required and new history is generated
+    // This method should be deprecated
+    /**
+     * TODO: need further consideration on this update, we should insert the lastest 100 query / viewed into DB
+     * and then each time we need to show the recommendation, retrieve all 100 data from DB and run the algorithm
+     * Therefore, we actually do not need to maintain a so-called "PreferenceData" at all
+     */
+    //
+    public void updatePreference(final String type, final Double cost, final Rating rating, final Double distance,
+                                  Double freqByType, Double freqByCost, final Double freqByRating, final Double freqByDistance){
         this.type = type;
         this.cost = cost;
         this.rating = rating;

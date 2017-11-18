@@ -1,9 +1,7 @@
 package com.example.vince.eatwise;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.vince.eatwise.API.YelpAPIcall;
 import com.example.vince.eatwise.Utility.AsyncResponse;
@@ -25,13 +22,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import org.json.JSONString;
-
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-/*
+/**
  * Entry fragment of NavigationDrawerActivity
  * Display recommendations based on past user activity
  */
@@ -83,7 +78,7 @@ public class RecommendFragment extends Fragment implements AsyncResponse {
         //producing mock recommendation
         User user = new User("username", "12345", "xxxx@gmail.com", "Larry", "David", new Date());
         user.showRecommendation();
-        final List<Restaurant> restaurants = user.getRecList().getDataMember();
+        final List<Restaurant> restaurants = user.getRestList().getDataMember();
         String[] rec_name_list = new String[]{
                 restaurants.get(0).getName(),
                 restaurants.get(1).getName(),
@@ -151,7 +146,7 @@ public class RecommendFragment extends Fragment implements AsyncResponse {
             itemRating[i] = results.get(i).getAsJsonObject().get("rating").getAsString();
         }
         CustomListAdapter adapter = new CustomListAdapter(getActivity(), itemName, itemRating, imageURL);
-        ListView list = (ListView) myView.findViewById(R.id.rec_list);
+        ListView list = myView.findViewById(R.id.rec_list);
         list.setAdapter(adapter);
 
         return;

@@ -1,5 +1,7 @@
 package com.example.vince.eatwise.Utility;
 
+import com.example.vince.eatwise.Constants.Rating;
+
 import org.junit.Test;
 import org.junit.Before;
 
@@ -35,7 +37,7 @@ public class RestaurantArrayTest {
 
     @Test
     public void resetSucceed() throws Exception {
-        ra.reset();
+        ra.resetRestaurants();
         assertEquals(new Integer(0), ra.getSize());
     }
 

@@ -1,4 +1,4 @@
-package com.example.vince.eatwise.Utility;
+package com.example.vince.eatwise.Constants;
 
 public enum Rating {
     ZERO(0),

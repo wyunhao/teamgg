@@ -1,4 +1,4 @@
-package com.example.vince.eatwise.QueryData;
+package com.example.vince.eatwise.Constants;
 
 
 public enum CuisineType {

@@ -107,7 +107,7 @@ public class ResultListFragment extends Fragment {
             imageURL[i] = results.get(i).getAsJsonObject().get("image_url").getAsString();
         }
         CustomListAdapter adapter = new CustomListAdapter(getActivity(), itemName, itemRating, imageURL);
-        ListView list = (ListView) myView.findViewById(R.id.list);
+        ListView list = myView.findViewById(R.id.list);
         list.setAdapter(adapter);
 
         return;

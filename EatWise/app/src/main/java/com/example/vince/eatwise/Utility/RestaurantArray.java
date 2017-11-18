@@ -1,22 +1,20 @@
 package com.example.vince.eatwise.Utility;
 
+import com.example.vince.eatwise.Constants.Rating;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Getter;
-
-/*
-* Last update on 2017-11-15
-* */
 
 @Getter
 public class RestaurantArray {
     private Integer size;
     private List<Restaurant> dataMember;
 
-    public RestaurantArray(){
-        this.dataMember = new ArrayList<Restaurant>();
+    public RestaurantArray() {
         this.size = 0;
+        this.dataMember = new ArrayList<>();
     }
 
     /**
@@ -28,17 +26,21 @@ public class RestaurantArray {
      * @param rating
      * @param distance
      */
-    public void addRestaurant(String name, String location, String type, Double cost,
-                               Rating rating, Double distance){//notice that rating here should naturally be double, not quantized; here it is only for convenience
+    public void addRestaurant(final String name, final String location, final String type, final Double cost,
+                              final Rating rating, final Double distance){
+        //notice that rating here should naturally be double, not quantized; here it is only for convenience
         this.dataMember.add(new Restaurant(name, location, type, cost, rating));
-        this.dataMember.get(this.size).setDistance(location);
+        //TODO: should not setDistance through Restaurant object
+        //this.dataMember.get(this.size).setDistance(distance);
         this.size++;
     }
+
+    //can't really think of any case this one will be used; commented out so that missing distance gives a compile error
     /*
-    public void add_restaurant(String name, String location, String type, Double cost,
+    public void addRestaurant(String name, String location, String type, Double cost,
                                PreferenceData.Rating rating){
-        this.data_member.add(new Restaurant(name, location, type, cost, rating));
-        this.data_member.get(this.size).set_distance(location); //can't really think of any case this one will be used; commented out so that missing distance gives a compile error
+        this.dataMember.add(new Restaurant(name, location, type, cost, rating));
+        this.dataMember.get(this.size).set_distance(location);
         this.size++;
     }
     */
@@ -46,10 +48,13 @@ public class RestaurantArray {
     /**
      * Clear the restaurant list
      */
-    public void reset(){
-        for(Integer i = this.size-1; i >= 0; i--){
-            this.dataMember.remove(i);
+    public void resetRestaurants(){
+        if (this.size != 0) {
+            for (Restaurant data : this.dataMember) {
+                this.dataMember.remove(data);
+            }
         }
+
         this.size = 0;
     }
 }

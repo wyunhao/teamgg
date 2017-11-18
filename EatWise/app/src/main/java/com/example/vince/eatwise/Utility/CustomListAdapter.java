@@ -10,14 +10,17 @@ import android.widget.TextView;
 
 import com.example.vince.eatwise.R;
 
+import lombok.AllArgsConstructor;
+
 public class CustomListAdapter extends ArrayAdapter<String> implements AsyncResponse {
 
-    private final Activity contextActivity;
-    private final String[] itemName;
-    private final String[] itemRating;
-    private final String[] imageURL;
+    private Activity contextActivity;
+    private String[] itemName;
+    private String[] itemRating;
+    private String[] imageURL;
 
-    public CustomListAdapter(Activity contextActivity, String[] itemName, String[] itemRating, String[] imageURL) {
+    public CustomListAdapter(final Activity contextActivity, final String[] itemName, final String[] itemRating,
+                             final String[] imageURL) {
         super(contextActivity, R.layout.list_row, itemName);
         // TODO Auto-generated constructor stub
 
@@ -27,12 +30,12 @@ public class CustomListAdapter extends ArrayAdapter<String> implements AsyncResp
         this.imageURL = imageURL;
     }
 
-    public View getView(int position, View view, ViewGroup parent) {
-        LayoutInflater inflater=contextActivity.getLayoutInflater();
-        View rowView=inflater.inflate(R.layout.list_row, null,true);
+    public View getView(final int position, final View view, final ViewGroup parent) throws NumberFormatException{
+        final LayoutInflater inflater=contextActivity.getLayoutInflater();
+        final View rowView=inflater.inflate(R.layout.list_row, null,true);
 
-        TextView title = (TextView) rowView.findViewById(R.id.item);
-        TextView rating = (TextView) rowView.findViewById(R.id.item_rating);
+        TextView title = rowView.findViewById(R.id.item);
+        TextView rating = rowView.findViewById(R.id.item_rating);
 //        ImageView restaurant_image = rowView.findViewById(R.id.icon);
 
 //        GetImage imageGetter = new GetImage(this);
@@ -49,28 +52,25 @@ public class CustomListAdapter extends ArrayAdapter<String> implements AsyncResp
 
         title.setText(this.itemName[position]);
         rating.setText(this.itemRating[position] + "/5.0");
-        double rating_d = Double.parseDouble(itemRating[position]);
+        double rate = Double.parseDouble(itemRating[position]);
 
         // red4-5, orange3-4, lightorange2-3, yellow1-2, grey0-1
-        if (rating_d >= 4 && rating_d <= 5) {
+        if (rate >= 4 && rate <= 5) {
             rating.setTextColor(Color.parseColor("#ff067c"));
-        } else if (rating_d >= 3 && rating_d < 4) {
+        } else if (rate >= 3 && rate < 4) {
             rating.setTextColor(Color.parseColor("#e9743f"));
-        } else if (rating_d >= 2 && rating_d < 3) {
+        } else if (rate >= 2 && rate < 3) {
             rating.setTextColor(Color.parseColor("#ff9e00"));
-        } else if (rating_d >= 1 && rating_d < 2) {
+        } else if (rate >= 1 && rate < 2) {
             rating.setTextColor(Color.parseColor("#fede86"));
         } else {
             rating.setTextColor(Color.parseColor("#d8d8d0"));
         }
 
-
-
         return rowView;
-
     }
 
-    public void processFinish(String output){
+    public void processFinish(final String output){
         return;
     }
 

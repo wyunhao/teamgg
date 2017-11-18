@@ -1,10 +1,12 @@
 package com.example.vince.eatwise.Utility;
 
+import com.example.vince.eatwise.Constants.Rating;
+
 import org.junit.Test;
 import org.junit.Before;
 import static org.junit.Assert.*;
 
-public class Preference_DataTest {
+public class PreferenceDataTest {
     private static final String TYPE = "type";
     private static final Double COST = new Double(0.0);
     private static final Rating RATING = Rating.ONE;

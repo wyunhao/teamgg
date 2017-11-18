@@ -3,8 +3,10 @@ package com.example.vince.eatwise.Utility;
 import java.util.Date;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class User {
     private String username;
     private Integer id;
@@ -12,58 +14,63 @@ public class User {
     private History history;
     private PreferenceData preference;
     private Registration registerInfo;
-    private RestaurantArray recList;
+    private RestaurantArray restList;
 
-    public User(String username, String password, String email, String first, String last, Date dob){
+    public User(final String username, final String password, final String email, final String first, final String last, final Date dob){
         this.username = username;
         this.password = password;
         this.id = 1; //hash it or keep a global record, dc
         this.registerInfo = new Registration(email, first, last, dob);
         this.history = new History();
         this.preference = new PreferenceData(/*consider asking user for initial preference during sign up*/);
-        this.recList = new RestaurantArray();
+        this.restList = new RestaurantArray();
     }
 
     //account info. management methods
-    public void changeUsername(String newUsername){this.username = newUsername;}
 
-    public void changePassword(String oldPassword, String newPassword){
-        if(comparePassword(oldPassword)){updatePassword(newPassword);}
-    }
-    public void changeEmail(String newEmail) {
-        updateEmail(newEmail);
+    public void updateUsername(final String username) {
+        this.username = username;
     }
 
-    public void changeFirstName(String newFirst){
-        updateFirstName(newFirst);
+    public void updatePassword(final String oldPassword, final String newPassword){
+        //call equals method on this.password to avoid nullptr exception
+        if (this.password.equals(oldPassword)) {
+            this.password = newPassword;
+        }
     }
 
-    public void changeLastName(String newLast){updateLastName(newLast);}
-    public void changeBirthDate(Date newDob){updateBirthDate(newDob);}//ideally the string to date conversion should be handled during sanitizing input
+    public void updateEmail(final String newEmail) {
+        this.registerInfo.setEmail(newEmail);
+    }
+
+    public void updateFirstName(final String newFirst) {
+        this.registerInfo.setFirst(newFirst);
+    }
+
+    public void updateLastName(final String newLast) {
+        this.registerInfo.setLast(newLast);
+    }
+
+    public void updateBirthDate(final Date newDob) {
+        //TODO: handle the string conversion for dob
+        this.registerInfo.setDob(newDob);
+    }
 
     //grow history
-    public void addHistoryByQuery(Query newQuery){updateHistoryByQuery(newQuery);}
-    public void addHistoryByViewed(Viewed newViewed){updateHistoryByViewed(newViewed);}
+    public void addHistoryByQuery(final Query newQuery) {
+        this.history.addQuery(newQuery);
+    }
 
-    //provide access to preference date
-    public PreferenceData showPreference(){return preference;};
-    private void updatePreference(){this.history.updatePreference(this.preference);}
+    public void addHistoryByViewed(final Viewed newViewed) {
+        this.history.addViewed(newViewed);
+    }
 
-    //trivial access methods
-    //private methods for passwords: check and update
-    private Boolean comparePassword(String inputPassword){return this.password.equals(inputPassword);}
-    private void updatePassword(String newPassword){this.password = newPassword;}
-    //private methods for registration info.
-    private void updateEmail(String newEmail){this.registerInfo.setEmail(newEmail);}
-    private void updateFirstName(String newFirst){this.registerInfo.setFirst(newFirst);}
-    private void updateLastName(String newLast){this.registerInfo.setLast(newLast);}
-    private void updateBirthDate(Date newDob){this.registerInfo.setDob(newDob);}
-    //private method for history
-    private void updateHistoryByQuery(Query newQuery){this.history.addQuery(newQuery);}
-    private void updateHistoryByViewed(Viewed newViewed){this.history.addViewed(newViewed);};
+    public void updatePreference() {
+        this.history.updatePreference(this.preference);
+    }
 
-    //major calling methods
-    //relate to search activity
+
+    //TODO: need to add more private method to help those above public functions interacting with DB / other classes
 
     /**
      * Search for restaurants from the restaurant list that match the preferences
@@ -78,9 +85,9 @@ public class User {
     /**
      * Update preferences and recommendations
      */
-    //relate to recommendation activity
+    //TODO: this recommendation generation should not be inside User class, move to Recommendation Activity
     public void showRecommendation(){
         //this.updatePreference(); //skipped for generating temp. recommendation page
-        this.history.calculateByPreference(this.preference, this.recList);
+        this.history.calculateByPreference(this.preference, this.restList);
     }
 }

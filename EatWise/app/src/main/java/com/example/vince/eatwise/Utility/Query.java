@@ -1,5 +1,7 @@
 package com.example.vince.eatwise.Utility;
 
+import com.example.vince.eatwise.Constants.Rating;
+
 import java.util.Date;
 
 import lombok.Getter;
@@ -26,7 +28,7 @@ public class Query extends PreferenceData {//passed by user into search
      * @param distance
      * @param restaurantName
      */
-    public Query(String type, Double cost, Rating rating, Double distance, String restaurantName){
+    public Query(final String type, final Double cost, final Rating rating, final Double distance, final String restaurantName){
         super(type, cost, rating, distance);
         this.restaurantName = restaurantName;
         this.queryTime = new Date();
@@ -39,7 +41,7 @@ public class Query extends PreferenceData {//passed by user into search
      * @param rating
      * @param distance
      */
-    public Query(String type, Double cost, Rating rating, Double distance){
+    public Query(final String type, final Double cost, final Rating rating, final Double distance){
         this(type, cost, rating, distance, "");
     }
 
@@ -49,7 +51,7 @@ public class Query extends PreferenceData {//passed by user into search
      * @param cost
      * @param rating
      */
-    public Query(String type, Double cost, Rating rating){
+    public Query(final String type, final Double cost, final Rating rating){
         super(type, cost, rating);
         this.restaurantName = "";
         this.queryTime = new Date();
@@ -60,7 +62,7 @@ public class Query extends PreferenceData {//passed by user into search
      * @param type
      * @param cost
      */
-    public Query(String type, Double cost){
+    public Query(final String type, final Double cost){
         super(type, cost);
         this.restaurantName = "";
         this.queryTime = new Date();
@@ -70,7 +72,7 @@ public class Query extends PreferenceData {//passed by user into search
      * Constructor that takes one parameter
      * @param type
      */
-    public Query(String type){
+    public Query(final String type){
         super(type);
         this.restaurantName = "";
         this.queryTime = new Date();
