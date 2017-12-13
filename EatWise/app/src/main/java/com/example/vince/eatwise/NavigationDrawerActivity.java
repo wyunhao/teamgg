@@ -64,7 +64,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+//            super.onBackPressed();
+            return;
         }
     }
 
@@ -109,10 +110,15 @@ public class NavigationDrawerActivity extends AppCompatActivity
         } else if (id == R.id.nav_search) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, new SearchFragment()).commit();
         } else if (id == R.id.nav_account) {
-
+            // TODO: create account management
+        } else if (id == R.id.nav_signout) {
+            Intent intent = new Intent(NavigationDrawerActivity.this, LoginActivity.class);
+            intent.putExtra("command", "logout");
+            startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

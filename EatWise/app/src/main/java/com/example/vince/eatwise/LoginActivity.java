@@ -56,6 +56,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mLogin.setOnClickListener(this);
         mRegister.setOnClickListener(this);
 
+        Intent intent = getIntent();
+        if (intent.getExtras() != null) {
+            String command = (String) intent.getExtras().getString("command");
+            if (command == "logout") {
+                signOut();
+            }
+        }
 
     }
 
@@ -82,6 +89,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (user != null) {
             mStatus.setText("log in successfully");
             // Create user object and pass it to NavigationDrawerActivity
+            // TODO: Mike Chung is placeholder. get user name from database
             LoginInfo info = LoginInfo.builder().name("Mike Chung").email(mEmail.getText().toString()).build();
             Intent intent = new Intent(LoginActivity.this, NavigationDrawerActivity.class);
             Bundle b = new Bundle();
@@ -91,7 +99,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             // TODO: send credentials specific to User Object to NavigationDrawerActivity
         } else {
             mStatus.setText("log in unsuccessful");
-            // TODO: set correct behavior if sign in is unsuccessful
         }
     }
 
@@ -191,7 +198,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void signOut() {
         mAuth.signOut();
-        updateUI(null);
+//        updateUI(null);
     }
 
     /**
