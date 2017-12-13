@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText mEmail;
     private EditText mPassword;
     private Button mLogin;
+    private Button mRegister;
     private FirebaseAuth mAuth;
     private TextView mStatus;
 
@@ -48,10 +49,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mEmail = (EditText) findViewById(R.id.email);
         mPassword = (EditText) findViewById(R.id.password);
         mLogin = (Button) findViewById(R.id.email_sign_in_button);
+        mRegister = (Button) findViewById(R.id.email_register_button);
         mStatus = (TextView) findViewById(R.id.status_bar);
         mAuth = FirebaseAuth.getInstance();
 
         mLogin.setOnClickListener(this);
+        mRegister.setOnClickListener(this);
+
 
     }
 
@@ -143,7 +147,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+
+                            // TODO: catch the exceptions
+                            mStatus.setText(task.getException().toString());
                         }
                     }
                 });
@@ -176,11 +182,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-
-                        if (!task.isSuccessful()) {
-                            mStatus.setText(R.string.error_sign_in);
+//                            mStatus.setText(R.string.error_sign_in);
+                            mStatus.setText(task.getException().toString());
                         }
                     }
                 });
@@ -203,6 +206,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             signIn(mEmail.getText().toString(), mPassword.getText().toString());
         } else if (i == R.id.email_register_button) {
             // TODO: create new user in database
+            createAccount(mEmail.getText().toString(), mPassword.getText().toString());
         }
     }
 }
