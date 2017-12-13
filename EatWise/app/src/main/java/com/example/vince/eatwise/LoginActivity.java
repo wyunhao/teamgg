@@ -201,8 +201,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // TODO: add register button and set its click behavior
         if (i == R.id.email_sign_in_button) {
             signIn(mEmail.getText().toString(), mPassword.getText().toString());
-        } else {
-            mStatus.setText("What are you clicking");
+        } else if (i == R.id.email_register_button) {
+            // TODO: create new user in database
         }
     }
 }
