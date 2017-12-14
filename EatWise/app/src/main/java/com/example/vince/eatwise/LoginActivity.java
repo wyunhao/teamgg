@@ -1,6 +1,7 @@
 package com.example.vince.eatwise;
 
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,7 +9,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -63,6 +66,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mLogin.setOnClickListener(this);
         mRegister.setOnClickListener(this);
+
+        setSoftKeyboardHiddenListener();
     }
 
     /**
@@ -222,5 +227,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             // TODO: create new user in database
             createAccount(mEmail.getText().toString(), mPassword.getText().toString());
         }
+    }
+
+
+    private void setSoftKeyboardHiddenListener() {
+        findViewById(R.id.content_frame).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                final InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                return true;
+            }
+        });
+        findViewById(R.id.login_form).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                final InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                return true;
+            }
+        });
     }
 }
