@@ -20,6 +20,8 @@ import com.example.vince.eatwise.QueryData.QueryFilter;
 import com.example.vince.eatwise.Utility.LoginInfo;
 import com.example.vince.eatwise.Utility.Registration;
 import com.example.vince.eatwise.Utility.User;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,6 +37,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
         // When activity is initiated, switch to RecommendFragment as default entry fragment.
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, new RecommendFragment()).commit();
+
+        // Get firebase realtime database reference
+        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
