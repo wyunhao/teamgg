@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * The entry activity of the app.
@@ -36,6 +38,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button mRegister;
     private FirebaseAuth mAuth;
     private TextView mStatus;
+    private DatabaseReference mRootRef;
 
     /**
      * Find UI elements related to different fields
@@ -52,6 +55,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mRegister = (Button) findViewById(R.id.email_register_button);
         mStatus = (TextView) findViewById(R.id.status_bar);
         mAuth = FirebaseAuth.getInstance();
+        mRootRef = FirebaseDatabase.getInstance().getReference();
+
 
         mLogin.setOnClickListener(this);
         mRegister.setOnClickListener(this);
@@ -90,6 +95,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             mStatus.setText("log in successfully");
             // Create user object and pass it to NavigationDrawerActivity
             // TODO: Mike Chung is placeholder. get user name from database
+            String uid = user.getUid();
+
             LoginInfo info = LoginInfo.builder().name("Mike Chung").email(mEmail.getText().toString()).build();
             Intent intent = new Intent(LoginActivity.this, NavigationDrawerActivity.class);
             Bundle b = new Bundle();
