@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment  {
     private View myView;
 
     /**

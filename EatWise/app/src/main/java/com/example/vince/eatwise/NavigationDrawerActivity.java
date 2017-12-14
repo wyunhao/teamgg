@@ -20,11 +20,16 @@ import com.example.vince.eatwise.QueryData.QueryFilter;
 import com.example.vince.eatwise.Utility.LoginInfo;
 import com.example.vince.eatwise.Utility.Registration;
 import com.example.vince.eatwise.Utility.User;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FirebaseAuth mAuth;
+    private DatabaseReference mRootRef;
+
     /**
      * Find views that buttons correspond to
      * @param savedInstanceState Instance State to operate upon
@@ -38,8 +43,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, new RecommendFragment()).commit();
 
-        // Get firebase realtime database reference
-        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+        // Get firebase realtime database reference and authentication service
+        mRootRef = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -53,15 +59,13 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        // Get user info created when logging in
-        Intent intent = getIntent();
-//        LoginInfo info = (LoginInfo) intent.getExtras().getSerializable("info");
-        String email = (String)intent.getExtras().getSerializable("email");
         View header=navigationView.getHeaderView(0);
         TextView nameView = (TextView)header.findViewById(R.id.profile_name);
         TextView emailView = (TextView)header.findViewById(R.id.profile_email);
-        nameView.setText("Mike Chung");
-        emailView.setText(email);
+        nameView.setText(mAuth.getCurrentUser().getDisplayName());
+        emailView.setText(mAuth.getCurrentUser().getEmail());
+
+        // TODO: use user's uid as unique identifier in the database
     }
 
     @Override
@@ -118,8 +122,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
         } else if (id == R.id.nav_account) {
             // TODO: create account management
         } else if (id == R.id.nav_signout) {
+            mAuth.signOut();
             Intent intent = new Intent(NavigationDrawerActivity.this, LoginActivity.class);
-            intent.putExtra("command", "logout");
             startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

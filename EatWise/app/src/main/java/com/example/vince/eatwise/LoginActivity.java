@@ -1,5 +1,6 @@
 package com.example.vince.eatwise;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -38,10 +39,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button mRegister;
     private FirebaseAuth mAuth;
     private TextView mStatus;
-    private DatabaseReference mRootRef;
+//    private DatabaseReference mRootRef;
 
     /**
      * Find UI elements related to different fields
+     *
      * @param savedInstanceState Saved inputs from the previous login attempts
      */
     @Override
@@ -55,20 +57,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mRegister = (Button) findViewById(R.id.email_register_button);
         mStatus = (TextView) findViewById(R.id.status_bar);
         mAuth = FirebaseAuth.getInstance();
-        mRootRef = FirebaseDatabase.getInstance().getReference();
+//        mRootRef = FirebaseDatabase.getInstance().getReference();
 
 
         mLogin.setOnClickListener(this);
         mRegister.setOnClickListener(this);
-
-        Intent intent = getIntent();
-        if (intent.getExtras() != null) {
-            String command = (String) intent.getExtras().getString("command");
-            if (command == "logout") {
-                signOut();
-            }
-        }
-
     }
 
     /**
@@ -77,37 +70,45 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onStart() {
         super.onStart();
-        // TODO: if user already signed in, retrieve corresponding information
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-//        updateUI(currentUser);
-        // TODO: change this after correct behaviors are set
-        mAuth.signOut();
+        if (currentUser != null) {
+            updateUI(currentUser);
+        }
     }
 
     /**
      * Respond to login successes and login failures
+     *
      * @param user the user object authenticated
      */
     private void updateUI(FirebaseUser user) {
         // pass user information to the next Activity: NavigationDrawerActivity
         if (user != null) {
             mStatus.setText("log in successfully");
-            // Create user object and pass it to NavigationDrawerActivity
-            // TODO: Mike Chung is placeholder. get user name from database
-            String uid = user.getUid();
-
-            LoginInfo info = LoginInfo.builder().name("Mike Chung").email(mEmail.getText().toString()).build();
             Intent intent = new Intent(LoginActivity.this, NavigationDrawerActivity.class);
-            Bundle b = new Bundle();
-            b.putSerializable("email", mEmail.getText().toString());
-            intent.putExtras(b);
             startActivity(intent);
-            // TODO: send credentials specific to User Object to NavigationDrawerActivity
         } else {
             mStatus.setText("log in unsuccessful");
         }
     }
+
+    /**
+     * Respond to registration successes and registration failures
+     *
+     * @param user the user object newly created
+     */
+    private void setDisplayName(FirebaseUser user) {
+        if (user != null) {
+            mStatus.setText("Create account successfully");
+            findViewById(R.id.login_form).setVisibility(View.GONE);
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new RegisterFragment()).commit();
+        } else {
+            mStatus.setText("Create account unsuccessful");
+        }
+    }
+
+
 
     /**
      * syntax level validation on user input
@@ -155,7 +156,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            setDisplayName(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -205,7 +206,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void signOut() {
         mAuth.signOut();
-//        updateUI(null);
     }
 
     /**
@@ -215,7 +215,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        // TODO: add register button and set its click behavior
         if (i == R.id.email_sign_in_button) {
             signIn(mEmail.getText().toString(), mPassword.getText().toString());
         } else if (i == R.id.email_register_button) {
