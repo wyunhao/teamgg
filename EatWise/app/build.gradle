@@ -38,6 +38,8 @@ dependencies {
     compile 'com.yelp.clientlib:yelp-android:3.0.0'
     compile 'com.google.code.gson:gson:2.8.1'
     compile 'org.json:json:20160212'
+    compile 'com.google.android.gms:play-services-maps:11.0.4'
+    compile 'com.google.android.gms:play-services-location:11.0.4'
 
     androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
     androidTestCompile 'com.android.support.test:runner:1.0.1'
@@ -65,6 +67,7 @@ dependencies {
 
     testCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
     testCompile 'com.android.support.test:runner:1.0.1'
+
 }
 
 
