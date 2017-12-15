@@ -12,7 +12,6 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.typeText;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static android.support.test.espresso.matcher.ViewMatchers.hasFocus;
@@ -24,7 +23,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class SearchFragmentInstrumentalTest {
-    private SearchFragment search;
+    private SearchFragment search = new SearchFragment();
 
     private static final String LOCATION = "westwood";
     private final ViewInteraction locationEdit = onView(withId(R.id.editTextLocation));

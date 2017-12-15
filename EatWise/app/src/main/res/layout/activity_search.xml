@@ -42,41 +42,11 @@
         android:paddingRight="20dp" />
 
 
-    <EditText
-        android:layout_width = "250dp"
-        android:layout_height = "40dp"
-        android:id = "@+id/editTextDistance"
-        android:hint = "  Enter range distance  "
-        android:inputType="number"
-        android:focusable = "true"
-        android:textColorHighlight = "#7fff88"
-        android:textColorHint = "#8b8d93"
-        android:background="@drawable/search_field_gradient"
-        android:layout_below="@id/editTextLocation"
-        android:layout_centerHorizontal="true"
-        android:layout_marginVertical="@dimen/text_margin"
-        android:nextFocusDown="@id/spinnerCategory"
-        android:textAlignment="center"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"/>
-
-    <ImageView
-        android:id="@+id/mapicon"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/map_icon"
-        android:layout_below="@id/editTextLocation"
-        android:tint="#837e7e"
-        android:layout_toLeftOf="@id/editTextDistance"
-        android:layout_marginVertical="@dimen/text_margin"/>
-
-
     <Spinner
         android:id="@+id/spinnerCategory"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_below="@id/editTextDistance"
+        android:layout_below="@id/editTextLocation"
         android:focusable="true"
         android:hint="  Select food category  "
         android:background="@drawable/search_field_gradient"
@@ -93,7 +63,7 @@
         android:layout_height="40dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:src="@drawable/fork_icon"
-        android:layout_below="@id/editTextDistance"
+        android:layout_below="@id/editTextLocation"
         android:tint="#5b5959"
         android:layout_toLeftOf="@id/spinnerCategory"
         android:layout_marginVertical="@dimen/text_margin"/>
@@ -157,11 +127,41 @@
         android:layout_toLeftOf="@id/editTextKeyword"
         android:layout_marginVertical="@dimen/text_margin"/>
 
+    <EditText
+        android:layout_width = "250dp"
+        android:layout_height = "40dp"
+        android:id = "@+id/editTextDistance"
+        android:hint = "  Enter range distance  "
+        android:inputType="number"
+        android:focusable = "true"
+        android:textColorHighlight = "#7fff88"
+        android:textColorHint = "#8b8d93"
+        android:background="@drawable/search_field_gradient"
+        android:layout_below="@id/editTextKeyword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="@dimen/text_margin"
+        android:nextFocusDown="@id/buttonSubmit"
+        android:textAlignment="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"/>
+
+    <ImageView
+        android:id="@+id/mapicon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:src="@drawable/map_icon"
+        android:layout_below="@id/editTextKeyword"
+        android:tint="#837e7e"
+        android:layout_toLeftOf="@id/editTextDistance"
+        android:layout_marginVertical="@dimen/text_margin"/>
+
+
     <Button
         android:id="@+id/buttonSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search"
-        android:layout_below="@id/editTextKeyword"
+        android:layout_below="@id/editTextDistance"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

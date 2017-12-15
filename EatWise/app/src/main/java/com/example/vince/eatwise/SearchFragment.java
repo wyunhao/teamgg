@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.inputmethod.InputMethodManager;
 import android.view.LayoutInflater;
@@ -111,19 +112,29 @@ public class SearchFragment extends Fragment  {
         submitFilter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String kw = "";
+                Integer distanceDefault;
+
                 try {
                     kw = keyword.getText().toString();
                 } catch (Exception e) {
-
+                    Log.i("keyword exception", "Keyword not set in Filter");
                 }
-                if (location.getError() != null || distance.getError() != null || price.getError() != null
+
+                try {
+                    distanceDefault = Integer.parseInt(distance.getText().toString());
+                } catch (Exception e) {
+                    distanceDefault = Integer.valueOf(500);
+                    Log.i("radius exception", "Radius not set in Filter");
+                }
+
+                if (location.getError() != null || price.getError() != null
                         || ((TextView) category.getSelectedView()).getError() != null) {
                     Toast.makeText(getActivity(), "Please complete the search filter", Toast.LENGTH_SHORT).show();
                 }//if there is still error in any edittext boxes, show the Toast to let user complete the search filter
                 else {
                     final QueryFilter filter = QueryFilter.builder().location(location.getText().toString())
                             .category((String) category.getSelectedItem())
-                            .distance(Integer.parseInt(distance.getText().toString()))
+                            .distance(distanceDefault)
                             .price(Double.parseDouble(price.getText().toString()))
                             .keyword(kw)
                             .build();
