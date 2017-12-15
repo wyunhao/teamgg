@@ -49,9 +49,8 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
         String r_addr = info.getAddr();
         String r_phone = info.getPhone();
         String pic_url = info.getPicture();
-        String yelp_rating = info.getRating() + "";
-        // TODO: ACTUALLY GET THESE RATING FROM API CALLS
-        String foursquare_rating = rand.nextInt(5) + 1 + "";
+        String yelp_rating = info.getRating();
+        String foursquare_rating = info.getFoursquareRating();
         String tripadvisor_rating = rand.nextInt(5) + 1 + "";
         Double avg_rating_d = (Double.parseDouble(yelp_rating) + Double.parseDouble(foursquare_rating) + Double.parseDouble(tripadvisor_rating)) / 3;;
         String avg_rating = String.format("%.2f", avg_rating_d);
