@@ -16,6 +16,7 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -26,22 +27,40 @@ import com.example.vince.eatwise.Utility.GetImage;
 import com.example.vince.eatwise.Utility.RestaurantInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
-public class DetailedResultsActivity extends AppCompatActivity implements AsyncResponse{
+public class DetailedResultsActivity extends AppCompatActivity implements AsyncResponse {
 
     private GetImage ImageGetter = new GetImage(this);
     private ImageView restaurant_image = null;
     private RatingBar ratingBar;
     private DatabaseReference mRootRef;
+<<<<<<< Updated upstream
     private DetailedResultsActivity detailedResultsActivity = this;
+=======
+    private Button ratingButton;
+    private FirebaseAuth mAuth;
+    private String customRating;
+
+    public float updateRating;
+>>>>>>> Stashed changes
 
     /**
      * Initialize the values to be shown in each field
@@ -54,6 +73,7 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
         setTitle("Restaurant Info");
         Random rand = new Random();
         mRootRef = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
 
         Intent intent = getIntent(); //get the corresponding entry of business class
 
@@ -102,7 +122,7 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
         textView.setText(tripadvisor_rating_d + "");
         setFontColor(tripadvisor_rating_d, textView);
         textView = findViewById(R.id.textView_overall);
-        textView.setText(avg_rating);
+        textView.setText(avg_rating + "/5.0");
         setFontColor(Double.parseDouble(avg_rating), textView);
 
 
@@ -113,9 +133,53 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
                                         boolean fromUser) {
                 // TODO: decide unique id for each restaurants. For now: name
                 // TODO: calculate our rating, link it to layout
-                mRootRef.child("Restaurants").child(r_name).child("rating").setValue(ratingBar.getRating());
+//                mRootRef.child("Restaurants").child(r_name).child("rating").setValue(ratingBar.getRating());
+                updateRating = rating;
             }
         });
+
+        ratingButton = (Button)findViewById(R.id.rating_button);
+        ratingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRootRef.child("UserFeedback").child(r_name).child(mAuth.getCurrentUser().getUid()).child("rating").setValue(updateRating);
+                // TODO: update "Our rating"
+
+            }
+        });
+
+        mRootRef.child("UserFeedback").child(r_name).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int count = 0;
+                Double sum = new Double(0);
+                Object ratings = dataSnapshot.getValue();
+                HashMap<String, HashMap<String, Object>> tmp = (HashMap<String, HashMap<String, Object>>)ratings;
+                Iterator it1 = tmp.entrySet().iterator();
+                while (it1.hasNext()) {
+                    HashMap.Entry pair = (HashMap.Entry)it1.next();
+                    HashMap<String, Object> tmp2 = (HashMap<String, Object>)pair.getValue();
+                    if (tmp2.get("rating") instanceof Double) {
+                        sum += (Double)tmp2.get("rating");
+                    } else {
+                        String tmp_num = tmp2.get("rating").toString() + ".0";
+                        sum += Double.parseDouble(tmp_num);
+                    }
+                    count++;
+                }
+                Double average = sum/count;
+                customRating = String.format("%.2f", average);
+                TextView customRatingView = (TextView) findViewById(R.id.textView_ourRating);
+                customRatingView.setText(customRating);
+                setFontColor(Double.parseDouble(customRating), customRatingView);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
 
         TextView phone = findViewById(R.id.textView_phone);
         phone.setOnClickListener(new View.OnClickListener() {
