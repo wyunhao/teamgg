@@ -16,12 +16,15 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.Manifest;
 
 import com.example.vince.eatwise.Utility.AsyncResponse;
 import com.example.vince.eatwise.Utility.GetImage;
 import com.example.vince.eatwise.Utility.RestaurantInfo;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -35,12 +38,16 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
 
     private GetImage ImageGetter = new GetImage(this);
     private ImageView restaurant_image = null;
+    private RatingBar ratingBar;
+    private DatabaseReference mRootRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_results);
+        setTitle("Restaurant Info");
         Random rand = new Random();
+        mRootRef = FirebaseDatabase.getInstance().getReference();
 
         Intent intent = getIntent(); //get the corresponding entry of business class
 
@@ -89,6 +96,17 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
         textView = findViewById(R.id.textView_overall);
         textView.setText(avg_rating);
         setFontColor(Double.parseDouble(avg_rating), textView);
+
+        // Set up rating bar
+        ratingBar = (RatingBar) findViewById(R.id.rating_bar);
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            public void onRatingChanged(RatingBar ratingBar, float rating,
+                                        boolean fromUser) {
+                // TODO: decide unique id for each restaurants. For now: name
+                mRootRef.child("Restaurants").child(r_name).child("rating").setValue(ratingBar.getRating());
+            }
+        });
+
     }
 
     private void setFontColor(Double rating_d, TextView rating) {
