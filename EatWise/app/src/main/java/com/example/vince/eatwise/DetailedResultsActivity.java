@@ -122,10 +122,18 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL,
                         Uri.parse("tel:" + r_phone));
-//                if (ActivityCompat.checkSelfPermission(DetailedResultsActivity.this,
-//                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-//                    return;
-//                }
+                startActivity(intent);
+            }
+        });
+
+        TextView addr = findViewById(R.id.textView_addr);
+        phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(this, DetailedMapActivity.class);
+                Bundle b = new Bundle();
+                b.putSerializable("restaurant", info);
+                intent.putExtras(b);
                 startActivity(intent);
             }
         });
