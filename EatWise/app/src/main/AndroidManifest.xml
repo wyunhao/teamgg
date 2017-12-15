@@ -46,9 +46,7 @@
         <activity
             android:name=".NavigationDrawerActivity"
             android:label="@string/title_activity_navigation_drawer"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,7 +54,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailedResultsActivity"></activity>
+        <activity android:name=".DetailedResultsActivity" />
+        <activity
+            android:name=".DetailedMapActivity"
+            android:label="@string/title_activity_detailed_map"></activity>
     </application>
 
 </manifest>
