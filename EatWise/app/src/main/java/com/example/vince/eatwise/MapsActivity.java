@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import com.example.vince.eatwise.Utility.RestaurantInfo;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -19,12 +20,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
@@ -66,11 +69,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         enableLocation();
 
         final Intent intent = getIntent();
-        final List<Location> coordinates = (List<Location>) intent.getExtras().getSerializable("coordinates");
+        final ArrayList<RestaurantInfo> coordinates = (ArrayList<RestaurantInfo>) intent.getExtras().getSerializable("coordinates");
 
+        Log.d("length", String.valueOf(coordinates.size()));
         for (int i = 0 ; i < coordinates.size(); i++) {
             final Double latitude = coordinates.get(i).getLatitude();
             final Double longitude = coordinates.get(i).getLongitude();
+            LatLng latLng = new LatLng(latitude, longitude);
+            Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title("Check the restaurants' ratings"));
+            Log.d("latitude", String.valueOf(latitude));
+            Log.d("longitude", String.valueOf(longitude));
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
+
         }
     }
 
