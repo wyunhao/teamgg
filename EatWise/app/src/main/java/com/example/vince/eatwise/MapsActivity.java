@@ -1,5 +1,6 @@
 package com.example.vince.eatwise;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.annotation.NonNull;
@@ -19,6 +20,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
@@ -57,6 +64,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         enableLocation();
+
+        final Intent intent = getIntent();
+        final List<Location> coordinates = (List<Location>) intent.getExtras().getSerializable("coordinates");
+
+        for (int i = 0 ; i < coordinates.size(); i++) {
+            final Double latitude = coordinates.get(i).getLatitude();
+            final Double longitude = coordinates.get(i).getLongitude();
+        }
     }
 
     @Override
