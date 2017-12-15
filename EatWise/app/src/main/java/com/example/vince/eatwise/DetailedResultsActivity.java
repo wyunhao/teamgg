@@ -128,7 +128,7 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
         });
 
         TextView addr = findViewById(R.id.textView_addr);
-        phone.setOnClickListener(new View.OnClickListener() {
+        addr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(detailedResultsActivity, DetailedMapActivity.class);
