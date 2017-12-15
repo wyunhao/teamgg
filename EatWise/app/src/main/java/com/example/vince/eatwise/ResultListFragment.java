@@ -87,6 +87,10 @@ public class ResultListFragment extends Fragment implements AsyncResponse{
         }
 
         // TODO: send to DetailedActivity: RestaurantInfo
+        /**
+         * get rating information from yelp, foursquare and tripadvisor, and send the rating
+         * to DetailedActivity for display
+         */
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -166,6 +170,13 @@ public class ResultListFragment extends Fragment implements AsyncResponse{
                 startActivity(intent);
             }
 
+            /**
+             * given the name, latitude and longitude of the selected restaurant, generate the corresponding foursquare api query string
+             * @param name name of the restaurant
+             * @param latitude latitude of the restaurant
+             * @param longitude longitude of the restaurant
+             * @return
+             */
             private String generateFoursquareURL(String name, String latitude, String longitude){
                 String url = "https://api.foursquare.com/v2/venues/explore?client_id=BFFQDGAFWFNMDR3CCMNSX1QN33F1F21CIXHZ2WGRFLKQGJ03&client_secret=IESOMDRLYP5JKOXNE20EYMVA3YPQQOYSLFMBCWQBY4PPCSCL&";
                 String ll = "ll=" + latitude + "," + longitude;
@@ -180,6 +191,11 @@ public class ResultListFragment extends Fragment implements AsyncResponse{
         return myView;
     }
 
+    /**
+     * Retrieve data from Json array that is returned by API
+     * Store them in forms of array and list
+     * Populate the list view with our custom list adapter and these data
+     */
     private void populateResults() {
         String[] itemName = new String[results.size()];
         String[] itemRating = new String[results.size()];

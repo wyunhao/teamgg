@@ -25,7 +25,13 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     private FirebaseAuth mAuth;
     private  FirebaseUser mUser;
 
-
+    /**
+     * Initialize the fragment to ask the new user to register with user name and password.
+     * @param inflater Bundle of data provided to clients by Google Play services. May be null if no content is provided by the service.
+     * @param container ViewGroup: If non-null, this is the parent view that the fragment's UI should be attached to. The fragment should not add the view itself, but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState Bundle: If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
