@@ -3,6 +3,7 @@ package com.example.vince.eatwise;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
@@ -41,6 +42,10 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
     private RatingBar ratingBar;
     private DatabaseReference mRootRef;
 
+    /**
+     * Initialize the values to be shown in each field
+     * @param savedInstanceState Saved state from the last session
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +63,10 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
         String pic_url = info.getPicture();
         String yelp_rating = info.getRating();
         String foursquare_rating = info.getFoursquareRating();
-        String tripadvisor_rating = rand.nextInt(5) + 1 + "";
-        Double avg_rating_d = (Double.parseDouble(yelp_rating) + Double.parseDouble(foursquare_rating) + Double.parseDouble(tripadvisor_rating)) / 3;;
+        Double foursquare_rating_d = Double.parseDouble(foursquare_rating) / 2;
+        String tripadvisor_rating = info.getTripadvisorRating();
+        Double tripadvisor_rating_d = Double.parseDouble(tripadvisor_rating) / 2;
+        Double avg_rating_d = (Double.parseDouble(yelp_rating) + foursquare_rating_d + tripadvisor_rating_d) / 3;
         String avg_rating = String.format("%.2f", avg_rating_d);
 
         //getting image
@@ -88,14 +95,15 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
         textView.setText(yelp_rating);
         setFontColor(Double.parseDouble(yelp_rating), textView);
         textView = findViewById(R.id.textView_foursquare);
-        textView.setText(foursquare_rating);
-        setFontColor(Double.parseDouble(foursquare_rating), textView);
+        textView.setText(foursquare_rating_d + "");
+        setFontColor(foursquare_rating_d, textView);
         textView = findViewById(R.id.textView_tripadvisor);
-        textView.setText(tripadvisor_rating);
-        setFontColor(Double.parseDouble(tripadvisor_rating), textView);
+        textView.setText(tripadvisor_rating_d + "");
+        setFontColor(tripadvisor_rating_d, textView);
         textView = findViewById(R.id.textView_overall);
         textView.setText(avg_rating);
         setFontColor(Double.parseDouble(avg_rating), textView);
+
 
         // Set up rating bar
         ratingBar = (RatingBar) findViewById(R.id.rating_bar);
@@ -103,12 +111,32 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
             public void onRatingChanged(RatingBar ratingBar, float rating,
                                         boolean fromUser) {
                 // TODO: decide unique id for each restaurants. For now: name
+                // TODO: calculate our rating, link it to layout
                 mRootRef.child("Restaurants").child(r_name).child("rating").setValue(ratingBar.getRating());
+            }
+        });
+
+        TextView phone = findViewById(R.id.textView_phone);
+        phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:" + r_phone));
+//                if (ActivityCompat.checkSelfPermission(DetailedResultsActivity.this,
+//                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//                    return;
+//                }
+                startActivity(intent);
             }
         });
 
     }
 
+    /**
+     * Adjust the text color based on the rating being displayed
+     * @param rating_d Double: The numerical rating to be shown
+     * @param rating TextView: The text view that the the rating will be shown on
+     */
     private void setFontColor(Double rating_d, TextView rating) {
         if (rating_d >= 4 && rating_d <= 5) {
             rating.setTextColor(Color.parseColor("#ff067c"));

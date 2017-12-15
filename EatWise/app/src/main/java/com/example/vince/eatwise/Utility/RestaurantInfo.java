@@ -21,4 +21,6 @@ public class RestaurantInfo implements Serializable {
     private String foursquareRating;
     private Double latitude;
     private Double longitude;
+    private String tripadvisorRating;
+    private String avgRating;
 }

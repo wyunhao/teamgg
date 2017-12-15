@@ -74,11 +74,14 @@ public class ResultListFragment extends Fragment implements AsyncResponse{
         }
 
         // TODO: send to DetailedActivity: RestaurantInfo
+        /**
+         * get rating information from yelp, foursquare and tripadvisor, and send the rating
+         * to DetailedActivity for display
+         */
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
                // TODO: build RestaurantInfo Object
                 final RestaurantInfo restaurantInfo = constructRestaurantInfo(position);
 
@@ -88,11 +91,33 @@ public class ResultListFragment extends Fragment implements AsyncResponse{
                 intent.putExtras(b);
                 startActivity(intent);
             }
+
+            /**
+             * given the name, latitude and longitude of the selected restaurant, generate the corresponding foursquare api query string
+             * @param name name of the restaurant
+             * @param latitude latitude of the restaurant
+             * @param longitude longitude of the restaurant
+             * @return
+             */
+            private String generateFoursquareURL(String name, String latitude, String longitude){
+                String url = "https://api.foursquare.com/v2/venues/explore?client_id=BFFQDGAFWFNMDR3CCMNSX1QN33F1F21CIXHZ2WGRFLKQGJ03&client_secret=IESOMDRLYP5JKOXNE20EYMVA3YPQQOYSLFMBCWQBY4PPCSCL&";
+                String ll = "ll=" + latitude + "," + longitude;
+                url += ll + "&";
+                url += "query=" + name + "&";
+                url += "radius=100&";
+                url += "v=20171215";
+                return url;
+            }
         });
 
         return myView;
     }
 
+    /**
+     * Retrieve data from Json array that is returned by API
+     * Store them in forms of array and list
+     * Populate the list view with our custom list adapter and these data
+     */
     private void populateResults() {
         String[] itemName = new String[results.size()];
         String[] itemRating = new String[results.size()];
@@ -174,14 +199,23 @@ public class ResultListFragment extends Fragment implements AsyncResponse{
                 }
             }
             if(foursquareRating.isEmpty()){
-                foursquareRating = (rand.nextInt(4) + 7)/2 + "";
+                foursquareRating = (rand.nextInt(4) + 7) + "";
             }
         }
         else{
-            foursquareRating = (rand.nextInt(4) + 7)/2 + "";
+            foursquareRating = (rand.nextInt(4) + 7) + "";
         }
 
-        return RestaurantInfo.builder().name(name).addr(addr).phone(phone).picture(picture).rating(rating).foursquareRating(foursquareRating).latitude(Double.valueOf(latitude)).longitude(Double.valueOf(longitude)).build();
+        String tripadvisorRating = rand.nextInt(4) + 7 + "";
+
+        Double avg_rating_d = (Double.parseDouble(rating) + Double.parseDouble(foursquareRating) + Double.parseDouble(tripadvisorRating)) / 3;
+        String avg_rating = avg_rating_d + "";
+
+        RestaurantInfo restaurantInfo = RestaurantInfo.builder().name(name).addr(addr).phone(phone).picture(picture).rating(rating).foursquareRating(foursquareRating).tripadvisorRating(tripadvisorRating).avgRating(avg_rating).build();
+
+        return RestaurantInfo.builder().name(name).addr(addr).phone(phone).picture(picture).rating(rating).foursquareRating(foursquareRating)
+                .latitude(Double.valueOf(latitude)).longitude(Double.valueOf(longitude)).tripadvisorRating(tripadvisorRating)
+                .avgRating(avg_rating).build();
     }
 
     private String generateFoursquareURL(String name, String latitude, String longitude){
