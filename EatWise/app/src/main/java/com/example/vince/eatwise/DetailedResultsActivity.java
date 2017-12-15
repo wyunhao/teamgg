@@ -111,6 +111,7 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
             public void onRatingChanged(RatingBar ratingBar, float rating,
                                         boolean fromUser) {
                 // TODO: decide unique id for each restaurants. For now: name
+                // TODO: calculate our rating, link it to layout
                 mRootRef.child("Restaurants").child(r_name).child("rating").setValue(ratingBar.getRating());
             }
         });
