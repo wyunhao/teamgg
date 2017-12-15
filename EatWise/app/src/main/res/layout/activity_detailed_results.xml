@@ -277,10 +277,6 @@
             android:textSize="13sp"
             android:background="#ffffff" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
 
         <TextView
             android:id="@+id/textView_phone"
@@ -307,55 +303,60 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginLeft="20dp"
-                android:text="Reviews"
+                android:text="Top Reviews"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"/>
+
 
             <!--TODO: fill the review later-->
             <TextView
                 android:id="@+id/review1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="left"
+                android:paddingLeft="8dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text="review placeholder"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"/>
+
 
             <TextView
                 android:id="@+id/review2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="left"
+                android:paddingLeft="8dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text="review placeholder"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"/>
 
-            <Button
-                android:id="@+id/morereview_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="60dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
+
+            <TextView
+                android:id="@+id/review3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingLeft="8dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_gravity="center"
-                android:text="More"
-                android:textSize="10sp"
-                android:textStyle="bold" />
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"/>
+
+
         </LinearLayout>
 
 
@@ -386,7 +387,7 @@
                 android:layout_gravity="center"
                 android:gravity="left"
                 android:padding="15dp"
-                android:text="custom review placeholder"
+                android:hint="Please write your review here"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"

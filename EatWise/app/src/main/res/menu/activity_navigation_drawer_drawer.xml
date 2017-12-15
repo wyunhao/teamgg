@@ -11,9 +11,6 @@
             android:id="@+id/nav_search"
             android:title="Search" />
         <item
-            android:id="@+id/nav_account"
-            android:title="Account" />
-        <item
             android:id="@+id/nav_signout"
             android:title="Sign out" />
     </group>

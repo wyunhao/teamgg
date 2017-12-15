@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.Manifest;
+import android.widget.EditText;
 
 import com.example.vince.eatwise.Utility.AsyncResponse;
 import com.example.vince.eatwise.Utility.GetImage;
@@ -56,6 +57,7 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
     private Button ratingButton;
     private FirebaseAuth mAuth;
     private String customRating;
+    private Button submitButton;
 
     public float updateRating;
 
@@ -140,11 +142,26 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
             @Override
             public void onClick(View v) {
                 mRootRef.child("UserFeedback").child(r_name).child(mAuth.getCurrentUser().getUid()).child("rating").setValue(updateRating);
-                // TODO: update "Our rating"
-
             }
         });
 
+        submitButton = (Button) findViewById(R.id.submitreview_button);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText test = (EditText) findViewById(R.id.custom_review);
+
+                String reviewContent = ((EditText)findViewById(R.id.custom_review)).getText().toString();
+                String finalContent = mAuth.getCurrentUser().getDisplayName() + ": " + reviewContent;
+
+                mRootRef.child("UserFeedback").child(r_name).child("review").child(mAuth.getCurrentUser().getUid()).setValue(finalContent);
+
+                test.setText("");
+                test.setHint("Thank you!");
+            }
+        });
+
+        // listener for rating update
         mRootRef.child("UserFeedback").child(r_name).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -154,13 +171,18 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
                 Object ratings = dataSnapshot.getValue();
                 HashMap<String, HashMap<String, Object>> tmp = (HashMap<String, HashMap<String, Object>>)ratings;
                 if (tmp == null) {
-                    customRatingView.setText("No Rating Yet");
+                    customRatingView.setText("No rating");
+                    // TODO: no reviews yet;
                     return;
                 }
                 Iterator it1 = tmp.entrySet().iterator();
                 while (it1.hasNext()) {
                     HashMap.Entry pair = (HashMap.Entry)it1.next();
+                    if (pair.getKey() == "reviews") continue;
                     HashMap<String, Object> tmp2 = (HashMap<String, Object>)pair.getValue();
+                    if (tmp2.get("rating") == null) {
+                        continue;
+                    }
                     if (tmp2.get("rating") instanceof Double) {
                         sum += (Double)tmp2.get("rating");
                     } else {
@@ -173,6 +195,45 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
                 customRating = String.format("%.2f", average);
                 customRatingView.setText(customRating);
                 setFontColor(Double.parseDouble(customRating), customRatingView);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
+
+        // listener for review update
+        mRootRef.child("UserFeedback").child(r_name).child("review").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                TextView top1Review = (TextView) findViewById(R.id.review1);
+                TextView top2Review = (TextView) findViewById(R.id.review2);
+                TextView top3Review = (TextView) findViewById(R.id.review3);
+
+                Object reviews = dataSnapshot.getValue();
+                HashMap<String, Object> tmp = (HashMap<String, Object>)reviews;
+                if (tmp == null) {
+                    top1Review.setText("No Reviews Yet");
+                    top2Review.setText("");
+                    top3Review.setText("");
+                    return;
+                }
+                Iterator it = tmp.entrySet().iterator();
+                int counter = 0;
+                while (it.hasNext()) {
+                    if (counter == 3) return;
+                    HashMap.Entry pair = (HashMap.Entry) it.next();
+                    if (counter == 0) {
+                        top1Review.setText(pair.getValue().toString());
+                    } else if (counter == 1) {
+                        top2Review.setText(pair.getValue().toString());
+                    } else if (counter == 2) {
+                        top3Review.setText(pair.getValue().toString());
+                    }
+                    counter++;
+                }
             }
 
             @Override

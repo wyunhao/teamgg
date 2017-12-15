@@ -119,8 +119,6 @@ public class NavigationDrawerActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.content_frame, new RecommendFragment()).commit();
         } else if (id == R.id.nav_search) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, new SearchFragment()).commit();
-        } else if (id == R.id.nav_account) {
-            // TODO: create account management
         } else if (id == R.id.nav_signout) {
             mAuth.signOut();
             Intent intent = new Intent(NavigationDrawerActivity.this, LoginActivity.class);
