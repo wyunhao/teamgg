@@ -85,6 +85,7 @@ public class ResultListFragment extends Fragment implements AsyncResponse{
                 FoursquareAPIcall foursquareAPIcall = new FoursquareAPIcall(ref);
                // TODO: build RestaurantInfo Object
                 Random rand = new Random();
+                rand.setSeed(10);
                 String name = results.get(position).getAsJsonObject().get("name").getAsString();
                 String addr = "";
                 JsonArray addr_array = results.get(position).getAsJsonObject().get("location").getAsJsonObject().getAsJsonArray("display_address");
@@ -129,21 +130,26 @@ public class ResultListFragment extends Fragment implements AsyncResponse{
                     for(int i = 0; i < items.size(); i++){
                         temp = items.get(i).getAsJsonObject().get("venue").getAsJsonObject().get("name").getAsString();
                         if(temp.equals(name)){
-                            if(items.get(i).getAsJsonObject().get("venue").getAsJsonObject().get("rating").getAsString() != null) {
+                            if(items.get(i).getAsJsonObject().get("venue").getAsJsonObject().get("rating") != null) {
                                 foursquareRating = items.get(i).getAsJsonObject().get("venue").getAsJsonObject().get("rating").getAsString();
                                 break;
                             }
                         }
                     }
                     if(foursquareRating.isEmpty()){
-                        foursquareRating = (rand.nextInt(4) + 7)/2 + "";
+                        foursquareRating = (rand.nextInt(4) + 7) + "";
                     }
                 }
                 else{
-                    foursquareRating = (rand.nextInt(4) + 7)/2 + "";
+                    foursquareRating = (rand.nextInt(4) + 7) + "";
                 }
 
-                RestaurantInfo restaurantInfo = RestaurantInfo.builder().name(name).addr(addr).phone(phone).picture(picture).rating(rating).foursquareRating(foursquareRating).build();
+                String tripadvisorRating = rand.nextInt(4) + 7 + "";
+
+                Double avg_rating_d = (Double.parseDouble(rating) + Double.parseDouble(foursquareRating) + Double.parseDouble(tripadvisorRating)) / 3;
+                String avg_rating = avg_rating_d + "";
+
+                RestaurantInfo restaurantInfo = RestaurantInfo.builder().name(name).addr(addr).phone(phone).picture(picture).rating(rating).foursquareRating(foursquareRating).tripadvisorRating(tripadvisorRating).avgRating(avg_rating).build();
                 Intent intent = new Intent(getActivity(), DetailedResultsActivity.class);
                 Bundle b = new Bundle();
                 b.putSerializable("restaurantInfo", restaurantInfo);

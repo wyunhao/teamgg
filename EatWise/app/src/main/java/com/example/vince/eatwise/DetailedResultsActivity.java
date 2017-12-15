@@ -51,8 +51,10 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
         String pic_url = info.getPicture();
         String yelp_rating = info.getRating();
         String foursquare_rating = info.getFoursquareRating();
-        String tripadvisor_rating = rand.nextInt(5) + 1 + "";
-        Double avg_rating_d = (Double.parseDouble(yelp_rating) + Double.parseDouble(foursquare_rating) + Double.parseDouble(tripadvisor_rating)) / 3;;
+        Double foursquare_rating_d = Double.parseDouble(foursquare_rating) / 2;
+        String tripadvisor_rating = info.getTripadvisorRating();
+        Double tripadvisor_rating_d = Double.parseDouble(tripadvisor_rating) / 2;
+        Double avg_rating_d = (Double.parseDouble(yelp_rating) + foursquare_rating_d + tripadvisor_rating_d) / 3;
         String avg_rating = String.format("%.2f", avg_rating_d);
 
         //getting image
@@ -81,11 +83,11 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
         textView.setText(yelp_rating);
         setFontColor(Double.parseDouble(yelp_rating), textView);
         textView = findViewById(R.id.textView_foursquare);
-        textView.setText(foursquare_rating);
-        setFontColor(Double.parseDouble(foursquare_rating), textView);
+        textView.setText(foursquare_rating_d + "");
+        setFontColor(foursquare_rating_d, textView);
         textView = findViewById(R.id.textView_tripadvisor);
-        textView.setText(tripadvisor_rating);
-        setFontColor(Double.parseDouble(tripadvisor_rating), textView);
+        textView.setText(tripadvisor_rating_d + "");
+        setFontColor(tripadvisor_rating_d, textView);
         textView = findViewById(R.id.textView_overall);
         textView.setText(avg_rating);
         setFontColor(Double.parseDouble(avg_rating), textView);
