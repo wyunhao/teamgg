@@ -41,6 +41,10 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
     private RatingBar ratingBar;
     private DatabaseReference mRootRef;
 
+    /**
+     * Initialize the values to be shown in each field
+     * @param savedInstanceState Saved state from the last session
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +113,11 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
 
     }
 
+    /**
+     * Adjust the text color based on the rating being displayed
+     * @param rating_d Double: The numerical rating to be shown
+     * @param rating TextView: The text view that the the rating will be shown on
+     */
     private void setFontColor(Double rating_d, TextView rating) {
         if (rating_d >= 4 && rating_d <= 5) {
             rating.setTextColor(Color.parseColor("#ff067c"));

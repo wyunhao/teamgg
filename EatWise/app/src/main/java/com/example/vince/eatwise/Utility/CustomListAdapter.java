@@ -30,6 +30,14 @@ public class CustomListAdapter extends ArrayAdapter<String> implements AsyncResp
         this.imageURL = imageURL;
     }
 
+    /**
+     * Get a View that displays the data at the specified position in the data set.
+     * @param position int: The position of the item within the adapter's data set of the item whose view we want.
+     * @param view View: The old view to reuse, if possible.
+     * @param parent ViewGroup: The parent that this view will eventually be attached to. This value must never be null.
+     * @return
+     * @throws NumberFormatException
+     */
     public View getView(final int position, final View view, final ViewGroup parent) throws NumberFormatException{
         final LayoutInflater inflater=contextActivity.getLayoutInflater();
         final View rowView=inflater.inflate(R.layout.list_row, null,true);
