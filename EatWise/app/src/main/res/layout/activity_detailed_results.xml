@@ -277,6 +277,11 @@
             android:textSize="13sp"
             android:background="#ffffff" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
         <TextView
             android:id="@+id/textView_phone"
             android:layout_width="match_parent"
