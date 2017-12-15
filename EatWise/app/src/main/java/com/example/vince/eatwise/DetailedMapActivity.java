@@ -78,7 +78,7 @@ public class DetailedMapActivity extends FragmentActivity implements OnMapReadyC
         final Double latitude = restaurant.getLatitude();
         final Double longitude = restaurant.getLongitude();
         LatLng latLng = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions().position(latLng).title("Check the restaurants' ratings"));
+        mMap.addMarker(new MarkerOptions().position(latLng).title(restaurant.getName()));
         mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
     }

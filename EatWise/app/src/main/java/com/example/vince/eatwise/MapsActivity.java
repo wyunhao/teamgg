@@ -81,7 +81,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             final Double latitude = coordinates.get(i).getLatitude();
             final Double longitude = coordinates.get(i).getLongitude();
             LatLng latLng = new LatLng(latitude, longitude);
-            Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title("Check the restaurants' ratings"));
+            Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(coordinates.get(i).getName()));
             Log.d("latitude", String.valueOf(latitude));
             Log.d("longitude", String.valueOf(longitude));
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
