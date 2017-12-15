@@ -3,6 +3,7 @@ package com.example.vince.eatwise;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
@@ -103,6 +104,7 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
         textView.setText(avg_rating);
         setFontColor(Double.parseDouble(avg_rating), textView);
 
+
         // Set up rating bar
         ratingBar = (RatingBar) findViewById(R.id.rating_bar);
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -110,6 +112,20 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
                                         boolean fromUser) {
                 // TODO: decide unique id for each restaurants. For now: name
                 mRootRef.child("Restaurants").child(r_name).child("rating").setValue(ratingBar.getRating());
+            }
+        });
+
+        TextView phone = findViewById(R.id.textView_phone);
+        phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:" + r_phone));
+//                if (ActivityCompat.checkSelfPermission(DetailedResultsActivity.this,
+//                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//                    return;
+//                }
+                startActivity(intent);
             }
         });
 
