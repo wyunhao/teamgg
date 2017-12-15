@@ -6,225 +6,347 @@
     android:layout_height="match_parent"
     tools:context="com.example.vince.eatwise.DetailedResultsActivity">
 
-    <TextView
-        android:id="@+id/textView_overall"
-        android:layout_width="110dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text=""
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.614" />
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#f5f5f5">
+    <!--//TODO: add border-->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#ffffff"
+                    android:layout_marginBottom="20dp">
+                        <ImageView
+                            android:id="@+id/restaurant_image"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="140dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp"
+                            app:srcCompat="@android:color/transparent" />
 
-    <TextView
-        android:id="@+id/textView_yelp"
-        android:layout_width="89dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text=""
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView_tripadvisor"
-        app:layout_constraintHorizontal_bias="0.38"
-        app:layout_constraintStart_toStartOf="@+id/textView_overall"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.614" />
 
-    <TextView
-        android:id="@+id/textView_foursquare"
-        android:layout_width="89dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text=""
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView_tripadvisor"
-        app:layout_constraintHorizontal_bias="0.72"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.614" />
+                        <TextView
+                            android:id="@+id/textView_m_name"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"/>
+                </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView_tripadvisor"
-        android:layout_width="89dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text=""
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/textView_overall"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.614" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#ffffff">
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_height="60dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Avg Rating"
+                            android:textColor="#000000"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="8dp"/>
 
-    <TextView
-        android:id="@+id/textView_addr"
-        android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text=""
-        android:textColor="#000000"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.751" />
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_height="60dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp"
+                            app:srcCompat="@drawable/yelp" />
 
-    <TextView
-        android:id="@+id/textView_phone"
-        android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text=""
-        android:textColor="#000000"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.86" />
+                        <ImageView
+                            android:id="@+id/imageView3"
+                            android:layout_height="60dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp"
+                            app:srcCompat="@drawable/foursquare" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.448"
-        app:srcCompat="@drawable/yelp" />
+                        <ImageView
+                            android:id="@+id/imageView4"
+                            android:layout_height="60dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp"
+                            app:srcCompat="@drawable/tripadvisor" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.67"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45"
-        app:srcCompat="@drawable/foursquare" />
+                </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.448"
-        app:srcCompat="@drawable/tripadvisor" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#ffffff"
+                    android:layout_marginBottom="20dp">
+                        <TextView
+                            android:id="@+id/textView_overall"
+                            android:layout_width="0dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"/>
 
-    <TextView
-        android:id="@+id/textView_m_name"
-        android:layout_width="180sp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text=""
-        android:textColor="#000000"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.136" />
+                        <TextView
+                            android:id="@+id/textView_yelp"
+                            android:layout_width="0dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="20dp"/>
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="Avg Rating"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.02"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.453" />
+                        <TextView
+                            android:id="@+id/textView_foursquare"
+                            android:layout_width="0dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="20dp"/>
 
-    <ImageView
-        android:id="@+id/restaurant_image"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.88"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.096"
-        app:srcCompat="@android:color/transparent" />
+                        <TextView
+                            android:id="@+id/textView_tripadvisor"
+                            android:layout_width="0dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="20dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#ffffff"
+                    android:layout_marginBottom="20dp">
+                    <TextView
+                        android:id="@+id/rating_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Rate this restaurant"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="#ffffff"/>
+
+                    <RatingBar
+                        android:id="@+id/rating_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="center"
+                        android:rating="0"
+                        android:stepSize="0.5"
+                        tools:layout_editor_absoluteX="72dp"
+                        tools:layout_editor_absoluteY="467dp"/>
+                </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_addr"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:gravity="center"
+            android:text="address placeholder"
+            android:textColor="#000000"
+            android:textSize="13sp"
+            android:background="#ffffff" />
+
+        <TextView
+            android:id="@+id/textView_phone"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="phone placeholder"
+            android:textColor="#000000"
+            android:textSize="13sp"
+            android:background="#ffffff" />
+
+
+        <!--Review title and two example reviews-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#ffffff"
+            android:layout_marginBottom="20dp">
+            <TextView
+                android:id="@+id/review_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="20dp"
+                android:text="Reviews"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <!--TODO: fill the review later-->
+            <TextView
+                android:id="@+id/review1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="review placeholder"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/review2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="review placeholder"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <Button
+                android:id="@+id/morereview_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+                android:text="More"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#ffffff">
+            <TextView
+                android:id="@+id/write_review_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="20dp"
+                android:text="Write your own review"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <EditText
+                android:id="@+id/custom_review"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center"
+                android:gravity="left"
+                android:padding="15dp"
+                android:text="custom review placeholder"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:inputType="textCapSentences"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/custom_form_style"/>
+
+
+            <Button
+                android:id="@+id/submitreview_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center"
+                android:text="Submit"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</ScrollView>
+
 
 </android.support.constraint.ConstraintLayout>
