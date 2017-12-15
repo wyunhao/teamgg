@@ -1,11 +1,14 @@
 package com.example.vince.eatwise;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.example.vince.eatwise.Utility.RestaurantInfo;
@@ -26,7 +29,6 @@ public class DetailedMapActivity extends FragmentActivity implements OnMapReadyC
         GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleMap mMap;
-    private Location mLastLocation;
     private GoogleApiClient mGoogleApiClient;
 
     @Override
@@ -62,6 +64,15 @@ public class DetailedMapActivity extends FragmentActivity implements OnMapReadyC
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        if (!(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this,
+                    new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION}, 123);
+        } else {
+            mMap.setMyLocationEnabled(true);
+            mGoogleApiClient.connect();
+        }
+
         final Intent intent = getIntent();
         final RestaurantInfo restaurant  = (RestaurantInfo) intent.getExtras().getSerializable("restaurant");
 
@@ -75,7 +86,10 @@ public class DetailedMapActivity extends FragmentActivity implements OnMapReadyC
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
     }
 
     @Override

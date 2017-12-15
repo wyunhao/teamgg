@@ -41,6 +41,7 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
     private ImageView restaurant_image = null;
     private RatingBar ratingBar;
     private DatabaseReference mRootRef;
+    private DetailedResultsActivity detailedResultsActivity = this;
 
     /**
      * Initialize the values to be shown in each field
@@ -130,7 +131,7 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
         phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(this, DetailedMapActivity.class);
+                Intent intent = new Intent(detailedResultsActivity, DetailedMapActivity.class);
                 Bundle b = new Bundle();
                 b.putSerializable("restaurant", info);
                 intent.putExtras(b);
