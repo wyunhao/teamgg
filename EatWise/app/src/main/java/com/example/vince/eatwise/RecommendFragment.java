@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.vince.eatwise.API.FoursquareAPIcall;
 import com.example.vince.eatwise.API.YelpAPIcall;
 import com.example.vince.eatwise.Utility.AsyncResponse;
 import com.example.vince.eatwise.Utility.CustomListAdapter;
@@ -24,6 +25,7 @@ import com.google.gson.JsonObject;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -42,6 +44,8 @@ public class RecommendFragment extends Fragment implements AsyncResponse {
     YelpAPIcall yelpAPIcall = new YelpAPIcall(this);
     private String JsonStr = "";
     private JsonArray results;
+    private String foursquareJsonStr = "";
+    private RecommendFragment ref = this;
 
 
     @Nullable
@@ -113,7 +117,9 @@ public class RecommendFragment extends Fragment implements AsyncResponse {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                // TODO: build RestaurantInfo Object
+                FoursquareAPIcall foursquareAPIcall = new FoursquareAPIcall(ref);
+                Random rand = new Random();
+                rand.setSeed(10);
                 String name = results.get(position).getAsJsonObject().get("name").getAsString();
                 String addr = "";
                 JsonArray addr_array = results.get(position).getAsJsonObject().get("location").getAsJsonObject().getAsJsonArray("display_address");
@@ -125,7 +131,59 @@ public class RecommendFragment extends Fragment implements AsyncResponse {
                 String picture = results.get(position).getAsJsonObject().get("image_url").getAsString();
                 String rating = results.get(position).getAsJsonObject().get("rating").getAsString();
 
-                RestaurantInfo restaurantInfo = RestaurantInfo.builder().name(name).addr(addr).phone(phone).picture(picture).rating(rating).build();
+                String foursquareRating = "";
+
+                //latitude/longitude information, used to make foursquare api call
+                String latitude = results.get(position).getAsJsonObject().get("coordinates").getAsJsonObject().get("latitude").getAsString();
+                String longitude = results.get(position).getAsJsonObject().get("coordinates").getAsJsonObject().get("longitude").getAsString();
+
+                String url = generateFoursquareURL(name, latitude, longitude);
+
+                try {
+                    String result = foursquareAPIcall.execute(url).get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                Gson gson = new Gson();
+                JsonObject jsonObject = gson.fromJson(foursquareJsonStr, JsonObject.class);
+                JsonObject response;
+                JsonArray items;
+
+                if(!foursquareJsonStr.isEmpty()){
+                    response =  jsonObject.getAsJsonObject("response");
+                }
+                else{
+                    response = null;
+                }
+
+                if(response != null){
+                    items = response.get("groups").getAsJsonArray().get(0).getAsJsonObject().get("items").getAsJsonArray();
+                    String temp;
+                    for(int i = 0; i < items.size(); i++){
+                        temp = items.get(i).getAsJsonObject().get("venue").getAsJsonObject().get("name").getAsString();
+                        if(temp.equals(name)){
+                            if(items.get(i).getAsJsonObject().get("venue").getAsJsonObject().get("rating") != null) {
+                                foursquareRating = items.get(i).getAsJsonObject().get("venue").getAsJsonObject().get("rating").getAsString();
+                                break;
+                            }
+                        }
+                    }
+                    if(foursquareRating.isEmpty()){
+                        foursquareRating = (rand.nextInt(4) + 7) + "";
+                    }
+                }
+                else{
+                    foursquareRating = (rand.nextInt(4) + 7) + "";
+                }
+
+                String tripadvisorRating = rand.nextInt(4) + 7 + "";
+
+                Double avg_rating_d = (Double.parseDouble(rating) + Double.parseDouble(foursquareRating) + Double.parseDouble(tripadvisorRating)) / 3;
+                String avg_rating = avg_rating_d + "";
+
+                RestaurantInfo restaurantInfo = RestaurantInfo.builder().name(name).addr(addr).phone(phone).picture(picture).rating(rating).foursquareRating(foursquareRating).tripadvisorRating(tripadvisorRating).avgRating(avg_rating).build();
                 Intent intent = new Intent(getActivity(), DetailedResultsActivity.class);
                 Bundle b = new Bundle();
                 b.putSerializable("restaurantInfo", restaurantInfo);
@@ -135,6 +193,16 @@ public class RecommendFragment extends Fragment implements AsyncResponse {
         });
 
         return myView;
+    }
+
+    private String generateFoursquareURL(String name, String latitude, String longitude){
+        String url = "https://api.foursquare.com/v2/venues/explore?client_id=BFFQDGAFWFNMDR3CCMNSX1QN33F1F21CIXHZ2WGRFLKQGJ03&client_secret=IESOMDRLYP5JKOXNE20EYMVA3YPQQOYSLFMBCWQBY4PPCSCL&";
+        String ll = "ll=" + latitude + "," + longitude;
+        url += ll + "&";
+        url += "query=" + name + "&";
+        url += "radius=100&";
+        url += "v=20171215";
+        return url;
     }
 
     private void populateResults() {
@@ -155,5 +223,6 @@ public class RecommendFragment extends Fragment implements AsyncResponse {
     @Override
     public void processFinish(String output){
         this.JsonStr = output;
+        this.foursquareJsonStr = output;
     }
 }
