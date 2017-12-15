@@ -131,7 +131,7 @@ public class ResultListFragment extends Fragment implements AsyncResponse{
                         if(temp.equals(name)){
                             if(items.get(i).getAsJsonObject().get("venue").getAsJsonObject().get("rating").getAsString() != null) {
                                 foursquareRating = items.get(i).getAsJsonObject().get("venue").getAsJsonObject().get("rating").getAsString();
-
+                                break;
                             }
                         }
                     }
