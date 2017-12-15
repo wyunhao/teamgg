@@ -52,15 +52,12 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
     private ImageView restaurant_image = null;
     private RatingBar ratingBar;
     private DatabaseReference mRootRef;
-<<<<<<< Updated upstream
     private DetailedResultsActivity detailedResultsActivity = this;
-=======
     private Button ratingButton;
     private FirebaseAuth mAuth;
     private String customRating;
 
     public float updateRating;
->>>>>>> Stashed changes
 
     /**
      * Initialize the values to be shown in each field
@@ -151,10 +148,15 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
         mRootRef.child("UserFeedback").child(r_name).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                TextView customRatingView = (TextView) findViewById(R.id.textView_ourRating);
                 int count = 0;
                 Double sum = new Double(0);
                 Object ratings = dataSnapshot.getValue();
                 HashMap<String, HashMap<String, Object>> tmp = (HashMap<String, HashMap<String, Object>>)ratings;
+                if (tmp == null) {
+                    customRatingView.setText("No Rating Yet");
+                    return;
+                }
                 Iterator it1 = tmp.entrySet().iterator();
                 while (it1.hasNext()) {
                     HashMap.Entry pair = (HashMap.Entry)it1.next();
@@ -169,7 +171,6 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
                 }
                 Double average = sum/count;
                 customRating = String.format("%.2f", average);
-                TextView customRatingView = (TextView) findViewById(R.id.textView_ourRating);
                 customRatingView.setText(customRating);
                 setFontColor(Double.parseDouble(customRating), customRatingView);
             }
