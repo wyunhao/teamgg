@@ -32,9 +32,14 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import static android.view.Gravity.CENTER;
 
@@ -45,6 +50,7 @@ import static android.view.Gravity.CENTER;
 public class ResultListFragment extends Fragment implements AsyncResponse{
     private View myView;
     private JsonArray results;
+    private List<Location> locations = new ArrayList<Location>();
     private String foursquareJsonStr = "";
     private ResultListFragment ref = this;
 
@@ -59,10 +65,13 @@ public class ResultListFragment extends Fragment implements AsyncResponse{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Snackbar.make(view, "Switch to Map view", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
 
                 Intent intent = new Intent(getActivity(), MapsActivity.class);
+
+                Bundle b = new Bundle();
+                b.putSerializable("coordinates", (Serializable) locations);
+                intent.putExtras(b);
+
                 startActivity(intent);
             }
         });
@@ -175,10 +184,20 @@ public class ResultListFragment extends Fragment implements AsyncResponse{
         String[] itemName = new String[results.size()];
         String[] itemRating = new String[results.size()];
         String[] imageURL = new String[results.size()];
+        List<List<Double>> c = new ArrayList<>();
+
+
         for (int i = 0; i < results.size(); i++) {
             itemName[i] = results.get(i).getAsJsonObject().get("name").getAsString();
             itemRating[i] = results.get(i).getAsJsonObject().get("rating").getAsString();
             imageURL[i] = results.get(i).getAsJsonObject().get("image_url").getAsString();
+            JsonObject coordinates = results.get(i).getAsJsonObject().get("coordinates").getAsJsonObject();
+            final Double la = coordinates.get("latitude").getAsDouble();
+            final Double lo = coordinates.get("longitude").getAsDouble();
+            List<Double> eachCod = new ArrayList<>();
+            eachCod.add(la);
+            eachCod.add(lo);
+            c.add(eachCod);
         }
         CustomListAdapter adapter = new CustomListAdapter(getActivity(), itemName, itemRating, imageURL);
         ListView list = myView.findViewById(R.id.list);
@@ -187,7 +206,16 @@ public class ResultListFragment extends Fragment implements AsyncResponse{
         return;
     }
 
+
+
     public void processFinish(String output){
         this.foursquareJsonStr = output;
+    }
+
+
+    @Setter
+    @Getter
+    public class Location implements Serializable {
+        private List<List<Double>> coordinate;
     }
 }
