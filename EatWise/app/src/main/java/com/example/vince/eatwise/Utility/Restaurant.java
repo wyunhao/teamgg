@@ -22,7 +22,7 @@ public class Restaurant {
 
     /**
      * given location of the restaurant, get the current location of the user and calculate distance, for navigation mode
-     * @param location location of restaurant
+     * @param location String: location of restaurant
      */
 
     /*

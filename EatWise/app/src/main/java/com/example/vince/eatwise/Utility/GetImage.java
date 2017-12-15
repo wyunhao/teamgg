@@ -18,8 +18,8 @@ public class GetImage extends AsyncTask<String, Void, Drawable> {
 
     /**
      * Extending the AsyncTask class to make the actual API call.
-     * @param params contains the query URL
-     * @return the JSON string returned by the API call
+     * @param params String: contains the query URL
+     * @return Drawable: the JSON string returned by the API call
      */
     protected Drawable doInBackground(final String... params) {
         try {

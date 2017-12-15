@@ -1,1 +1,5 @@
 com.example.vince.eatwise
+com.example.vince.eatwise.API
+com.example.vince.eatwise.Constants
+com.example.vince.eatwise.QueryData
+com.example.vince.eatwise.Utility

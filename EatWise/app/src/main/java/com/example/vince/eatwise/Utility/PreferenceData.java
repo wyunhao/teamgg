@@ -18,10 +18,10 @@ public class PreferenceData {//kept by user for recommendation
 
     /**
      * Constructor that takes four parameters
-     * @param type
-     * @param cost
-     * @param rating
-     * @param distance
+     * @param type String
+     * @param cost Double
+     * @param rating Rating
+     * @param distance Double
      */
     public PreferenceData(final String type, final Double cost, final Rating rating, final Double distance) {
         this.type = type;
@@ -33,9 +33,9 @@ public class PreferenceData {//kept by user for recommendation
 
     /**
      * Constructor that takes three parameters
-     * @param type
-     * @param cost
-     * @param rating
+     * @param type String
+     * @param cost Double
+     * @param rating Rating
      */
     public PreferenceData(final String type, final Double cost, final Rating rating) {
         this(type, cost, rating, 0.0);
@@ -43,8 +43,8 @@ public class PreferenceData {//kept by user for recommendation
 
     /**
      * Constructor that takes two parameters
-     * @param type
-     * @param cost
+     * @param type String
+     * @param cost Double
      */
     public PreferenceData(final String type, final Double cost) {
         this(type, cost, Rating.ZERO, 0.0);
@@ -52,7 +52,7 @@ public class PreferenceData {//kept by user for recommendation
 
     /**
      * Constructor that takes one parameter
-     * @param type
+     * @param type String
      */
     public PreferenceData(final String type){
         this(type, 0.0, Rating.ZERO, 0.0);
@@ -67,14 +67,14 @@ public class PreferenceData {//kept by user for recommendation
 
     /**
      * Setter function to set the preference
-     * @param type
-     * @param cost
-     * @param rating
-     * @param distance
-     * @param freqByType
-     * @param freqByCost
-     * @param freqByRating
-     * @param freqByDistance
+     * @param type String
+     * @param cost Double
+     * @param rating Rating
+     * @param distance Double
+     * @param freqByType Double
+     * @param freqByCost Double
+     * @param freqByRating Double
+     * @param freqByDistance Double
      */
 
     // update preference when required and new history is generated

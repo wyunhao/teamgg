@@ -22,11 +22,11 @@ public class Query extends PreferenceData {//passed by user into search
 
     /**
      * Constructor that takes five parameters
-     * @param type
-     * @param cost
-     * @param rating
-     * @param distance
-     * @param restaurantName
+     * @param type String
+     * @param cost Double
+     * @param rating Rating
+     * @param distance Double
+     * @param restaurantName String
      */
     public Query(final String type, final Double cost, final Rating rating, final Double distance, final String restaurantName){
         super(type, cost, rating, distance);
@@ -36,10 +36,10 @@ public class Query extends PreferenceData {//passed by user into search
 
     /**
      * Contructor that takes four parameters
-     * @param type
-     * @param cost
-     * @param rating
-     * @param distance
+     * @param type String
+     * @param cost Double
+     * @param rating Rating
+     * @param distance Double
      */
     public Query(final String type, final Double cost, final Rating rating, final Double distance){
         this(type, cost, rating, distance, "");
@@ -47,9 +47,9 @@ public class Query extends PreferenceData {//passed by user into search
 
     /**
      * Constructor that takes three parameters
-     * @param type
-     * @param cost
-     * @param rating
+     * @param type String
+     * @param cost Double
+     * @param rating Rating
      */
     public Query(final String type, final Double cost, final Rating rating){
         super(type, cost, rating);
@@ -59,8 +59,8 @@ public class Query extends PreferenceData {//passed by user into search
 
     /**
      * Constructor that takes two parameters
-     * @param type
-     * @param cost
+     * @param type String
+     * @param cost Double
      */
     public Query(final String type, final Double cost){
         super(type, cost);
@@ -70,7 +70,7 @@ public class Query extends PreferenceData {//passed by user into search
 
     /**
      * Constructor that takes one parameter
-     * @param type
+     * @param type String
      */
     public Query(final String type){
         super(type);

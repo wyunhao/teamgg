@@ -107,8 +107,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
     @Override
     /**
      *  Handle navigation view item clicks here.
-     *  @param item The item associated with the clicked button
-     *  @return always return true
+     *  @param item MenuItem: The item associated with the clicked button
+     *  @return Boolean: always return true
      */
     public boolean onNavigationItemSelected(MenuItem item) {
         FragmentManager fragmentManager = getFragmentManager();

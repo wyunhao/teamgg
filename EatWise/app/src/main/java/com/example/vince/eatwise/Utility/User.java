@@ -74,7 +74,7 @@ public class User {
 
     /**
      * Search for restaurants from the restaurant list that match the preferences
-     * @return restaurants that match the preferences
+     * @return RestaurantArray: restaurants that match the preferences
      */
     public RestaurantArray searchRestaurants()
     {

@@ -24,8 +24,8 @@ public class YelpAPIcall extends AsyncTask<String, Void, String> {
 
     /**
      * Extending the AsyncTask class to make the actual API call.
-     * @param params contains the query URL
-     * @return the JSON string returned by the API call
+     * @param params String: contains the query URL
+     * @return String: the JSON string returned by the API call
      */
     protected String doInBackground(String... params) {
         try {

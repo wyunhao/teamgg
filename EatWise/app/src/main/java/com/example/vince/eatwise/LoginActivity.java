@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     /**
      * Find UI elements related to different fields
      *
-     * @param savedInstanceState Saved inputs from the previous login attempts
+     * @param savedInstanceState Bundle: Saved inputs from the previous login attempts
      */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     /**
      * Respond to login successes and login failures
      *
-     * @param user the user object authenticated
+     * @param user FirebaseUser: the user object authenticated
      */
     private void updateUI(FirebaseUser user) {
         // pass user information to the next Activity: NavigationDrawerActivity
@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     /**
      * Respond to registration successes and registration failures
      *
-     * @param user the user object newly created
+     * @param user FirebaseUser: the user object newly created
      */
     private void setDisplayName(FirebaseUser user) {
         if (user != null) {
@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     /**
      * syntax level validation on user input
-     * @return  if the input is valid
+     * @return  boolean: if the input is valid
      */
     private boolean validateForm() {
         boolean valid = true;
@@ -144,8 +144,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     /**
      * Create account with new email address and password combination
-     * @param email new email address to be registered
-     * @param password the password corresponds to the email
+     * @param email String: new email address to be registered
+     * @param password String: the password corresponds to the email
      */
 
     private void createAccount(String email, String password) {
@@ -179,8 +179,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     /**
      * Attempt to sign in with email with password online when they are both valid and match each other would login succeed
-     * @param email
-     * @param password
+     * @param email String
+     * @param password String
      */
 
     private void signIn(String email, String password) {
@@ -216,7 +216,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     /**
      * Click the button will trigger Sign In attempt
-     * @param v The search view
+     * @param v View The search view
      */
     @Override
     public void onClick(View v) {

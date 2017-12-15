@@ -66,7 +66,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     /**
      * Called when the map is ready to be used.
-     * @param googleMap googleMap: A non-null instance of a GoogleMap associated with the MapFragment or MapView that defines the callback.
+     * @param googleMap GoogleMap: googleMap: A non-null instance of a GoogleMap associated with the MapFragment or MapView that defines the callback.
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -92,7 +92,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     /**
      * After calling connect(), this method will be invoked asynchronously when the connect request has successfully completed. After this callback, the application can make requests on other methods provided by the client and expect that no user intervention is required to call methods that use account and scopes provided to the client constructor.
-     * @param bundle Bundle of data provided to clients by Google Play services. May be null if no content is provided by the service.
+     * @param bundle Bundle: Bundle of data provided to clients by Google Play services. May be null if no content is provided by the service.
      */
     @Override
     public void onConnected(@Nullable Bundle bundle) {

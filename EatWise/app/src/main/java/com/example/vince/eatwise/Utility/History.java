@@ -30,7 +30,7 @@ public class History {
 
     /**
      * Adding a new query to the history
-     * @param newQuery The query to be added
+     * @param newQuery Query: The query to be added
      */
     public void addQuery(final Query newQuery){
         if(queryLength < HISTORY_LENGTH){
@@ -46,7 +46,7 @@ public class History {
 
     /**
      * Adding a restaurant to the viewed list if it is viewed by the user
-     * @param newViewed The viewed restaurant tio be added
+     * @param newViewed Viewed: The viewed restaurant tio be added
      */
     public void addViewed(final Viewed newViewed){
         if (viewLength < HISTORY_LENGTH){
@@ -63,7 +63,7 @@ public class History {
      * Modify the calculated preference by frequency of the keys of user's query
      * Store the preference of the user
      * Still in progress
-     * @param currentPreference User class would pass in its own preference to get an updated preference
+     * @param currentPreference PreferenceData: User class would pass in its own preference to get an updated preference
      */
     //calculate preference
     public void updatePreference(final PreferenceData currentPreference){
@@ -103,8 +103,8 @@ public class History {
     /**
      * Assign weight to viewed and visited restaurants from history to calculate recommendation
      * Still in progress
-     * @param currentPreference  User class would pass in its own preference to get an updated preference
-     * @param userRestList   User class would pass in its stored list of recommended restaurants
+     * @param currentPreference PreferenceData: User class would pass in its own preference to get an updated preference
+     * @param userRestList   RestaurantArray: User class would pass in its stored list of recommended restaurants
      */
     //get recommended restaurants by preference from historically viewed
     public void calculateByPreference(final PreferenceData currentPreference, final RestaurantArray userRestList){//avoid return/copying RestaurantArray
