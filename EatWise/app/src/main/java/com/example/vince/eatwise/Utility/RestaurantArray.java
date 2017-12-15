@@ -19,12 +19,12 @@ public class RestaurantArray {
 
     /**
      * Add a new restaurant initialized with features to the restaurant list
-     * @param name
-     * @param location
-     * @param type
-     * @param cost
-     * @param rating
-     * @param distance
+     * @param name String
+     * @param location String
+     * @param type String
+     * @param cost Double
+     * @param rating Rating
+     * @param distance Double
      */
     public void addRestaurant(final String name, final String location, final String type, final Double cost,
                               final Rating rating, final Double distance){

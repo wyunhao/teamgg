@@ -97,8 +97,8 @@ public class SearchResultActivity extends AppCompatActivity implements AsyncResp
 
     /**
      * Use filter information to create valid URL to search for restaurant information
-     * @param filter object that contains all the filter information
-     * @return a valid URL that integrates the filter information
+     * @param filter QueryFilter: object that contains all the filter information
+     * @return String: a valid URL that integrates the filter information
      */
     private String generateYelpURL(QueryFilter filter){
         String keyword = "food";

@@ -54,6 +54,13 @@ public class ResultListFragment extends Fragment implements AsyncResponse{
     private String foursquareJsonStr = "";
     private ResultListFragment ref = this;
 
+    /**
+     *  Get rating information from yelp, foursquare and tripadvisor APIs, display in the restaurants with their rates in a list and send the rating to DetailedActivity for display
+     * @param inflater LayoutInflater: The LayoutInflater object that can be used to inflate any views in the fragment,
+     * @param container ViewGroup: If non-null, this is the parent view that the fragment's UI should be attached to. The fragment should not add the view itself, but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState Bundle: If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

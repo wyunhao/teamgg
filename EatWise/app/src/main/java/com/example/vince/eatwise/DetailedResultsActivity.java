@@ -43,7 +43,7 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
 
     /**
      * Initialize the values to be shown in each field
-     * @param savedInstanceState Saved state from the last session
+     * @param savedInstanceState Bundle: Saved state from the last session
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
