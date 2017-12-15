@@ -148,6 +148,7 @@ public class ResultListFragment extends Fragment implements AsyncResponse{
     private RestaurantInfo constructRestaurantInfo(int position) {
         FoursquareAPIcall foursquareAPIcall = new FoursquareAPIcall(ref);
         Random rand = new Random();
+        rand.setSeed(10);
         String name = results.get(position).getAsJsonObject().get("name").getAsString();
         String addr = "";
         JsonArray addr_array = results.get(position).getAsJsonObject().get("location").getAsJsonObject().getAsJsonArray("display_address");
