@@ -96,17 +96,6 @@ public class SearchFragment extends Fragment  {
             }
         });
 
-        final EditText price = myView.findViewById(R.id.editTextPrice);
-        price.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                try {
-                    Double.parseDouble(price.getText().toString());
-                } catch (NumberFormatException e) {
-                    price.setError("Please enter a valid price level.");
-                }
-            }
-        });//set error for price level if user does not specify one, real-time validation
         final EditText keyword = myView.findViewById(R.id.editTextKeyword);
 
         submitFilter.setOnClickListener(new View.OnClickListener() {
@@ -127,15 +116,13 @@ public class SearchFragment extends Fragment  {
                     Log.i("radius exception", "Radius not set in Filter");
                 }
 
-                if (location.getError() != null || price.getError() != null
-                        || ((TextView) category.getSelectedView()).getError() != null) {
+                if (location.getError() != null || ((TextView) category.getSelectedView()).getError() != null) {
                     Toast.makeText(getActivity(), "Please complete the search filter", Toast.LENGTH_SHORT).show();
                 }//if there is still error in any edittext boxes, show the Toast to let user complete the search filter
                 else {
                     final QueryFilter filter = QueryFilter.builder().location(location.getText().toString())
                             .category((String) category.getSelectedItem())
                             .distance(distanceDefault)
-                            .price(Double.parseDouble(price.getText().toString()))
                             .keyword(kw)
                             .build();
 

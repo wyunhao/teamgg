@@ -69,35 +69,6 @@
         android:layout_marginVertical="@dimen/text_margin"/>
 
 
-    <EditText
-        android:layout_width = "250dp"
-        android:layout_height = "40dp"
-        android:id = "@+id/editTextPrice"
-        android:inputType="numberDecimal"
-        android:hint = "  Enter price level  "
-        android:focusable = "true"
-        android:textColorHighlight = "#7fff88"
-        android:textColorHint = "#8b8d93"
-        android:background="@drawable/search_field_gradient"
-        android:layout_below="@id/spinnerCategory"
-        android:layout_centerHorizontal="true"
-        android:layout_marginVertical="@dimen/text_margin"
-        android:nextFocusDown="@id/editTextKeyword"
-        android:textAlignment="center"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:singleLine="true"/>
-
-    <ImageView
-        android:id="@+id/priceicon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/price_icon"
-        android:layout_below="@id/spinnerCategory"
-        android:layout_toLeftOf="@id/editTextPrice"
-        android:layout_marginVertical="@dimen/text_margin"/>
-
 
     <EditText
         android:layout_width = "250dp"
@@ -108,7 +79,7 @@
         android:textColorHighlight = "#7fff88"
         android:textColorHint = "#8b8d93"
         android:background="@drawable/search_field_gradient"
-        android:layout_below="@id/editTextPrice"
+        android:layout_below="@id/spinnerCategory"
         android:layout_centerHorizontal="true"
         android:layout_marginVertical="@dimen/text_margin"
         android:textAlignment="center"
@@ -122,7 +93,7 @@
         android:layout_height="35dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:src="@drawable/house_icon"
-        android:layout_below="@id/editTextPrice"
+        android:layout_below="@id/spinnerCategory"
         android:tint="#837e7e"
         android:layout_toLeftOf="@id/editTextKeyword"
         android:layout_marginVertical="@dimen/text_margin"/>

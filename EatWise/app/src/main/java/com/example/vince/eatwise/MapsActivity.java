@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.vince.eatwise.Utility.RestaurantInfo;
 import com.google.android.gms.common.ConnectionResult;
@@ -28,14 +29,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mMap;
     private Location mLastLocation;
     private GoogleApiClient mGoogleApiClient;
+    private HashMap<Marker, RestaurantInfo> markerRestaurant = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +87,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(coordinates.get(i).getName()));
             Log.d("latitude", String.valueOf(latitude));
             Log.d("longitude", String.valueOf(longitude));
+            mMap.setOnInfoWindowClickListener(this);
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
-
+            markerRestaurant.put(marker, coordinates.get(i));
         }
     }
 
@@ -133,5 +137,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    public void onInfoWindowClick(Marker marker) {
+        if (marker != null)
+            Log.i("Click Error", "marker should be null");
+
+        RestaurantInfo restaurant = markerRestaurant.get(marker);
+        if(restaurant != null){
+            Intent intent = new Intent(this, DetailedResultsActivity.class);
+            Bundle b = new Bundle();
+            b.putSerializable("restaurantInfo", restaurant);
+            intent.putExtras(b);
+            startActivity(intent);
+        }
+        else
+            Log.i("Click Error", "restaurant information is null");
     }
 }
