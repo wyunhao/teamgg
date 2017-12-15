@@ -112,7 +112,7 @@ public class SearchFragment extends Fragment  {
                 try {
                     distanceDefault = Integer.parseInt(distance.getText().toString());
                 } catch (Exception e) {
-                    distanceDefault = Integer.valueOf(500);
+                    distanceDefault = Integer.valueOf(1000);
                     Log.i("radius exception", "Radius not set in Filter");
                 }
 

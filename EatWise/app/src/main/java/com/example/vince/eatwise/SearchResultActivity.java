@@ -106,12 +106,15 @@ public class SearchResultActivity extends AppCompatActivity implements AsyncResp
         String distance_s = distance + "";
         String location = filter.getLocation();
         String category = filter.getCategory();
+        if(!filter.getKeyword().isEmpty()){
+            keyword = filter.getKeyword();
+        }
         String queryURL = "https://api.yelp.com/v3/businesses/search?";
         queryURL += "term=" + keyword + "&";
         queryURL += "location=" + location + "&";
         queryURL += "radius=" + distance_s + "&";
         queryURL += "categories=" + category + "&";
-        queryURL += "limit=10";
+        queryURL += "limit=20";
         return queryURL;
     }
 
