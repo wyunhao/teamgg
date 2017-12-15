@@ -44,7 +44,8 @@ public class SearchResultActivity extends AppCompatActivity implements AsyncResp
     private final String token_secret = "KVIzqS5JwpvzDhTOELrii4Yl563Yg2FTxaaJBmNKIi0Igkhd3dCDhWfslEq3jLkG1ZQ7_aX6MZUgp2oWtU32GkdLsVGvpGmRJstpQFcAQpvnME8Kqx-ZufrRuZoLWnYx";
 
     YelpAPIcall yelpAPIcall = new YelpAPIcall(this);
-    private String JsonStr = "";
+    private String YelpJsonStr = "";
+    private String FoursquareJsonStr = "";
     private JsonArray businesses_arr;
 
     @Override
@@ -54,7 +55,8 @@ public class SearchResultActivity extends AppCompatActivity implements AsyncResp
 
         Intent intent = getIntent();
         QueryFilter filter = (QueryFilter) intent.getExtras().getSerializable("filter"); //gets the query filter
-        String url = generateURL(filter);
+
+        String url = generateYelpURL(filter);
 
         try {
             String result = yelpAPIcall.execute(url).get();
@@ -65,19 +67,18 @@ public class SearchResultActivity extends AppCompatActivity implements AsyncResp
         }
 
         // JsonStr value assigned
-        //parsing JSON str
+        // parsing JSON str
         Gson gson = new Gson();
-        JsonObject jsonObject = gson.fromJson(this.JsonStr, JsonObject.class);
+        JsonObject jsonObject = gson.fromJson(this.YelpJsonStr, JsonObject.class);
         // businesses_arr contains all the restaurants' metadata as elements
-        if(!JsonStr.isEmpty()){
+        if(!YelpJsonStr.isEmpty()){
             businesses_arr =  jsonObject.getAsJsonArray("businesses");
         }
         else{
             businesses_arr = null;
         }
-//        String name = businesses_arr.get(0).getAsJsonObject().get("name").getAsString();
-//        textView.setText(name);
 
+        //got yelp's response now. need to get latitude/longitude to make foursqaure api call
         gotoResultListFragment();
     }
 
@@ -99,21 +100,23 @@ public class SearchResultActivity extends AppCompatActivity implements AsyncResp
      * @param filter object that contains all the filter information
      * @return a valid URL that integrates the filter information
      */
-    private String generateURL(QueryFilter filter){
+    private String generateYelpURL(QueryFilter filter){
         String keyword = "food";
         Integer distance = filter.getDistance();
         String distance_s = distance + "";
         String location = filter.getLocation();
+        String category = filter.getCategory();
         String queryURL = "https://api.yelp.com/v3/businesses/search?";
         queryURL += "term=" + keyword + "&";
         queryURL += "location=" + location + "&";
         queryURL += "radius=" + distance_s + "&";
+        queryURL += "categories=" + category + "&";
         queryURL += "limit=10";
         return queryURL;
     }
 
     @Override
     public void processFinish(String output){
-        this.JsonStr = output;
+        this.YelpJsonStr = output;
     }
 }
