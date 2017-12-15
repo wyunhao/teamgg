@@ -28,4 +28,5 @@
     </string>
     <string name="error_sign_in">Sign in error</string>
     <string name="title_activity_detailed">DetailedActivity</string>
+    <string name="title_activity_detailed_map">Map</string>
 </resources>

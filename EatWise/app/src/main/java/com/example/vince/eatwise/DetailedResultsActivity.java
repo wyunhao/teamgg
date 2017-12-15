@@ -3,6 +3,7 @@ package com.example.vince.eatwise;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
@@ -40,6 +41,7 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
     private ImageView restaurant_image = null;
     private RatingBar ratingBar;
     private DatabaseReference mRootRef;
+    private DetailedResultsActivity detailedResultsActivity = this;
 
     /**
      * Initialize the values to be shown in each field
@@ -103,13 +105,37 @@ public class DetailedResultsActivity extends AppCompatActivity implements AsyncR
         textView.setText(avg_rating);
         setFontColor(Double.parseDouble(avg_rating), textView);
 
+
         // Set up rating bar
         ratingBar = (RatingBar) findViewById(R.id.rating_bar);
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             public void onRatingChanged(RatingBar ratingBar, float rating,
                                         boolean fromUser) {
                 // TODO: decide unique id for each restaurants. For now: name
+                // TODO: calculate our rating, link it to layout
                 mRootRef.child("Restaurants").child(r_name).child("rating").setValue(ratingBar.getRating());
+            }
+        });
+
+        TextView phone = findViewById(R.id.textView_phone);
+        phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:" + r_phone));
+                startActivity(intent);
+            }
+        });
+
+        TextView addr = findViewById(R.id.textView_addr);
+        addr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(detailedResultsActivity, DetailedMapActivity.class);
+                Bundle b = new Bundle();
+                b.putSerializable("restaurant", info);
+                intent.putExtras(b);
+                startActivity(intent);
             }
         });
 
