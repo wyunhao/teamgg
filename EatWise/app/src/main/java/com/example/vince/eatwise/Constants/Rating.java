@@ -1,16 +1,20 @@
 package com.example.vince.eatwise.Constants;
 
 public enum Rating {
-    ZERO(0),
-    ONE(1),
-    TWO(2),
-    THREE(3),
-    FOUR(4),
-    FIVE(5);
+    ZERO(0.0),
+    ONE(1.0),
+    TWO(2.0),
+    THREE(3.0),
+    FOUR(4.0),
+    FIVE(5.0);
 
-    private int value;
+    private double value;
 
-    Rating(int value) {
+    Rating(double value) {
         this.value = value;
+    }
+
+    public double toDouble() {
+        return value;
     }
 }
