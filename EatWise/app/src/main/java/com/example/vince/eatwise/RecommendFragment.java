@@ -70,37 +70,21 @@ public class RecommendFragment extends Fragment implements AsyncResponse {
 
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(this.JsonStr, JsonObject.class);
+
+        User user = new User();
+
         // businesses_arr contains all the restaurants' metadata as elements
         if(!JsonStr.isEmpty()){
             results =  jsonObject.getAsJsonArray("businesses");
+            results = user.showRecommendation(results, 0.0, 0.0);
         }
         else{
             results = null;
         }
 
-        //TODO:get user after login
-        //producing mock recommendation
-        User user = new User("username", "12345", "xxxx@gmail.com", "Larry", "David", new Date());
-        user.showRecommendation();
         final List<Restaurant> restaurants = user.getRestList().getDataMember();
         String[] rec_name_list = new String[]{
-                restaurants.get(0).getName(),
-                restaurants.get(1).getName(),
-                restaurants.get(2).getName(),
-                restaurants.get(3).getName(),
-                restaurants.get(4).getName(),
-                restaurants.get(4).getName(),
-                restaurants.get(4).getName(),
-                restaurants.get(4).getName(),
-                restaurants.get(4).getName(),
-                restaurants.get(4).getName(),
-                restaurants.get(4).getName(),
-                restaurants.get(4).getName(),
-                restaurants.get(4).getName(),
-                restaurants.get(4).getName(),
-                restaurants.get(4).getName(),
-                restaurants.get(4).getName(),
-                restaurants.get(4).getName()
+                "1", "2", "3","4","5"
         };
 
         //adaptor
