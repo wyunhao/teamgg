@@ -76,7 +76,7 @@ public class RecommendFragment extends Fragment implements AsyncResponse {
         // businesses_arr contains all the restaurants' metadata as elements
         if(!JsonStr.isEmpty()){
             results =  jsonObject.getAsJsonArray("businesses");
-            results = user.showRecommendation(results, 0.0, 0.0);
+            results = user.showRecommendation(results, -118.04, 34.05);
         }
         else{
             results = null;
