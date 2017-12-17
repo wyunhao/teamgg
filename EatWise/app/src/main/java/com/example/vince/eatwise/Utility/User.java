@@ -49,7 +49,7 @@ public class User {
      * Update preferences and recommendations
      */
     public JsonArray showRecommendation(JsonArray results, Double longitude, Double latitude){
-        //this.history.updatePreference(this.preference); //skipped for refactoring history
+        this.history.updatePreference(this.preference); //skipped for refactoring history
         return this.history.calculateByPreference(this.preference, results, longitude, latitude );
     }
 }

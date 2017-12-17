@@ -1,5 +1,6 @@
 package com.example.vince.eatwise.Utility;
 
+import com.example.vince.eatwise.Constants.Constant;
 import com.example.vince.eatwise.Constants.CuisineType;
 import com.example.vince.eatwise.Constants.Distance;
 import com.example.vince.eatwise.Constants.Price;
@@ -11,6 +12,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 import java.util.concurrent.ExecutionException;
 
 import lombok.Getter;
@@ -106,7 +109,9 @@ public class History {
         }
 
         Double cost, rating, distance;
-        cost = rating = distance = 0.0;
+        cost = Constant.INIT_PREF_COST;
+        rating = Constant.INIT_PREF_RATING;
+        distance = Constant.INIT_PREF_DISTANCE;
         HashMap.Entry<String, Integer> maxEntry = null; //for getting the maximal value of typeRecord
 
         if(viewLength != 0){
@@ -219,7 +224,7 @@ public class History {
         }
 
 
-        currentPreference.updatePreference(maxEntry.getKey(), cost, rating, distance, freType, freCost, freRating, freDistance);
+        currentPreference.updatePreference((maxEntry == null)?Constant.INIT_PREF_TYPE:maxEntry.getKey(), cost, rating, distance, freType, freCost, freRating, freDistance);
     }
 
     /**
@@ -230,9 +235,66 @@ public class History {
      */
     //get recommended restaurants by preference from historically viewed
     public JsonArray calculateByPreference(final PreferenceData currentPreference, final JsonArray results, final Double longitude, final Double latitude ){
-        if(results == null || results.size() <= 10) return results;
+        if(results == null || results.size() <= Constant.NUM_RECOMMEND/2) return results;
+
+        //var to consider
+        /* not incorporated
+        String type;
+        */
+        Double cost;
+        Double distance;
+        Double rating;
+        //score to index map
+        TreeMap<Double, Integer> res_scores = new TreeMap<Double, Integer>();
+
         //select num_record for recommend list; being refactored
-        return results;
-        //pick num_recommend highest score to topTenId;
+        for(int i = 0; i < results.size(); i++){
+            Double score;
+
+            //get restaurant location
+            Double res_latitude = results.get(i).getAsJsonObject().get("coordinates").getAsJsonObject().get("latitude").getAsDouble();
+            Double res_longitude = results.get(i).getAsJsonObject().get("coordinates").getAsJsonObject().get("longitude").getAsDouble();
+            distance = getLinearDistance(latitude, longitude, res_latitude, res_longitude);
+            //get rating
+            rating = results.get(i).getAsJsonObject().get("rating").getAsDouble();
+            //get cost
+            switch(results.get(i).getAsJsonObject().get("price").getAsString()){
+                case "$": cost = Price.INEXPENSIVE.toDouble(); break;
+                case "$$": cost = Price.MODERATE.toDouble(); break;
+                case "$$$": cost = Price.PRICY.toDouble(); break;
+                case "$$$$": cost = Price.HIGHENG.toDouble(); break;
+                default: cost = 0.0; //indicating price info not available
+            }
+
+            score = ((distance <= currentPreference.getDistance()) ? (Constant.DISTANCE_WEIGHT * currentPreference.getFreqByDistance()) : 0.0)
+                    +
+                    ((rating >= currentPreference.getRating()) ? (Constant.RATING_WEIGHT * currentPreference.getFreqByRating()) : 0.0)
+                    +
+                    ((cost == 0.0)?0.0:((cost <= currentPreference.getCost())?(Constant.COST_WEIGHT * currentPreference.getFreqByCost()):0.0));
+            System.out.printf("score: %f; index: %d \n", distance, i);
+            //break tie while adding the entry
+            addTomap(res_scores, score, i);
+        }
+        //assemble a new JsonArray by the recommendation result
+        JsonArray rec_result = new JsonArray();
+        //reverse the map order to get a descending order by score.
+        NavigableMap<Double, Integer> rec_map = res_scores.descendingMap();
+        Iterator itr = rec_map.entrySet().iterator();
+        int num_res = 0;
+        for(NavigableMap.Entry<Double, Integer> e: rec_map.entrySet()){
+            if(num_res > Constant.NUM_RECOMMEND) break;
+            num_res += 1;
+            rec_result.add(results.get(e.getValue()));
+        }
+        return rec_result;
+    }
+
+    public Double getLinearDistance(Double user_lat, Double user_long, Double latitude, Double longitude){
+        return Math.sqrt(Math.pow(user_lat - latitude, 2) + Math.pow(user_long - longitude, 2));
+    }
+    //recursively resolve key conflict by breaking tie of scores arbitrarily
+    public void addTomap(TreeMap<Double, Integer> treeMap, Double key_score, Integer value_index){
+        if(treeMap.get(key_score) == null) treeMap.put(key_score, value_index);
+        else addTomap(treeMap, key_score + 0.01, value_index);
     }
 }
