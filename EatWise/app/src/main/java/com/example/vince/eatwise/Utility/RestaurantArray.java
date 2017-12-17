@@ -19,31 +19,15 @@ public class RestaurantArray {
 
     /**
      * Add a new restaurant initialized with features to the restaurant list
-     * @param name String
-     * @param location String
-     * @param type String
-     * @param cost Double
-     * @param rating Rating
-     * @param distance Double
+     * @param type
+     * @param cost
+     * @param rstInfo
      */
-    public void addRestaurant(final String name, final String location, final String type, final Double cost,
-                              final Rating rating, final Double distance){
+    public void addRestaurant(RestaurantInfo rstInfo, String type, Double cost){
         //notice that rating here should naturally be double, not quantized; here it is only for convenience
-        this.dataMember.add(new Restaurant(name, location, type, cost, rating));
-        //TODO: should not setDistance through Restaurant object
-        //this.dataMember.get(this.size).setDistance(distance);
+        this.dataMember.add(new Restaurant(rstInfo,type,cost));
         this.size++;
     }
-
-    //can't really think of any case this one will be used; commented out so that missing distance gives a compile error
-    /*
-    public void addRestaurant(String name, String location, String type, Double cost,
-                               PreferenceData.Rating rating){
-        this.dataMember.add(new Restaurant(name, location, type, cost, rating));
-        this.dataMember.get(this.size).set_distance(location);
-        this.size++;
-    }
-    */
 
     /**
      * Clear the restaurant list

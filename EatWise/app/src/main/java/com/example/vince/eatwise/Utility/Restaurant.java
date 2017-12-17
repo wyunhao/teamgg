@@ -7,37 +7,27 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Restaurant {
+public class Restaurant{
     private String name;
-    private String location;
+    private Double latitude;
+    private Double longitude;
     private Review[] reviews;
     private PreferenceData preferenceFeature;
 
-    public Restaurant(final String name, final String location, final String type, final Double cost, final Rating rating){
-        this.name = name;
-        this.location = location;
-        this.preferenceFeature = new PreferenceData(type, cost,rating);
+    public Restaurant(RestaurantInfo rstInfo, String type, Double cost){
+        this.name = rstInfo.getName();
+        this.latitude = rstInfo.getLatitude();
+        this.longitude  = rstInfo.getLongitude();
         this.reviews = new Review[10];
+        this.preferenceFeature = new PreferenceData(type, cost, rating_strTodouble(rstInfo.getAvgRating()));
     }
 
-    /**
-     * given location of the restaurant, get the current location of the user and calculate distance, for navigation mode
-     * @param location String: location of restaurant
-     */
-
-    /*
-     * set the attribute of PreferenceData inside class Restaurant does not make sense
-     * should calculate the distance somewhere else and build up PreferenceFeature object
-     * and set that PreferenceFeature as the attribute of Restaurant
-     */
-    /*
-    public void setDistance(String location){
-        //TODO:given location of the restaurant, get the current location of the user and calculate distance, for navigation mode
+    public Double rating_strTodouble(String avgString){
+        //TODO: convert some fields from RestaurantInfo to set the proper value of preferenceFeature
+        return 4.0;
     }
 
-
-    public void setDistance(Double distance){//for recording view based on search info
-        this.preferenceFeature.setDistance(distance);
+    public Double getLinearDistance(Double user_lat, Double user_long){
+        return Math.sqrt(Math.pow(user_lat - this.latitude, 2) + Math.pow(user_long - this.longitude, 2));
     }
-    */
 }
